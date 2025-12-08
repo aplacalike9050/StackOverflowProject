@@ -34,6 +34,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @Query("SELECT c FROM Comment c WHERE c.score > :minScore ORDER BY c.score DESC")
     List<Comment> findHighScoreComments(@Param("minScore") int minScore);
 
+    // 修复：参数改为 Long 类型
     @Query("SELECT c FROM Comment c WHERE c.creationDate > :sinceDate")
-    List<Comment> findCommentsCreatedAfter(@Param("sinceDate") java.time.LocalDateTime sinceDate);
+    List<Comment> findCommentsCreatedAfter(@Param("sinceDate") Long sinceDate);
 }

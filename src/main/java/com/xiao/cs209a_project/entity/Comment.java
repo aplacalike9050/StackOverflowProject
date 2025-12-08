@@ -8,15 +8,20 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "comments")
 public class Comment {
+
     @Id
-    @Column(name = "comment_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "comment_id", unique = true)
     private Long commentId;
 
+    // 核心修改：只存 ID 和类型，不建立物理外键关联
     @Column(name = "post_id")
-    private Long postId; // 可以是问题ID或答案ID
+    private Long postId;
 
     @Column(name = "post_type")
-    private String postType; // 'question' 或 'answer'
+    private String postType; // "question" or "answer"
 
     @Column(name = "owner_user_id")
     private Long ownerUserId;
@@ -27,21 +32,12 @@ public class Comment {
     private Integer score;
 
     @Column(name = "creation_date")
-    private LocalDateTime creationDate;
+    private Long creationDate;
 
     @Column(name = "collected_at")
     private LocalDateTime collectedAt = LocalDateTime.now();
 
-    // 可选：添加关联关系
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", insertable = false, updatable = false)
-    private Question question;
+    // 删除了所有的 @ManyToOne 关联，保证数据纯净导入
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", insertable = false, updatable = false)
-    private Answer answer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_user_id", insertable = false, updatable = false)
-    private User user;
 }

@@ -28,6 +28,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT COUNT(u) FROM User u WHERE u.reputation > 1000")
     long countHighReputationUsers();
 
-    @Query("SELECT u FROM User u WHERE u.createdAt > :sinceDate")
-    List<User> findUsersCreatedAfter(@Param("sinceDate") java.time.LocalDateTime sinceDate);
+    // 修复：u.createdAt 改为 u.creationDate，类型改为 Long
+    @Query("SELECT u FROM User u WHERE u.creationDate > :sinceDate")
+    List<User> findUsersCreatedAfter(@Param("sinceDate") Long sinceDate);
 }

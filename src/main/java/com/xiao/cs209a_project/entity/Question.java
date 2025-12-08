@@ -8,8 +8,14 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "questions")
 public class Question {
+
+    // 1. 增加独立的数据库自增主键
     @Id
-    @Column(name = "question_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // 2. Stack Overflow 的原始 ID，作为业务唯一键
+    @Column(name = "question_id", unique = true, nullable = false)
     private Long questionId;
 
     @Column(name = "title", columnDefinition = "TEXT")
@@ -18,6 +24,7 @@ public class Question {
     @Column(name = "body", columnDefinition = "TEXT")
     private String body;
 
+    // 只需要存ID，不需要强关联 User 对象，防止 User 没爬取导致报错
     @Column(name = "owner_user_id")
     private Long ownerUserId;
 
@@ -32,18 +39,12 @@ public class Question {
     @Column(name = "comment_count")
     private Integer commentCount;
 
-    @Column(name = "favorite_count")
-    private Integer favoriteCount;
-
+    // 3. 时间改为 Long，直接存 API 返回的时间戳，无需转换
     @Column(name = "creation_date")
-    private LocalDateTime creationDate;
+    private Long creationDate;
 
     @Column(name = "last_activity_date")
-    private LocalDateTime lastActivityDate;
-
-    @Column(name = "last_edit_date")
-    private LocalDateTime lastEditDate;
-
+    private Long lastActivityDate;
     @Column(name = "is_answered")
     private Boolean isAnswered;
 
@@ -55,4 +56,6 @@ public class Question {
 
     @Column(name = "collected_at")
     private LocalDateTime collectedAt = LocalDateTime.now();
+
+
 }

@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,11 @@ import java.util.Map;
 @Slf4j
 @Service
 public class StackExchangeApiService {
+
+    // =========================================================================
+    // 修改这里：将 Key 填入下方引号中
+    // =========================================================================
+    private static final String API_KEY = "rl_EpkMmc1Eyc1PZnZJa4BLa47Fq";
 
     private final WebClient webClient;
 
@@ -37,6 +41,7 @@ public class StackExchangeApiService {
                     .queryParam("tagged", "java")
                     .queryParam("site", "stackoverflow")
                     .queryParam("filter", "withbody")
+                    .queryParam("key", API_KEY) // 【修改】添加 Key
                     .build().toUriString();
 
             log.info("请求Stack Exchange API: {}", url);
@@ -53,20 +58,7 @@ public class StackExchangeApiService {
                 return null;
             }
 
-            StackExchangeResponse<QuestionItem> response = new StackExchangeResponse<>();
-            response.setHasMore((Boolean) responseMap.get("has_more"));
-            response.setQuotaRemaining((Integer) responseMap.get("quota_remaining"));
-
-            List<Map<String, Object>> itemsMap = (List<Map<String, Object>>) responseMap.get("items");
-            if (itemsMap != null) {
-                List<QuestionItem> questionItems = itemsMap.stream()
-                        .map(this::convertMapToQuestionItem)
-                        .toList();
-                response.setItems(questionItems);
-                log.info("成功获取 {} 条问题数据", questionItems.size());
-            }
-
-            return response;
+            return parseResponse(responseMap, this::convertMapToQuestionItem);
 
         } catch (Exception e) {
             log.error("调用Stack Exchange API失败: {}", e.getMessage());
@@ -86,6 +78,7 @@ public class StackExchangeApiService {
                     .queryParam("sort", "creation")
                     .queryParam("site", "stackoverflow")
                     .queryParam("filter", "withbody")
+                    .queryParam("key", API_KEY) // 【修改】添加 Key
                     .build().toUriString();
 
             log.info("请求答案API: {}", url);
@@ -98,24 +91,10 @@ public class StackExchangeApiService {
                     .block();
 
             if (responseMap == null) {
-                log.warn("答案API返回空响应");
                 return null;
             }
 
-            StackExchangeResponse<AnswerItem> response = new StackExchangeResponse<>();
-            response.setHasMore((Boolean) responseMap.get("has_more"));
-            response.setQuotaRemaining((Integer) responseMap.get("quota_remaining"));
-
-            List<Map<String, Object>> itemsMap = (List<Map<String, Object>>) responseMap.get("items");
-            if (itemsMap != null) {
-                List<AnswerItem> answerItems = itemsMap.stream()
-                        .map(this::convertMapToAnswerItem)
-                        .toList();
-                response.setItems(answerItems);
-                log.info("成功获取 {} 条答案数据", answerItems.size());
-            }
-
-            return response;
+            return parseResponse(responseMap, this::convertMapToAnswerItem);
 
         } catch (Exception e) {
             log.error("调用答案API失败: {}", e.getMessage());
@@ -130,6 +109,7 @@ public class StackExchangeApiService {
         try {
             String url = UriComponentsBuilder.fromPath("/users/" + userId)
                     .queryParam("site", "stackoverflow")
+                    .queryParam("key", API_KEY) // 【修改】添加 Key
                     .build().toUriString();
 
             log.info("请求用户API: {}", url);
@@ -142,13 +122,11 @@ public class StackExchangeApiService {
                     .block();
 
             if (responseMap == null || responseMap.get("items") == null) {
-                log.warn("用户API返回空响应: userId={}", userId);
                 return null;
             }
 
             List<Map<String, Object>> itemsMap = (List<Map<String, Object>>) responseMap.get("items");
             if (itemsMap.isEmpty()) {
-                log.warn("未找到用户数据: userId={}", userId);
                 return null;
             }
 
@@ -156,149 +134,6 @@ public class StackExchangeApiService {
 
         } catch (Exception e) {
             log.error("调用用户API失败: userId={}, error={}", userId, e.getMessage());
-            return null;
-        }
-    }
-
-    private QuestionItem convertMapToQuestionItem(Map<String, Object> itemMap) {
-        try {
-            QuestionItem item = new QuestionItem();
-
-            if (itemMap.get("question_id") != null) {
-                item.setQuestionId(((Number) itemMap.get("question_id")).longValue());
-            }
-            item.setTitle((String) itemMap.get("title"));
-            item.setBody((String) itemMap.get("body"));
-
-            // 处理owner信息
-            if (itemMap.get("owner") instanceof Map) {
-                Map<String, Object> ownerMap = (Map<String, Object>) itemMap.get("owner");
-                if (ownerMap.get("user_id") != null) {
-                    item.setOwnerUserId(((Number) ownerMap.get("user_id")).longValue());
-                }
-            }
-
-            // 处理数值字段
-            if (itemMap.get("score") != null) {
-                item.setScore(((Number) itemMap.get("score")).intValue());
-            }
-            if (itemMap.get("view_count") != null) {
-                item.setViewCount(((Number) itemMap.get("view_count")).intValue());
-            }
-            if (itemMap.get("answer_count") != null) {
-                item.setAnswerCount(((Number) itemMap.get("answer_count")).intValue());
-            }
-            if (itemMap.get("comment_count") != null) {
-                item.setCommentCount(((Number) itemMap.get("comment_count")).intValue());
-            }
-            if (itemMap.get("favorite_count") != null) {
-                item.setFavoriteCount(((Number) itemMap.get("favorite_count")).intValue());
-            }
-
-            // 处理布尔字段
-            if (itemMap.get("is_answered") != null) {
-                item.setIsAnswered((Boolean) itemMap.get("is_answered"));
-            }
-
-            // 处理日期字段
-            if (itemMap.get("creation_date") != null) {
-                item.setCreationDate(((Number) itemMap.get("creation_date")).longValue());
-            }
-            if (itemMap.get("last_activity_date") != null) {
-                item.setLastActivityDate(((Number) itemMap.get("last_activity_date")).longValue());
-            }
-            if (itemMap.get("last_edit_date") != null) {
-                item.setLastEditDate(((Number) itemMap.get("last_edit_date")).longValue());
-            }
-
-            // 处理accepted_answer_id
-            if (itemMap.get("accepted_answer_id") != null) {
-                item.setAcceptedAnswerId(((Number) itemMap.get("accepted_answer_id")).longValue());
-            }
-
-            // 处理标签
-            if (itemMap.get("tags") instanceof List) {
-                item.setTags((List<String>) itemMap.get("tags"));
-            }
-
-            return item;
-
-        } catch (Exception e) {
-            log.error("转换QuestionItem失败: {}", e.getMessage());
-            return null;
-        }
-    }
-
-    private AnswerItem convertMapToAnswerItem(Map<String, Object> itemMap) {
-        try {
-            AnswerItem item = new AnswerItem();
-
-            if (itemMap.get("answer_id") != null) {
-                item.setAnswerId(((Number) itemMap.get("answer_id")).longValue());
-            }
-            if (itemMap.get("question_id") != null) {
-                item.setQuestionId(((Number) itemMap.get("question_id")).longValue());
-            }
-            item.setBody((String) itemMap.get("body"));
-
-            if (itemMap.get("owner") instanceof Map) {
-                Map<String, Object> ownerMap = (Map<String, Object>) itemMap.get("owner");
-                if (ownerMap.get("user_id") != null) {
-                    item.setOwnerUserId(((Number) ownerMap.get("user_id")).longValue());
-                }
-            }
-
-            if (itemMap.get("score") != null) {
-                item.setScore(((Number) itemMap.get("score")).intValue());
-            }
-            if (itemMap.get("is_accepted") != null) {
-                item.setIsAccepted((Boolean) itemMap.get("is_accepted"));
-            }
-            if (itemMap.get("comment_count") != null) {
-                item.setCommentCount(((Number) itemMap.get("comment_count")).intValue());
-            }
-
-            if (itemMap.get("creation_date") != null) {
-                item.setCreationDate(((Number) itemMap.get("creation_date")).longValue());
-            }
-            if (itemMap.get("last_activity_date") != null) {
-                item.setLastActivityDate(((Number) itemMap.get("last_activity_date")).longValue());
-            }
-            if (itemMap.get("last_edit_date") != null) {
-                item.setLastEditDate(((Number) itemMap.get("last_edit_date")).longValue());
-            }
-
-            return item;
-
-        } catch (Exception e) {
-            log.error("转换AnswerItem失败: {}", e.getMessage());
-            return null;
-        }
-    }
-
-    private UserItem convertMapToUserItem(Map<String, Object> itemMap) {
-        try {
-            UserItem item = new UserItem();
-
-            if (itemMap.get("user_id") != null) {
-                item.setUserId(((Number) itemMap.get("user_id")).longValue());
-            }
-            item.setDisplayName((String) itemMap.get("display_name"));
-
-            if (itemMap.get("reputation") != null) {
-                item.setReputation(((Number) itemMap.get("reputation")).intValue());
-            }
-            if (itemMap.get("creation_date") != null) {
-                item.setCreationDate(((Number) itemMap.get("creation_date")).longValue());
-            }
-            if (itemMap.get("last_access_date") != null) {
-                item.setLastAccessDate(((Number) itemMap.get("last_access_date")).longValue());
-            }
-
-            return item;
-
-        } catch (Exception e) {
-            log.error("转换UserItem失败: {}", e.getMessage());
             return null;
         }
     }
@@ -315,6 +150,7 @@ public class StackExchangeApiService {
                     .queryParam("sort", "creation")
                     .queryParam("site", "stackoverflow")
                     .queryParam("filter", "withbody")
+                    .queryParam("key", API_KEY) // 【修改】添加 Key
                     .build().toUriString();
 
             log.info("请求问题评论API: {}", url);
@@ -326,25 +162,9 @@ public class StackExchangeApiService {
                     .bodyToMono(Map.class)
                     .block();
 
-            if (responseMap == null) {
-                log.warn("问题评论API返回空响应");
-                return null;
-            }
+            if (responseMap == null) return null;
 
-            StackExchangeResponse<CommentItem> response = new StackExchangeResponse<>();
-            response.setHasMore((Boolean) responseMap.get("has_more"));
-            response.setQuotaRemaining((Integer) responseMap.get("quota_remaining"));
-
-            List<Map<String, Object>> itemsMap = (List<Map<String, Object>>) responseMap.get("items");
-            if (itemsMap != null) {
-                List<CommentItem> commentItems = itemsMap.stream()
-                        .map(itemMap -> convertMapToCommentItem(itemMap, "question"))
-                        .toList();
-                response.setItems(commentItems);
-                log.info("成功获取 {} 条问题评论数据", commentItems.size());
-            }
-
-            return response;
+            return parseResponse(responseMap, itemMap -> convertMapToCommentItem(itemMap, "question"));
 
         } catch (Exception e) {
             log.error("调用问题评论API失败: {}", e.getMessage());
@@ -364,6 +184,7 @@ public class StackExchangeApiService {
                     .queryParam("sort", "creation")
                     .queryParam("site", "stackoverflow")
                     .queryParam("filter", "withbody")
+                    .queryParam("key", API_KEY) // 【修改】添加 Key
                     .build().toUriString();
 
             log.info("请求答案评论API: {}", url);
@@ -375,25 +196,9 @@ public class StackExchangeApiService {
                     .bodyToMono(Map.class)
                     .block();
 
-            if (responseMap == null) {
-                log.warn("答案评论API返回空响应");
-                return null;
-            }
+            if (responseMap == null) return null;
 
-            StackExchangeResponse<CommentItem> response = new StackExchangeResponse<>();
-            response.setHasMore((Boolean) responseMap.get("has_more"));
-            response.setQuotaRemaining((Integer) responseMap.get("quota_remaining"));
-
-            List<Map<String, Object>> itemsMap = (List<Map<String, Object>>) responseMap.get("items");
-            if (itemsMap != null) {
-                List<CommentItem> commentItems = itemsMap.stream()
-                        .map(itemMap -> convertMapToCommentItem(itemMap, "answer"))
-                        .toList();
-                response.setItems(commentItems);
-                log.info("成功获取 {} 条答案评论数据", commentItems.size());
-            }
-
-            return response;
+            return parseResponse(responseMap, itemMap -> convertMapToCommentItem(itemMap, "answer"));
 
         } catch (Exception e) {
             log.error("调用答案评论API失败: {}", e.getMessage());
@@ -401,9 +206,55 @@ public class StackExchangeApiService {
         }
     }
 
-    /**
-     * 转换Map到CommentItem
-     */
+    // --- 辅助方法 ---
+
+    // 泛型解析响应，避免重复代码
+    private <T> StackExchangeResponse<T> parseResponse(Map<String, Object> responseMap, java.util.function.Function<Map<String, Object>, T> mapper) {
+        StackExchangeResponse<T> response = new StackExchangeResponse<>();
+
+        if (responseMap.get("has_more") != null)
+            response.setHasMore((Boolean) responseMap.get("has_more"));
+        if (responseMap.get("quota_remaining") != null)
+            response.setQuotaRemaining((Integer) responseMap.get("quota_remaining"));
+
+        List<Map<String, Object>> itemsMap = (List<Map<String, Object>>) responseMap.get("items");
+        if (itemsMap != null) {
+            List<T> items = itemsMap.stream().map(mapper).toList();
+            response.setItems(items);
+        }
+        return response;
+    }
+
+    private QuestionItem convertMapToQuestionItem(Map<String, Object> itemMap) {
+        try {
+            QuestionItem item = new QuestionItem();
+            if (itemMap.get("question_id") != null) item.setQuestionId(((Number) itemMap.get("question_id")).longValue());
+            item.setTitle((String) itemMap.get("title"));
+            item.setBody((String) itemMap.get("body"));
+
+            if (itemMap.get("owner") instanceof Map) {
+                Map<String, Object> ownerMap = (Map<String, Object>) itemMap.get("owner");
+                if (ownerMap.get("user_id") != null) item.setOwnerUserId(((Number) ownerMap.get("user_id")).longValue());
+            }
+
+            if (itemMap.get("score") != null) item.setScore(((Number) itemMap.get("score")).intValue());
+            if (itemMap.get("view_count") != null) item.setViewCount(((Number) itemMap.get("view_count")).intValue());
+            if (itemMap.get("answer_count") != null) item.setAnswerCount(((Number) itemMap.get("answer_count")).intValue());
+            if (itemMap.get("comment_count") != null) item.setCommentCount(((Number) itemMap.get("comment_count")).intValue());
+            if (itemMap.get("favorite_count") != null) item.setFavoriteCount(((Number) itemMap.get("favorite_count")).intValue());
+            if (itemMap.get("is_answered") != null) item.setIsAnswered((Boolean) itemMap.get("is_answered"));
+            if (itemMap.get("creation_date") != null) item.setCreationDate(((Number) itemMap.get("creation_date")).longValue());
+            if (itemMap.get("last_activity_date") != null) item.setLastActivityDate(((Number) itemMap.get("last_activity_date")).longValue());
+            if (itemMap.get("last_edit_date") != null) item.setLastEditDate(((Number) itemMap.get("last_edit_date")).longValue());
+            if (itemMap.get("accepted_answer_id") != null) item.setAcceptedAnswerId(((Number) itemMap.get("accepted_answer_id")).longValue());
+            if (itemMap.get("tags") instanceof List) item.setTags((List<String>) itemMap.get("tags"));
+
+            return item;
+        } catch (Exception e) {
+            log.error("转换QuestionItem失败: {}", e.getMessage());
+            return null;
+        }
+    }
     private CommentItem convertMapToCommentItem(Map<String, Object> itemMap, String postType) {
         try {
             CommentItem item = new CommentItem();
@@ -417,6 +268,7 @@ public class StackExchangeApiService {
             item.setPostType(postType);
             item.setBody((String) itemMap.get("body"));
 
+            // 处理 owner (评论者)
             if (itemMap.get("owner") instanceof Map) {
                 Map<String, Object> ownerMap = (Map<String, Object>) itemMap.get("owner");
                 if (ownerMap.get("user_id") != null) {
@@ -433,15 +285,70 @@ public class StackExchangeApiService {
             if (itemMap.get("edited") != null) {
                 item.setEdited((Boolean) itemMap.get("edited"));
             }
+
+
             if (itemMap.get("reply_to_user") != null) {
-                item.setReplyToUserId(((Number) itemMap.get("reply_to_user")).longValue());
+
+                if (itemMap.get("reply_to_user") instanceof Map) {
+                    Map<String, Object> replyUserMap = (Map<String, Object>) itemMap.get("reply_to_user");
+                    if (replyUserMap.get("user_id") != null) {
+                        item.setReplyToUserId(((Number) replyUserMap.get("user_id")).longValue());
+                    }
+                }
+
+                else if (itemMap.get("reply_to_user") instanceof Number) {
+                    item.setReplyToUserId(((Number) itemMap.get("reply_to_user")).longValue());
+                }
             }
 
             return item;
 
         } catch (Exception e) {
             log.error("转换CommentItem失败: {}", e.getMessage());
+
             return null;
         }
     }
+    private AnswerItem convertMapToAnswerItem(Map<String, Object> itemMap) {
+        try {
+            AnswerItem item = new AnswerItem();
+            if (itemMap.get("answer_id") != null) item.setAnswerId(((Number) itemMap.get("answer_id")).longValue());
+            if (itemMap.get("question_id") != null) item.setQuestionId(((Number) itemMap.get("question_id")).longValue());
+            item.setBody((String) itemMap.get("body"));
+
+            if (itemMap.get("owner") instanceof Map) {
+                Map<String, Object> ownerMap = (Map<String, Object>) itemMap.get("owner");
+                if (ownerMap.get("user_id") != null) item.setOwnerUserId(((Number) ownerMap.get("user_id")).longValue());
+            }
+
+            if (itemMap.get("score") != null) item.setScore(((Number) itemMap.get("score")).intValue());
+            if (itemMap.get("is_accepted") != null) item.setIsAccepted((Boolean) itemMap.get("is_accepted"));
+            if (itemMap.get("comment_count") != null) item.setCommentCount(((Number) itemMap.get("comment_count")).intValue());
+            if (itemMap.get("creation_date") != null) item.setCreationDate(((Number) itemMap.get("creation_date")).longValue());
+            if (itemMap.get("last_activity_date") != null) item.setLastActivityDate(((Number) itemMap.get("last_activity_date")).longValue());
+            if (itemMap.get("last_edit_date") != null) item.setLastEditDate(((Number) itemMap.get("last_edit_date")).longValue());
+
+            return item;
+        } catch (Exception e) {
+            log.error("转换AnswerItem失败: {}", e.getMessage());
+            return null;
+        }
+    }
+
+    private UserItem convertMapToUserItem(Map<String, Object> itemMap) {
+        try {
+            UserItem item = new UserItem();
+            if (itemMap.get("user_id") != null) item.setUserId(((Number) itemMap.get("user_id")).longValue());
+            item.setDisplayName((String) itemMap.get("display_name"));
+            if (itemMap.get("reputation") != null) item.setReputation(((Number) itemMap.get("reputation")).intValue());
+            if (itemMap.get("creation_date") != null) item.setCreationDate(((Number) itemMap.get("creation_date")).longValue());
+            if (itemMap.get("last_access_date") != null) item.setLastAccessDate(((Number) itemMap.get("last_access_date")).longValue());
+            return item;
+        } catch (Exception e) {
+            log.error("转换UserItem失败: {}", e.getMessage());
+            return null;
+        }
+    }
+
+
 }
