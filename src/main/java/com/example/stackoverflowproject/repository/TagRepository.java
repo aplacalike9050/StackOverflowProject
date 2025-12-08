@@ -1,12 +1,13 @@
 package com.example.stackoverflowproject.repository;
 
-import com.example.stackoverflowproject.entity.Question;
+import com.example.stackoverflowproject.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {
+public interface TagRepository extends JpaRepository<Tag, Long> {
+
 
 }

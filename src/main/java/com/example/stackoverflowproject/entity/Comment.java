@@ -6,18 +6,22 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "answers")
-public class Answer {
+@Table(name = "comments")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "answer_id", unique = true, nullable = false)
-    private Long answerId;
+    @Column(name = "comment_id", unique = true)
+    private Long commentId;
 
-    @Column(name = "question_id") // 逻辑外键，关联 Question 的 questionId
-    private Long questionId;
+    // 核心修改：只存 ID 和类型，不建立物理外键关联
+    @Column(name = "post_id")
+    private Long postId;
+
+    @Column(name = "post_type")
+    private String postType; // "question" or "answer"
 
     @Column(name = "owner_user_id")
     private Long ownerUserId;
@@ -27,15 +31,13 @@ public class Answer {
 
     private Integer score;
 
-    @Column(name = "is_accepted")
-    private Boolean isAccepted;
-
     @Column(name = "creation_date")
     private Long creationDate;
-    @Column(name = "last_activity_date")
-    private Long lastActivityDate;
+
     @Column(name = "collected_at")
     private LocalDateTime collectedAt = LocalDateTime.now();
+
+    // 删除了所有的 @ManyToOne 关联，保证数据纯净导入
 
 
 }

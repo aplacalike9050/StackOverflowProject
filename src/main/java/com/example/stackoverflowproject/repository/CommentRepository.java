@@ -1,12 +1,14 @@
 package com.example.stackoverflowproject.repository;
 
-import com.example.stackoverflowproject.entity.Question;
+import com.example.stackoverflowproject.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
 
 
+
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+
 
 }
