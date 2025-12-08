@@ -1,0 +1,90 @@
+2025-12-07T15:15:03.078+08:00  INFO 270928 --- [cs209a-project] [main] c.x.c.Cs209aProjectApplication           : Starting Cs209aProjectApplication using Java 23.0.1 with PID 270928 (D:\cs209a_project\target\classes started by 浮生半昼 in D:\cs209a_project)
+2025-12-07T15:15:03.084+08:00  INFO 270928 --- [cs209a-project] [main] c.x.c.Cs209aProjectApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-12-07T15:15:03.420+08:00  INFO 270928 --- [cs209a-project] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-07T15:15:03.456+08:00  INFO 270928 --- [cs209a-project] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 2 JPA repository interfaces.
+2025-12-07T15:15:03.699+08:00  INFO 270928 --- [cs209a-project] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2025-12-07T15:15:03.712+08:00  INFO 270928 --- [cs209a-project] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-07T15:15:03.713+08:00  INFO 270928 --- [cs209a-project] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-07T15:15:03.736+08:00  INFO 270928 --- [cs209a-project] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 618 ms
+2025-12-07T15:15:03.814+08:00  INFO 270928 --- [cs209a-project] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-07T15:15:03.838+08:00  INFO 270928 --- [cs209a-project] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-07T15:15:04.080+08:00  INFO 270928 --- [cs209a-project] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-07T15:15:04.098+08:00  INFO 270928 --- [cs209a-project] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-07T15:15:04.210+08:00  INFO 270928 --- [cs209a-project] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3e2772a9
+2025-12-07T15:15:04.211+08:00  INFO 270928 --- [cs209a-project] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-07T15:15:04.230+08:00  WARN 270928 --- [cs209a-project] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-07T15:15:04.246+08:00  INFO 270928 --- [cs209a-project] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/cs209a_project]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.10
+	Default catalog/schema: cs209a_project/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-07T15:15:04.779+08:00  INFO 270928 --- [cs209a-project] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-07T15:15:04.781+08:00  INFO 270928 --- [cs209a-project] [main] org.hibernate.orm.jdbc.batch             : HHH100501: Automatic JDBC statement batching enabled (maximum batch size 20)
+2025-12-07T15:15:04.823+08:00  INFO 270928 --- [cs209a-project] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-07T15:15:04.868+08:00  INFO 270928 --- [cs209a-project] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-07T15:15:04.984+08:00  WARN 270928 --- [cs209a-project] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-07T15:15:05.158+08:00  INFO 270928 --- [cs209a-project] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2025-12-07T15:15:05.162+08:00  INFO 270928 --- [cs209a-project] [main] c.x.c.Cs209aProjectApplication           : Started Cs209aProjectApplication in 2.368 seconds (process running for 2.751)
+2025-12-07T15:15:07.763+08:00  INFO 270928 --- [cs209a-project] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-07T15:15:07.764+08:00  INFO 270928 --- [cs209a-project] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-07T15:15:07.766+08:00  INFO 270928 --- [cs209a-project] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-12-07T15:15:13.657+08:00  WARN 270928 --- [cs209a-project] [http-nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-12-07T15:16:04.971+08:00  WARN 270928 --- [cs209a-project] [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-12-07T15:20:56.611+08:00  INFO 270928 --- [cs209a-project] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-07T15:20:56.614+08:00  INFO 270928 --- [cs209a-project] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-07T15:20:56.616+08:00  INFO 270928 --- [cs209a-project] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-07T15:20:56.618+08:00  INFO 270928 --- [cs209a-project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-07T15:20:56.619+08:00  INFO 270928 --- [cs209a-project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-07T15:45:57.698+08:00  INFO 262532 --- [cs209a-project] [main] c.x.c.Cs209aProjectApplication           : Starting Cs209aProjectApplication using Java 23.0.1 with PID 262532 (D:\cs209a_project\target\classes started by 浮生半昼 in D:\cs209a_project)
+2025-12-07T15:45:57.700+08:00  INFO 262532 --- [cs209a-project] [main] c.x.c.Cs209aProjectApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-12-07T15:45:58.073+08:00  INFO 262532 --- [cs209a-project] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-07T15:45:58.108+08:00  INFO 262532 --- [cs209a-project] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 2 JPA repository interfaces.
+2025-12-07T15:45:58.379+08:00  INFO 262532 --- [cs209a-project] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2025-12-07T15:45:58.388+08:00  INFO 262532 --- [cs209a-project] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-07T15:45:58.389+08:00  INFO 262532 --- [cs209a-project] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-07T15:45:58.418+08:00  INFO 262532 --- [cs209a-project] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 682 ms
+2025-12-07T15:45:58.519+08:00  INFO 262532 --- [cs209a-project] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-07T15:45:58.558+08:00  INFO 262532 --- [cs209a-project] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-07T15:45:58.859+08:00  INFO 262532 --- [cs209a-project] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-07T15:45:58.886+08:00  INFO 262532 --- [cs209a-project] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-07T15:45:59.044+08:00  INFO 262532 --- [cs209a-project] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@18ac4af6
+2025-12-07T15:45:59.045+08:00  INFO 262532 --- [cs209a-project] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-07T15:45:59.084+08:00  WARN 262532 --- [cs209a-project] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-07T15:45:59.106+08:00  INFO 262532 --- [cs209a-project] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/cs209a_project]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.10
+	Default catalog/schema: cs209a_project/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-07T15:45:59.722+08:00  INFO 262532 --- [cs209a-project] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-07T15:45:59.724+08:00  INFO 262532 --- [cs209a-project] [main] org.hibernate.orm.jdbc.batch             : HHH100501: Automatic JDBC statement batching enabled (maximum batch size 20)
+2025-12-07T15:45:59.773+08:00  INFO 262532 --- [cs209a-project] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-07T15:45:59.826+08:00  INFO 262532 --- [cs209a-project] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-07T15:46:00.324+08:00  WARN 262532 --- [cs209a-project] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-07T15:46:00.519+08:00  INFO 262532 --- [cs209a-project] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2025-12-07T15:46:00.522+08:00  INFO 262532 --- [cs209a-project] [main] c.x.c.Cs209aProjectApplication           : Started Cs209aProjectApplication in 3.151 seconds (process running for 3.595)
+2025-12-07T15:46:03.021+08:00  INFO 262532 --- [cs209a-project] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-07T15:46:03.022+08:00  INFO 262532 --- [cs209a-project] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-07T15:46:03.023+08:00  INFO 262532 --- [cs209a-project] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-12-07T15:46:06.762+08:00  WARN 262532 --- [cs209a-project] [http-nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-12-07T15:46:10.187+08:00  WARN 262532 --- [cs209a-project] [http-nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-12-07T15:47:09.108+08:00  WARN 262532 --- [cs209a-project] [http-nio-8080-exec-2] o.s.web.servlet.PageNotFound             : No mapping for GET /index
+2025-12-07T15:47:09.110+08:00  WARN 262532 --- [cs209a-project] [http-nio-8080-exec-2] o.s.web.servlet.PageNotFound             : No endpoint GET /index.
+2025-12-07T15:53:08.983+08:00  INFO 262532 --- [cs209a-project] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-07T15:53:08.986+08:00  INFO 262532 --- [cs209a-project] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-07T15:53:08.988+08:00  INFO 262532 --- [cs209a-project] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-07T15:53:08.989+08:00  INFO 262532 --- [cs209a-project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-07T15:53:08.990+08:00  INFO 262532 --- [cs209a-project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

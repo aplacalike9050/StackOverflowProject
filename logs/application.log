@@ -1,0 +1,1622 @@
+2025-12-06 12:41:11 - INFO  - c.x.c.Cs209aProjectApplication - Starting Cs209aProjectApplication using Java 23.0.1 with PID 282588 (D:\cs209a_project\target\classes started by 浮生半昼 in D:\cs209a_project)
+2025-12-06 12:41:11 - DEBUG - c.x.c.Cs209aProjectApplication - Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-06 12:41:11 - INFO  - c.x.c.Cs209aProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2025-12-06 12:41:12 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-06 12:41:12 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37 ms. Found 2 JPA repository interfaces.
+2025-12-06 12:41:12 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-06 12:41:12 - INFO  - o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-06 12:41:12 - INFO  - o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-06 12:41:12 - INFO  - o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 814 ms
+2025-12-06 12:41:12 - INFO  - o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-06 12:41:12 - INFO  - org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-06 12:41:13 - INFO  - o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-06 12:41:13 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-06 12:41:13 - INFO  - com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3e8afc2d
+2025-12-06 12:41:13 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-06 12:41:13 - WARN  - org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-06 12:41:13 - INFO  - o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/cs209a_project]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.10
+	Default catalog/schema: cs209a_project/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-06 12:41:14 - INFO  - o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-06 12:41:14 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 12:41:14 - INFO  - o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-06 12:41:14 - WARN  - o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-06 12:41:15 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-06 12:41:15 - INFO  - c.x.c.Cs209aProjectApplication - Started Cs209aProjectApplication in 3.713 seconds (process running for 4.313)
+2025-12-06 12:41:15 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 12:41:15 - INFO  - c.x.c.Cs209aProjectApplication - 🚀 CS209A项目应用启动成功!
+2025-12-06 12:41:15 - INFO  - c.x.c.Cs209aProjectApplication - 📊 数据收集界面: http://localhost:8080/admin/collect
+2025-12-06 12:41:15 - INFO  - c.x.c.Cs209aProjectApplication - 🔧 API基础路径: http://localhost:8080/api
+2025-12-06 12:41:15 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 12:41:21 - INFO  - o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-06 12:41:21 - INFO  - o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-06 12:41:21 - INFO  - o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-06 12:41:21 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 12:41:24 - INFO  - c.x.c.c.DataCollectionController - 开始采集数据，目标数量: 1
+2025-12-06 12:41:24 - INFO  - c.x.c.c.DataCollectionController - 采集前数据库数据量: 0
+2025-12-06 12:41:24 - INFO  - c.x.c.c.DataCollectionController - 需要获取 1 页数据
+2025-12-06 12:41:24 - INFO  - c.x.c.c.DataCollectionController - 正在获取第 1 页数据
+2025-12-06 12:41:24 - INFO  - c.x.c.service.StackOverflowService - 开始采集第 1 页数据，每页 100 条
+2025-12-06 12:41:24 - DEBUG - c.x.c.service.StackOverflowService - API URL: https://api.stackexchange.com/2.3/questions?page=1&pagesize=100&order=desc&sort=activity&site=stackoverflow
+2025-12-06 12:41:25 - INFO  - c.x.c.service.StackOverflowService - API响应状态: 200 OK
+2025-12-06 12:41:25 - INFO  - c.x.c.service.StackOverflowService - 解析到 100 个问题
+2025-12-06 12:41:25 - INFO  - c.x.c.service.StackOverflowService - 成功转换 100 个问题
+2025-12-06 12:41:25 - INFO  - c.x.c.c.DataCollectionController - 成功获取第 1 页数据，共 100 条
+2025-12-06 12:41:25 - INFO  - c.x.c.service.QuestionService - === 开始保存问题数据到数据库 ===
+2025-12-06 12:41:25 - INFO  - c.x.c.service.QuestionService - 准备保存 100 条问题数据
+2025-12-06 12:41:25 - INFO  - c.x.c.service.QuestionService - 保存前数据库数据量: 0
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 1 条数据: ggplot2 stacked area-bar plot in R
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 2 条数据: Add timezone to java.time.OffsetDateTime
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 3 条数据: Using marginaleffects inside a purrr::map
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 4 条数据: Unshare Files and Folders using script from Google Drive
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 5 条数据: Transfering gddoc files from one Google Drive account to another - &quot;No preview available&quot;?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 6 条数据: In lua, is there a way to &quot;force&quot; an argument to its multiple values
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 7 条数据: VS 2022 fails when solution is on Google Drive
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 8 条数据: Guidance needed? Cash cs50
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 9 条数据: How to detect Spark application failure in SparkListener when no jobs are executed?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 10 条数据: visual studio 2019 schema compare no differences detected
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 11 条数据: Stacked Area Graph in R
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 12 条数据: VS 2015 Schema Compare differences not shown but are detected
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 13 条数据: Anyway to add a 12 V battery to a Fritzing circuit?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 14 条数据: trouble in microsoft input method
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 15 条数据: Including Windows.h is producing errors of: &#39;byte&#39;: ambiguous symbol
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 16 条数据: ggplot2 plotting a 100% stacked area chart
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 17 条数据: Xcode Cloud access private repo with Access Token
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 18 条数据: Postgress connection failure in browser
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 19 条数据: Spreadsheet in Perl
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 20 条数据: Replicate Typescript VSCode Debug in: launch.json
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 21 条数据: Best way to filter for distinct on the union of multiple columns?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 22 条数据: How should I filter for distinct values on the union of multiple columns rather than the intersection?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 23 条数据: Win32 C++: Error in CComPtr Release(): ATL::_NoAddRefReleaseOnCComPtr&lt;T&gt; in &quot;atlcomcli.h&quot; is inaccessible
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 24 条数据: Can I use a [ThreadStatic] field with a static local function to avoid creating closures?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 25 条数据: How can I make tests on a functional way using modern PHP?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 26 条数据: I have a problem with the request module in Automate Boring Stuff With Python - Chapter 13
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 27 条数据: Spring-boot: Getting IllegalArgumentException in Logback
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 28 条数据: How to integrate @react-native-firebase/messaging with Expo managed workflow without errors?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 29 条数据: How to handle heteroskedasticity when detecting anomalies using Z-scores on growth rates?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 30 条数据: How to Add and Remove MIME attachments correctly
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 31 条数据: Convert XML to Base64 using Javascript
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 32 条数据: WebView ssl error
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 33 条数据: Kendo ui grid with custom filter
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 34 条数据: Can you data bind a TreeView control?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 35 条数据: CSS badge shifts to the right inside Forminator form when injected via JavaScript (flex alignment issue)
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 36 条数据: Shortest path with time constraint
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 37 条数据: postgreSQL 18 , function jsonb_delete doesn&#39;t work
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 38 条数据: Alignment of y-axis
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 39 条数据: How to JIT-compile a function in JAX when input dimensions grow over time?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 40 条数据: Android .idea/misc.xml&#39;s languageLevel tag keeps changing JDKs
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 41 条数据: How to use VBA to populate one column based on another column in excel
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 42 条数据: How do I resolve the ConnectionResetError and CondaHTTPError when attempting to update conda despite multiple retries and Anaconda reinstalls?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 43 条数据: Eureka client 2.x + Spring Boot 3.5.6 on WebLogic 15.1.1: 404 heartbeat / 400 registration, ok on Tomcat
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 44 条数据: Next-auth redirects me back to dashboard after logout
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 45 条数据: Pass item group elements to custom task array parameter in msbuild
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 46 条数据: Playwright locator can find only one element by class
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 47 条数据: DbContext being auto added to DI container
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 48 条数据: ASP.NET Core ignores path I set for serving static files
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 49 条数据: Alpaca API returns fewer bars (13 instead of 14) only when running via nohup in Python
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 50 条数据: Artifactory OSS - HTTP 404 Not found after initial setup
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 51 条数据: Does ddtrace (python) support snowflake-sqlalchemy?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 52 条数据: Java - Resize JFrame When Moving to New Screen
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 53 条数据: html2pdf.js on the fly css issue
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 54 条数据: notepad++ How can I disable the auto indent in npp?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 55 条数据: Slider On/Off Switch in WPF
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 56 条数据: How do I create a table using Pugjs or Jade
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 57 条数据: Merging two tables in Access?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 58 条数据: Using $(this).find with .click() jQuery
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 59 条数据: Connecting to Oracle DB from shell script with &#39;sysdba&#39;
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 60 条数据: Unable to link Raylib.h in C project using MinGW in Visual Studio Code on Windows
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 61 条数据: Best Approach to High Volume Azure App Service Authentication
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 62 条数据: Retain the exact modification timestamp of a file in a Git repository
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 63 条数据: Warning and performance issues when scanning delta tables
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 64 条数据: Error implementing EntraID authentication with MCP Server ASP.NET CORE
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 65 条数据: What value goes in the XML &quot;lang&quot; attribute for biological names?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 66 条数据: Embedded: Rust, V, Zig?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 67 条数据: Re-create the possibly lost license
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 68 条数据: How are loops that modify a state implemented in SSA form?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 69 条数据: Multiindexed Pandas Series to Yes/No table
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 70 条数据: Pandas: IndexingError: Unalignable boolean Series provided as indexer
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 71 条数据: How to bubble up `std::unexpected` values when the expected types are different?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 72 条数据: torch-sparse install, module &#39;torch&#39; not found even with torch installed
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 73 条数据: Unable to find route .Net Maui
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 74 条数据: Zod email validation issue
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 75 条数据: Link HTML File To JavaScript File
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 76 条数据: Is there a way to get more detailed error messages from browser.scripting.executeScript?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 77 条数据: Nokogiri 1.13.3 Gem Install Failure Termux
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 78 条数据: Laravel Valet fails to install via Composer on Mac (Apple Silicon)
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 79 条数据: Error occurred while reading WSGI handler: Error
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 80 条数据: Laravel 5.2: Artisan Key Generation for Application Key not working properly
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 81 条数据: add new item to sharepoint list in javascript
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 82 条数据: Invocation of init method failed; nested exception is org.apache.cxf.service.factory.ServiceConstructionException
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 83 条数据: I think my arduino is not properly receiving sensor values
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 84 条数据: How to avoid IntegrityError issue with update_or_create?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 85 条数据: R Markdown won&#39;t knit even though my code chunks work
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 86 条数据: use system packages inside a python script with uv?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 87 条数据: mlr3 training error during tunning with Deepsurv and loghaz
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 88 条数据: How do I see a user-friendly format when debugging chrono::DateTime in vscode-lldb?
+2025-12-06 12:41:25 - DEBUG - c.x.c.service.QuestionService - 成功保存第 89 条数据: Google gnostic: protoc-gen-openapi
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 90 条数据: Android 16 KB page size support in a Flutter app
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 91 条数据: llama_index Ollama misloading model issue
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 92 条数据: Exclude or ignore CMake build targets if dependencies
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 93 条数据: Svelte 5 reactive attachment
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 94 条数据: mlr3 Parameters in surv.coxph learner
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 95 条数据: Can I connect to an authenticated proxy using undetected-chromedriver + seleniumwire?
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 96 条数据: C++ : Formatting output text to .doc/.docx/.rtf (PART 2)
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 97 条数据: How to merge multiple CSV files based on specific column IDs
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 98 条数据: Python 3.14t free-thread compatibility with Polars
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 99 条数据: NextJS 15+ Promise-based Params: &quot;params&quot; in prop expression
+2025-12-06 12:41:26 - DEBUG - c.x.c.service.QuestionService - 成功保存第 100 条数据: How to Approach this C++ STL Practice Assignment for my Algorithms and Data Structures Final Exam
+2025-12-06 12:41:26 - INFO  - c.x.c.service.QuestionService - === 保存完成 ===
+2025-12-06 12:41:26 - INFO  - c.x.c.service.QuestionService - 处理结果 - 新增: 100 条, 跳过: 0 条
+2025-12-06 12:41:26 - INFO  - c.x.c.service.QuestionService - 数据库验证 - 保存前: 0 条, 保存后: 100 条, 实际增加: 100 条
+2025-12-06 12:41:26 - INFO  - c.x.c.c.DataCollectionController - 已保存第 1 页数据，当前总计: 100 条
+2025-12-06 12:41:26 - INFO  - c.x.c.c.DataCollectionController - 已达到目标数量，停止采集
+2025-12-06 12:41:26 - INFO  - c.x.c.c.DataCollectionController - 数据采集完成！
+2025-12-06 12:41:26 - INFO  - c.x.c.c.DataCollectionController - 采集结果 - 目标: 1 条, 实际新增: 100 条, 总数据量: 100 条
+2025-12-06 12:41:26 - INFO  - c.x.c.c.DataCollectionController - 总耗时: 1 秒
+2025-12-06 12:47:34 - INFO  - o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-06 12:47:34 - INFO  - o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-06 12:47:34 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 12:47:34 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-06 12:47:34 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-06 13:14:04 - INFO  - c.x.c.Cs209aProjectApplication - Starting Cs209aProjectApplication using Java 23.0.1 with PID 273616 (D:\cs209a_project\target\classes started by 浮生半昼 in D:\cs209a_project)
+2025-12-06 13:14:04 - DEBUG - c.x.c.Cs209aProjectApplication - Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-06 13:14:04 - INFO  - c.x.c.Cs209aProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2025-12-06 13:14:05 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-06 13:14:05 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 2 JPA repository interfaces.
+2025-12-06 13:14:05 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-06 13:14:05 - INFO  - o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-06 13:14:05 - INFO  - o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-06 13:14:05 - INFO  - o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 724 ms
+2025-12-06 13:14:05 - INFO  - o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-06 13:14:05 - INFO  - org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-06 13:14:06 - INFO  - o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-06 13:14:06 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-06 13:14:06 - INFO  - com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@40a7974
+2025-12-06 13:14:06 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-06 13:14:06 - WARN  - org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-06 13:14:06 - INFO  - o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/cs209a_project]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.10
+	Default catalog/schema: cs209a_project/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-06 13:14:06 - WARN  - org.hibernate.orm.deprecation - HHH90000033: Encountered use of deprecated annotation [interface jakarta.persistence.Temporal] at com.xiao.cs209a_project.entity.Question.collectedDate.
+2025-12-06 13:14:06 - INFO  - o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-06 13:14:07 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 13:14:07 - INFO  - o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-06 13:14:07 - WARN  - o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-06 13:14:07 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-06 13:14:07 - INFO  - c.x.c.Cs209aProjectApplication - Started Cs209aProjectApplication in 3.277 seconds (process running for 3.758)
+2025-12-06 13:14:07 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 13:14:07 - INFO  - c.x.c.Cs209aProjectApplication - 🚀 CS209A项目应用启动成功!
+2025-12-06 13:14:07 - INFO  - c.x.c.Cs209aProjectApplication - 📊 数据收集界面: http://localhost:8080/admin/collect
+2025-12-06 13:14:07 - INFO  - c.x.c.Cs209aProjectApplication - 🔧 API基础路径: http://localhost:8080/api
+2025-12-06 13:14:07 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 13:14:09 - INFO  - o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-06 13:14:09 - INFO  - o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-06 13:14:09 - INFO  - o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-06 13:14:09 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 13:14:34 - INFO  - c.x.c.c.DataCollectionController - 开始采集 100 个java标签的问题数据
+2025-12-06 13:14:34 - INFO  - c.x.c.c.DataCollectionController - 采集前 - 总问题数: 100, Java问题数: 12
+2025-12-06 13:14:34 - INFO  - c.x.c.service.StackOverflowService - 开始批量采集 100 个java标签的问题
+2025-12-06 13:14:34 - INFO  - c.x.c.service.StackOverflowService - 正在采集第 1 页java数据，目标: 100 条
+2025-12-06 13:14:34 - INFO  - c.x.c.service.StackOverflowService - 开始采集第 1 页java标签问题，每页 100 条
+2025-12-06 13:14:34 - INFO  - c.x.c.service.StackOverflowService - API URL: https://api.stackexchange.com/2.3/questions?page=1&pagesize=100&order=desc&sort=activity&tagged=java&site=stackoverflow
+2025-12-06 13:14:34 - INFO  - c.x.c.service.StackOverflowService - API响应状态: 200 OK
+2025-12-06 13:14:34 - INFO  - c.x.c.service.StackOverflowService - 解析到 100 个问题，其中包含java标签
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Java - Resize JFrame When Moving to New Screen
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,string
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to convert a string to corresponding day,month and date
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,utc,java-time
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Add timezone to java.time.OffsetDateTime
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-boot,logging,microservices,jhipster
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Spring-boot: Getting IllegalArgumentException in Logback
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,android-studio
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Android .idea/misc.xml&#39;s languageLevel tag keeps changing JDKs
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,gradle,micrometer,java-25
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Building and running Micrometer with Java 25
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,jdbc
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Use Database in java application
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,linux,gnome
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Linux: how to get a list of all visible windows
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,aop,aspectj,jdbi
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Is it possible to inspect method invocations on a JDBI DAO using aspect-oriented programming?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,timezone,java-time,jsr310
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Why does the java.time.Clock has zone information?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How do I avoid left padding in menu items after upgrading from Java 21 to Java 25?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-boot,websocket
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: The HTTP request to initiate the WebSocket connection failed
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,javafx,javafx-8
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Nested JavaFX Services
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-boot,spring-cloud-gateway
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: HTTP-403 when authentication in spring authentication server after /login in spring cloud gateway
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,gradle,boot
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Gradle does not add the correct main-class entry in the manifest.mf file
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,payment,applepay,applepayjs,applepay-web
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: ApplePay Web - sessionError {code:&quot;unknown&quot;}
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,arrays,tostring,multidimensional-array
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: 2 dimensional array to string code java
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,spring-boot
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Spring Boot 4.x need manual inject for ObjectMapper Jackson?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-boot,mockito
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: ClassCastException Mono&lt;Void&gt; unit test Java
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-boot,spring-mvc
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: From which package do I import @WebMvcTest in Spring Boot 4.x?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,button,applet,call
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: call another applet in an applet
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Java android frame layout
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,oracle-database,plugins,version
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Issue with opening oracle form you must install the J2SE Plugin version
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,tomcat,spark-java
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Tomcat fails to load Java Spark application
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,ssl,ssl-certificate,webclient,x509
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: PKIX path building failed: unable to find valid certification path — How to load PEM certificate into truststore at runtime in Spring Boot?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,regex,unit-testing
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How can I solve this problem of test difference?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,floating-point,numerical-methods,approximation,taylor-series
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Taylor Series in Java using float
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,ssl,sslcontext,trustmanager,x509trustmanager
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to setup additional CA certificates *on top of* defaults in Java. I can&#39;t change the system wide CA list
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,mockito,junit5,jboss-arquillian,payara-micro
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Caused by: java.lang.ClassNotFoundException: org.mockito.internal.creation.bytebuddy.inject.MockMethodDispatcher
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,security,keystore,digital-certificate,keytool
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: keytool - see the public and private keys
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,spring-mvc,spring-test,spring-test-mvc
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Using Spring mockMvc to test optional path variables
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,maven,version
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Maven version with a property
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,mqtt,paho
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: paho Android MQTT client does not send PINGREQ to broker when phone screen is off
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,spring-boot,apache-kafka,spring-kafka
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Spring boot Kafka batching for all partitions
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,postgresql
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: java enum and postgresql enum
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,serversocket
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Android Machine is not on the network
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,apache-kafka
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Getting duplicate records In Parquet files created In Kafka Consumer
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,selenium,appium
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Appium unknow error: An unknown server-side error occurred while processing the command. Original error: &#39;app&#39; option is required for reinstall
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,dependency-injection,autowired
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Constructor-based dependency injection fails when requesting bean via beanFactory.getBean(Command.class, dto) in Spring Boot
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,node.js,post,https,restlet
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Internal Connector Error (1002) - The calling thread timed out while waiting for a response to unblock it
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,http
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Java web service request parameters returned as null
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,multithreading,synchronization
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Printing Even and Odd using two Threads in Java
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,concurrency,javafx-8
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Binding two JavaFX services&#39; running properties
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Webclient Exception : PKIX path building
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,ssh,sftp,jsch
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Not able to connect to SFTP using jcraft JSch
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,ms-word
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Creating word document from a template using java
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing,user-interface,archlinux
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Java Swing Invisible Image
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,sonarqube
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Turn off coverage for certain lines in Java
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,php,sql,mysql,solr
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to manage &quot;paging&quot; with Solr?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,javafx-8,hdpi
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: JavaFX 8 HiDPI Support
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,mysql,hibernate,connection,driver
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Hibernate - MySQL - Connection to DB
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,listview,nullpointerexception,android-arrayadapter
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Array Adapter is null after initialization
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,hibernate,spring-annotations
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Spring : @Transactional @Scheduled method throws TransactionException
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,heroku,database-connection
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Something unusual has occurred to cause the driver to fail. Heroku postgresql database
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,compilation,jvm,dynamic-compilation
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: JVM – Escape Analysis &amp; Stack Allocation
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,circuit-breaker,resilience4j
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: CircuitBreaker is going to OPEN state from CLOSED before minimumNumberOfCalls
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing,inputverifier
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Swing tutorial: InputVerifier setup
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,vpn,pptp,l2tp
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Implementing PPTP/L2TP Protocols on Android +14
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,date,java-time,epoch,zoneddatetime
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: zoneddatetime toEpochSecond without converting to local time
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,postgresql,spring-boot,hibernate,testcontainers
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Testcontainer: H2 is still used in test, Domain &quot;TEXT&quot; not found;
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,angular,postgresql,spring-boot
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Risks of using Java 25 LTS versus Java 21 LTS in a new Spring Boot backend
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,bluetooth,hc-05
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: I cannot connect to my HC-05 bluetooth module using my own Java app
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,rest,authentication,spring-security
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Spring Boot Custom Authentication Provider with Java Configuration not working
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,javafx,module-path
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: javafx.controls module can&#39;t be found but its exists in the right location
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,gwt
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Fields are not showing on screen after upgrading gwt from 2.8.0 to 2.10.0 and java 8 to 10
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,arrays,generics,hashmap
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Type safety: The expression of type Map[] needs unchecked conversion to conform to Map&lt;String,Object&gt;[]
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,generics,unchecked,suppress-warnings
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: What is SuppressWarnings (&quot;unchecked&quot;) in Java?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,docker,jar,dockerfile,classpath
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Setting CLASSPATH within Docker container using Dockerfile
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,eclipse,maven,azure
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: how to run a war file in maven application?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,eclipse,hibernate,annotations,mapping
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Hibernate Mapping Error: MappingException: An AnnotationConfiguration instance
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,dependency-injection,properties
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: @Value not working in Spring @Configuration
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: android.view.View.performClick(View.java:5610)
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,jedis,spring-data-redis
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Cannot get Jedis connection, Could not get a resource from the pool
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,string,http,http-headers,text-parsing
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to handle variable-length header values when parsing HTTP requests in Java?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: javascript,java,digital-signature,ecdsa,webcrypto-api
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Failing to verify ECDSA signature using WebCrypto
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: javascript,java,webcrypto-api,end-to-end-encryption
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: End2End encryption IOException: algid parse error, not a sequence
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,selenium-webdriver,gitlab,gitlab-ci
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to run headless Chrome in Gitlab
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,docker,selenium,gitlab-ci,selenium-grid
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to set up a selenium test of download a file in Gitlab CI
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,web-services
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: org.springframework.ws.soap.client.SoapFaultClientException: 400200
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,junit5
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to implement JUnit 4 parameterized tests in JUnit 5?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing,jbutton,tic-tac-toe
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Hello I am creating a TicTacToe game for myself to understand Java better
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,opengl-es
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: GL_INVALID_OPERATION setting image2D in compute shader
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,intellij-idea,jvm,aspectj
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to define Run/Debug configuration templates per module?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,shader,processing,fragment-shader
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to prevent pixels from overwriting each other in processing?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-mvc,spring-security,spring-boot
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: spring boot with spring security : Error creating bean with name &#39;securityFilterChainRegistration&#39;
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,android-studio,smali
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Android Studio - Fail to load plugin descriptor from file smalidea.zip
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,web-services,validation,soap,wsdl
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How programmatically (!) validate soap request/response with wsdl?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,c#,go,domain-driven-design
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Representing 4 types of Card Templates Adhering to DDD
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,json,jackson
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Duplicate JSON Field with Jackson
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,formatting,classcastexception,messageformat
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: MessageFormat.format() gives ClassCast exception
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,apache,maven,dependencies,repository
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: error while running maven project java.lang.ClassNotFoundException: org.apache.commons.io.IOUtils
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,eclipse,selenium-webdriver,cucumber
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to install and setup Cucumber jar files in Eclipse for WebDriver Testing
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,spring-data-jpa,event-driven-design,domain-events
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Sending Spring domain events using a custom ApplicationEventPublisher
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,javafx
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Disable Button as click is still processed
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,mongodb-java
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: java mongodb driver how do you catch exceptions?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,spring-boot,mcp-server
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to connect to MCP server (Transport type: Streamable HTTP) in MCP Inspector (v0.17.2)
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing,jcombobox
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Java Swing - JComboBox getSelectedItem() not finding the object (cannot be resolved)
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,performance,file-io,stream,benchmarking
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Why is FileReader as efficient as BufferedReader in reading 1KB chunks of data?
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,microsoft-graph-api
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Read and write email using Microsoft Graph API Java
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,dom
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to use org.w3c.dom.NodeList with Java 8 Stream API?
+2025-12-06 13:14:34 - INFO  - c.x.c.service.StackOverflowService - 成功转换 100 个java标签问题
+2025-12-06 13:14:34 - INFO  - c.x.c.service.StackOverflowService - 成功获取第 1 页数据，共 100 条java问题
+2025-12-06 13:14:34 - INFO  - c.x.c.service.QuestionService - === 开始保存问题数据到数据库 ===
+2025-12-06 13:14:34 - INFO  - c.x.c.service.QuestionService - 准备保存 100 条问题数据
+2025-12-06 13:14:34 - INFO  - c.x.c.service.QuestionService - 保存前数据库数据量: 100
+2025-12-06 13:14:34 - DEBUG - c.x.c.service.QuestionService - 跳过重复数据: 79839444
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 2 条数据: How to convert a string to corresponding day,month and date
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 跳过重复数据: 79443500
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 跳过重复数据: 56162518
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 跳过重复数据: 32878888
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 6 条数据: Building and running Micrometer with Java 25
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 7 条数据: Use Database in java application
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 8 条数据: Linux: how to get a list of all visible windows
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 9 条数据: Is it possible to inspect method invocations on a JDBI DAO using aspect-oriented programming?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 10 条数据: Why does the java.time.Clock has zone information?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 11 条数据: How do I avoid left padding in menu items after upgrading from Java 21 to Java 25?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 12 条数据: The HTTP request to initiate the WebSocket connection failed
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 13 条数据: Nested JavaFX Services
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 14 条数据: HTTP-403 when authentication in spring authentication server after /login in spring cloud gateway
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 15 条数据: Gradle does not add the correct main-class entry in the manifest.mf file
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 16 条数据: ApplePay Web - sessionError {code:&quot;unknown&quot;}
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 17 条数据: 2 dimensional array to string code java
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 18 条数据: Spring Boot 4.x need manual inject for ObjectMapper Jackson?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 19 条数据: ClassCastException Mono&lt;Void&gt; unit test Java
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 20 条数据: From which package do I import @WebMvcTest in Spring Boot 4.x?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 21 条数据: call another applet in an applet
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 22 条数据: Java android frame layout
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 23 条数据: Issue with opening oracle form you must install the J2SE Plugin version
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 24 条数据: Tomcat fails to load Java Spark application
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 25 条数据: PKIX path building failed: unable to find valid certification path — How to load PEM certificate into truststore at runtime in Spring Boot?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 26 条数据: How can I solve this problem of test difference?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 27 条数据: Taylor Series in Java using float
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 28 条数据: How to setup additional CA certificates *on top of* defaults in Java. I can&#39;t change the system wide CA list
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 29 条数据: Caused by: java.lang.ClassNotFoundException: org.mockito.internal.creation.bytebuddy.inject.MockMethodDispatcher
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 30 条数据: keytool - see the public and private keys
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 31 条数据: Using Spring mockMvc to test optional path variables
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 32 条数据: Maven version with a property
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 33 条数据: paho Android MQTT client does not send PINGREQ to broker when phone screen is off
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 34 条数据: Spring boot Kafka batching for all partitions
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 35 条数据: java enum and postgresql enum
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 36 条数据: Android Machine is not on the network
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 37 条数据: Getting duplicate records In Parquet files created In Kafka Consumer
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 38 条数据: Appium unknow error: An unknown server-side error occurred while processing the command. Original error: &#39;app&#39; option is required for reinstall
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 39 条数据: Constructor-based dependency injection fails when requesting bean via beanFactory.getBean(Command.class, dto) in Spring Boot
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 40 条数据: Internal Connector Error (1002) - The calling thread timed out while waiting for a response to unblock it
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 41 条数据: Java web service request parameters returned as null
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 42 条数据: Printing Even and Odd using two Threads in Java
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 43 条数据: Binding two JavaFX services&#39; running properties
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 44 条数据: Webclient Exception : PKIX path building
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 45 条数据: Not able to connect to SFTP using jcraft JSch
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 46 条数据: Creating word document from a template using java
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 47 条数据: Java Swing Invisible Image
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 48 条数据: Turn off coverage for certain lines in Java
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 49 条数据: How to manage &quot;paging&quot; with Solr?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 50 条数据: JavaFX 8 HiDPI Support
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 51 条数据: Hibernate - MySQL - Connection to DB
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 52 条数据: Array Adapter is null after initialization
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 53 条数据: Spring : @Transactional @Scheduled method throws TransactionException
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 54 条数据: Something unusual has occurred to cause the driver to fail. Heroku postgresql database
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 55 条数据: JVM – Escape Analysis &amp; Stack Allocation
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 56 条数据: CircuitBreaker is going to OPEN state from CLOSED before minimumNumberOfCalls
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 57 条数据: Swing tutorial: InputVerifier setup
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 58 条数据: Implementing PPTP/L2TP Protocols on Android +14
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 59 条数据: zoneddatetime toEpochSecond without converting to local time
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 60 条数据: Testcontainer: H2 is still used in test, Domain &quot;TEXT&quot; not found;
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 61 条数据: Risks of using Java 25 LTS versus Java 21 LTS in a new Spring Boot backend
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 62 条数据: I cannot connect to my HC-05 bluetooth module using my own Java app
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 63 条数据: Spring Boot Custom Authentication Provider with Java Configuration not working
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 64 条数据: javafx.controls module can&#39;t be found but its exists in the right location
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 65 条数据: Fields are not showing on screen after upgrading gwt from 2.8.0 to 2.10.0 and java 8 to 10
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 66 条数据: Type safety: The expression of type Map[] needs unchecked conversion to conform to Map&lt;String,Object&gt;[]
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 67 条数据: What is SuppressWarnings (&quot;unchecked&quot;) in Java?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 68 条数据: Setting CLASSPATH within Docker container using Dockerfile
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 69 条数据: how to run a war file in maven application?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 70 条数据: Hibernate Mapping Error: MappingException: An AnnotationConfiguration instance
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 71 条数据: @Value not working in Spring @Configuration
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 72 条数据: android.view.View.performClick(View.java:5610)
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 73 条数据: Cannot get Jedis connection, Could not get a resource from the pool
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 74 条数据: How to handle variable-length header values when parsing HTTP requests in Java?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 75 条数据: Failing to verify ECDSA signature using WebCrypto
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 76 条数据: End2End encryption IOException: algid parse error, not a sequence
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 77 条数据: How to run headless Chrome in Gitlab
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 78 条数据: How to set up a selenium test of download a file in Gitlab CI
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 79 条数据: org.springframework.ws.soap.client.SoapFaultClientException: 400200
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 80 条数据: How to implement JUnit 4 parameterized tests in JUnit 5?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 81 条数据: Hello I am creating a TicTacToe game for myself to understand Java better
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 82 条数据: GL_INVALID_OPERATION setting image2D in compute shader
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 83 条数据: How to define Run/Debug configuration templates per module?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 84 条数据: How to prevent pixels from overwriting each other in processing?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 85 条数据: spring boot with spring security : Error creating bean with name &#39;securityFilterChainRegistration&#39;
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 86 条数据: Android Studio - Fail to load plugin descriptor from file smalidea.zip
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 87 条数据: How programmatically (!) validate soap request/response with wsdl?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 88 条数据: Representing 4 types of Card Templates Adhering to DDD
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 89 条数据: Duplicate JSON Field with Jackson
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 90 条数据: MessageFormat.format() gives ClassCast exception
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 91 条数据: error while running maven project java.lang.ClassNotFoundException: org.apache.commons.io.IOUtils
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 92 条数据: How to install and setup Cucumber jar files in Eclipse for WebDriver Testing
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 93 条数据: Sending Spring domain events using a custom ApplicationEventPublisher
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 94 条数据: Disable Button as click is still processed
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 95 条数据: java mongodb driver how do you catch exceptions?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 96 条数据: How to connect to MCP server (Transport type: Streamable HTTP) in MCP Inspector (v0.17.2)
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 97 条数据: Java Swing - JComboBox getSelectedItem() not finding the object (cannot be resolved)
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 98 条数据: Why is FileReader as efficient as BufferedReader in reading 1KB chunks of data?
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 99 条数据: Read and write email using Microsoft Graph API Java
+2025-12-06 13:14:35 - DEBUG - c.x.c.service.QuestionService - 成功保存第 100 条数据: How to use org.w3c.dom.NodeList with Java 8 Stream API?
+2025-12-06 13:14:35 - INFO  - c.x.c.service.QuestionService - === 保存完成 ===
+2025-12-06 13:14:35 - INFO  - c.x.c.service.QuestionService - 处理结果 - 新增: 96 条, 跳过: 4 条
+2025-12-06 13:14:35 - INFO  - c.x.c.service.QuestionService - 数据库验证 - 保存前: 100 条, 保存后: 196 条, 实际增加: 96 条
+2025-12-06 13:14:35 - INFO  - c.x.c.service.StackOverflowService - 已保存第 1 页数据，当前总计: 100 条java问题
+2025-12-06 13:14:35 - INFO  - c.x.c.service.StackOverflowService - 已达到目标数量，停止采集
+2025-12-06 13:14:35 - INFO  - c.x.c.service.StackOverflowService - 批量采集完成，共采集 100 个java标签的问题
+2025-12-06 13:14:35 - INFO  - c.x.c.c.DataCollectionController - Java标签数据采集完成！目标: 100 条, 实际新增: 96 条 (Java: 96 条), 总Java问题: 108 条, 耗时: 1 秒
+2025-12-06 13:14:38 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 13:14:56 - INFO  - o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-06 13:14:56 - INFO  - o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-06 13:14:56 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 13:14:56 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-06 13:14:56 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-06 13:48:36 - INFO  - c.x.c.Cs209aProjectApplication - Starting Cs209aProjectApplication using Java 23.0.1 with PID 268700 (D:\cs209a_project\target\classes started by 浮生半昼 in D:\cs209a_project)
+2025-12-06 13:48:36 - DEBUG - c.x.c.Cs209aProjectApplication - Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-06 13:48:36 - INFO  - c.x.c.Cs209aProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2025-12-06 13:48:36 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-06 13:48:36 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 2 JPA repository interfaces.
+2025-12-06 13:48:36 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-06 13:48:36 - INFO  - o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-06 13:48:36 - INFO  - o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-06 13:48:36 - INFO  - o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 817 ms
+2025-12-06 13:48:37 - INFO  - o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-06 13:48:37 - INFO  - org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-06 13:48:37 - INFO  - o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-06 13:48:37 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-06 13:48:37 - INFO  - com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@990b86b
+2025-12-06 13:48:37 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-06 13:48:37 - WARN  - org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-06 13:48:37 - INFO  - o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/cs209a_project]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.10
+	Default catalog/schema: cs209a_project/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-06 13:48:37 - WARN  - org.hibernate.orm.deprecation - HHH90000033: Encountered use of deprecated annotation [interface jakarta.persistence.Temporal] at com.xiao.cs209a_project.entity.Question.collectedDate.
+2025-12-06 13:48:38 - INFO  - o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-06 13:48:38 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 13:48:38 - INFO  - o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-06 13:48:39 - WARN  - o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-06 13:48:39 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-06 13:48:39 - INFO  - c.x.c.Cs209aProjectApplication - Started Cs209aProjectApplication in 3.615 seconds (process running for 4.168)
+2025-12-06 13:48:39 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 13:48:39 - INFO  - c.x.c.Cs209aProjectApplication - 🚀 CS209A项目应用启动成功!
+2025-12-06 13:48:39 - INFO  - c.x.c.Cs209aProjectApplication - 📊 数据收集界面: http://localhost:8080/admin/collect
+2025-12-06 13:48:39 - INFO  - c.x.c.Cs209aProjectApplication - 🔧 API基础路径: http://localhost:8080/api
+2025-12-06 13:48:39 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 13:48:44 - INFO  - o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-06 13:48:44 - INFO  - o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-06 13:48:44 - INFO  - o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-12-06 13:48:44 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 13:48:47 - INFO  - c.x.c.c.DataCollectionController - 开始采集 100 个java标签的问题数据
+2025-12-06 13:48:47 - INFO  - c.x.c.c.DataCollectionController - 采集前 - 总问题数: 0, Java问题数: 0
+2025-12-06 13:48:47 - INFO  - c.x.c.service.StackOverflowService - 开始批量采集 100 个java标签的问题
+2025-12-06 13:48:47 - INFO  - c.x.c.service.StackOverflowService - 正在采集第 1 页java数据，目标: 100 条
+2025-12-06 13:48:47 - INFO  - c.x.c.service.StackOverflowService - 开始采集第 1 页java标签问题，每页 100 条
+2025-12-06 13:48:47 - INFO  - c.x.c.service.StackOverflowService - API URL: https://api.stackexchange.com/2.3/questions?page=1&pagesize=100&order=desc&sort=activity&tagged=java&site=stackoverflow
+2025-12-06 13:48:48 - INFO  - c.x.c.service.StackOverflowService - API响应状态: 200 OK
+2025-12-06 13:48:48 - INFO  - c.x.c.service.StackOverflowService - 解析到 100 个问题，其中包含java标签
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-boot,logging,microservices,jhipster
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Spring-boot: Getting IllegalArgumentException in Logback
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,java-time
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Add a fixed amount of minutes to a Java LocalTime in a for-loop until midnight without causing an infinite loop
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,javafx,module-path
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: javafx.controls module can&#39;t be found but its exists in the right location
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,circuit-breaker,resilience4j
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: CircuitBreaker is going to OPEN state from CLOSED before minimumNumberOfCalls
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Java - Resize JFrame When Moving to New Screen
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,string
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to convert a string to corresponding day,month and date
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,utc,java-time
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Add timezone to java.time.OffsetDateTime
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,android-studio
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Android .idea/misc.xml&#39;s languageLevel tag keeps changing JDKs
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,gradle,micrometer,java-25
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Building and running Micrometer with Java 25
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,jdbc
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Use Database in java application
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,linux,gnome
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Linux: how to get a list of all visible windows
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,aop,aspectj,jdbi
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Is it possible to inspect method invocations on a JDBI DAO using aspect-oriented programming?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,timezone,java-time,jsr310
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Why does the java.time.Clock has zone information?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How do I avoid left padding in menu items after upgrading from Java 21 to Java 25?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-boot,websocket
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: The HTTP request to initiate the WebSocket connection failed
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,javafx,javafx-8
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Nested JavaFX Services
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-boot,spring-cloud-gateway
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: HTTP-403 when authentication in spring authentication server after /login in spring cloud gateway
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,gradle,boot
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Gradle does not add the correct main-class entry in the manifest.mf file
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,payment,applepay,applepayjs,applepay-web
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: ApplePay Web - sessionError {code:&quot;unknown&quot;}
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,arrays,tostring,multidimensional-array
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: 2 dimensional array to string code java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,spring-boot
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Spring Boot 4.x need manual inject for ObjectMapper Jackson?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-boot,mockito
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: ClassCastException Mono&lt;Void&gt; unit test Java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-boot,spring-mvc
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: From which package do I import @WebMvcTest in Spring Boot 4.x?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,button,applet,call
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: call another applet in an applet
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Java android frame layout
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,oracle-database,plugins,version
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Issue with opening oracle form you must install the J2SE Plugin version
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,tomcat,spark-java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Tomcat fails to load Java Spark application
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,ssl,ssl-certificate,webclient,x509
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: PKIX path building failed: unable to find valid certification path — How to load PEM certificate into truststore at runtime in Spring Boot?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,regex,unit-testing
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How can I solve this problem of test difference?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,floating-point,numerical-methods,approximation,taylor-series
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Taylor Series in Java using float
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,ssl,sslcontext,trustmanager,x509trustmanager
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to setup additional CA certificates *on top of* defaults in Java. I can&#39;t change the system wide CA list
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,mockito,junit5,jboss-arquillian,payara-micro
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Caused by: java.lang.ClassNotFoundException: org.mockito.internal.creation.bytebuddy.inject.MockMethodDispatcher
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,security,keystore,digital-certificate,keytool
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: keytool - see the public and private keys
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,spring-mvc,spring-test,spring-test-mvc
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Using Spring mockMvc to test optional path variables
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,maven,version
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Maven version with a property
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,mqtt,paho
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: paho Android MQTT client does not send PINGREQ to broker when phone screen is off
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,spring-boot,apache-kafka,spring-kafka
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Spring boot Kafka batching for all partitions
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,postgresql
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: java enum and postgresql enum
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,serversocket
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Android Machine is not on the network
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,apache-kafka
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Getting duplicate records In Parquet files created In Kafka Consumer
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,selenium,appium
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Appium unknow error: An unknown server-side error occurred while processing the command. Original error: &#39;app&#39; option is required for reinstall
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,dependency-injection,autowired
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Constructor-based dependency injection fails when requesting bean via beanFactory.getBean(Command.class, dto) in Spring Boot
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,node.js,post,https,restlet
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Internal Connector Error (1002) - The calling thread timed out while waiting for a response to unblock it
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,http
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Java web service request parameters returned as null
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,multithreading,synchronization
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Printing Even and Odd using two Threads in Java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,concurrency,javafx-8
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Binding two JavaFX services&#39; running properties
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Webclient Exception : PKIX path building
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,ssh,sftp,jsch
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Not able to connect to SFTP using jcraft JSch
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,ms-word
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Creating word document from a template using java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing,user-interface,archlinux
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Java Swing Invisible Image
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,sonarqube
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Turn off coverage for certain lines in Java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,php,sql,mysql,solr
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to manage &quot;paging&quot; with Solr?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,javafx-8,hdpi
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: JavaFX 8 HiDPI Support
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,mysql,hibernate,connection,driver
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Hibernate - MySQL - Connection to DB
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,listview,nullpointerexception,android-arrayadapter
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Array Adapter is null after initialization
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,hibernate,spring-annotations
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Spring : @Transactional @Scheduled method throws TransactionException
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,heroku,database-connection
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Something unusual has occurred to cause the driver to fail. Heroku postgresql database
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,compilation,jvm,dynamic-compilation
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: JVM – Escape Analysis &amp; Stack Allocation
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing,inputverifier
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Swing tutorial: InputVerifier setup
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,vpn,pptp,l2tp
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Implementing PPTP/L2TP Protocols on Android +14
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,date,java-time,epoch,zoneddatetime
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: zoneddatetime toEpochSecond without converting to local time
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,postgresql,spring-boot,hibernate,testcontainers
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Testcontainer: H2 is still used in test, Domain &quot;TEXT&quot; not found;
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,angular,postgresql,spring-boot
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Risks of using Java 25 LTS versus Java 21 LTS in a new Spring Boot backend
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,bluetooth,hc-05
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: I cannot connect to my HC-05 bluetooth module using my own Java app
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,rest,authentication,spring-security
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Spring Boot Custom Authentication Provider with Java Configuration not working
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,gwt
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Fields are not showing on screen after upgrading gwt from 2.8.0 to 2.10.0 and java 8 to 10
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,arrays,generics,hashmap
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Type safety: The expression of type Map[] needs unchecked conversion to conform to Map&lt;String,Object&gt;[]
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,generics,unchecked,suppress-warnings
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: What is SuppressWarnings (&quot;unchecked&quot;) in Java?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,docker,jar,dockerfile,classpath
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Setting CLASSPATH within Docker container using Dockerfile
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,eclipse,maven,azure
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: how to run a war file in maven application?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,eclipse,hibernate,annotations,mapping
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Hibernate Mapping Error: MappingException: An AnnotationConfiguration instance
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,dependency-injection,properties
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: @Value not working in Spring @Configuration
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: android.view.View.performClick(View.java:5610)
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,jedis,spring-data-redis
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Cannot get Jedis connection, Could not get a resource from the pool
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,string,http,http-headers,text-parsing
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to handle variable-length header values when parsing HTTP requests in Java?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: javascript,java,digital-signature,ecdsa,webcrypto-api
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Failing to verify ECDSA signature using WebCrypto
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: javascript,java,webcrypto-api,end-to-end-encryption
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: End2End encryption IOException: algid parse error, not a sequence
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,selenium-webdriver,gitlab,gitlab-ci
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to run headless Chrome in Gitlab
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,docker,selenium,gitlab-ci,selenium-grid
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to set up a selenium test of download a file in Gitlab CI
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,web-services
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: org.springframework.ws.soap.client.SoapFaultClientException: 400200
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,junit5
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to implement JUnit 4 parameterized tests in JUnit 5?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing,jbutton,tic-tac-toe
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Hello I am creating a TicTacToe game for myself to understand Java better
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,opengl-es
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: GL_INVALID_OPERATION setting image2D in compute shader
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,intellij-idea,jvm,aspectj
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to define Run/Debug configuration templates per module?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,shader,processing,fragment-shader
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to prevent pixels from overwriting each other in processing?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring-mvc,spring-security,spring-boot
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: spring boot with spring security : Error creating bean with name &#39;securityFilterChainRegistration&#39;
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,android,android-studio,smali
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Android Studio - Fail to load plugin descriptor from file smalidea.zip
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,web-services,validation,soap,wsdl
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How programmatically (!) validate soap request/response with wsdl?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,c#,go,domain-driven-design
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Representing 4 types of Card Templates Adhering to DDD
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,json,jackson
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Duplicate JSON Field with Jackson
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,formatting,classcastexception,messageformat
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: MessageFormat.format() gives ClassCast exception
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,apache,maven,dependencies,repository
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: error while running maven project java.lang.ClassNotFoundException: org.apache.commons.io.IOUtils
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,eclipse,selenium-webdriver,cucumber
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to install and setup Cucumber jar files in Eclipse for WebDriver Testing
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,spring-data-jpa,event-driven-design,domain-events
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Sending Spring domain events using a custom ApplicationEventPublisher
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,javafx
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Disable Button as click is still processed
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,mongodb-java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: java mongodb driver how do you catch exceptions?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,spring,spring-boot,mcp-server
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: How to connect to MCP server (Transport type: Streamable HTTP) in MCP Inspector (v0.17.2)
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,swing,jcombobox
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Java Swing - JComboBox getSelectedItem() not finding the object (cannot be resolved)
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,performance,file-io,stream,benchmarking
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Why is FileReader as efficient as BufferedReader in reading 1KB chunks of data?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 问题标签: java,microsoft-graph-api
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.StackOverflowService - 成功转换java问题: Read and write email using Microsoft Graph API Java
+2025-12-06 13:48:48 - INFO  - c.x.c.service.StackOverflowService - 成功转换 100 个java标签问题
+2025-12-06 13:48:48 - INFO  - c.x.c.service.StackOverflowService - 成功获取第 1 页数据，共 100 条java问题
+2025-12-06 13:48:48 - INFO  - c.x.c.service.QuestionService - === 开始保存问题数据到数据库 ===
+2025-12-06 13:48:48 - INFO  - c.x.c.service.QuestionService - 准备保存 100 条问题数据
+2025-12-06 13:48:48 - INFO  - c.x.c.service.QuestionService - 保存前数据库数据量: 0
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 1 条数据: Spring-boot: Getting IllegalArgumentException in Logback
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 2 条数据: Add a fixed amount of minutes to a Java LocalTime in a for-loop until midnight without causing an infinite loop
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 3 条数据: javafx.controls module can&#39;t be found but its exists in the right location
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 4 条数据: CircuitBreaker is going to OPEN state from CLOSED before minimumNumberOfCalls
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 5 条数据: Java - Resize JFrame When Moving to New Screen
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 6 条数据: How to convert a string to corresponding day,month and date
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 7 条数据: Add timezone to java.time.OffsetDateTime
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 8 条数据: Android .idea/misc.xml&#39;s languageLevel tag keeps changing JDKs
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 9 条数据: Building and running Micrometer with Java 25
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 10 条数据: Use Database in java application
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 11 条数据: Linux: how to get a list of all visible windows
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 12 条数据: Is it possible to inspect method invocations on a JDBI DAO using aspect-oriented programming?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 13 条数据: Why does the java.time.Clock has zone information?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 14 条数据: How do I avoid left padding in menu items after upgrading from Java 21 to Java 25?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 15 条数据: The HTTP request to initiate the WebSocket connection failed
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 16 条数据: Nested JavaFX Services
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 17 条数据: HTTP-403 when authentication in spring authentication server after /login in spring cloud gateway
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 18 条数据: Gradle does not add the correct main-class entry in the manifest.mf file
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 19 条数据: ApplePay Web - sessionError {code:&quot;unknown&quot;}
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 20 条数据: 2 dimensional array to string code java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 21 条数据: Spring Boot 4.x need manual inject for ObjectMapper Jackson?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 22 条数据: ClassCastException Mono&lt;Void&gt; unit test Java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 23 条数据: From which package do I import @WebMvcTest in Spring Boot 4.x?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 24 条数据: call another applet in an applet
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 25 条数据: Java android frame layout
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 26 条数据: Issue with opening oracle form you must install the J2SE Plugin version
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 27 条数据: Tomcat fails to load Java Spark application
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 28 条数据: PKIX path building failed: unable to find valid certification path — How to load PEM certificate into truststore at runtime in Spring Boot?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 29 条数据: How can I solve this problem of test difference?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 30 条数据: Taylor Series in Java using float
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 31 条数据: How to setup additional CA certificates *on top of* defaults in Java. I can&#39;t change the system wide CA list
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 32 条数据: Caused by: java.lang.ClassNotFoundException: org.mockito.internal.creation.bytebuddy.inject.MockMethodDispatcher
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 33 条数据: keytool - see the public and private keys
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 34 条数据: Using Spring mockMvc to test optional path variables
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 35 条数据: Maven version with a property
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 36 条数据: paho Android MQTT client does not send PINGREQ to broker when phone screen is off
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 37 条数据: Spring boot Kafka batching for all partitions
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 38 条数据: java enum and postgresql enum
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 39 条数据: Android Machine is not on the network
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 40 条数据: Getting duplicate records In Parquet files created In Kafka Consumer
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 41 条数据: Appium unknow error: An unknown server-side error occurred while processing the command. Original error: &#39;app&#39; option is required for reinstall
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 42 条数据: Constructor-based dependency injection fails when requesting bean via beanFactory.getBean(Command.class, dto) in Spring Boot
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 43 条数据: Internal Connector Error (1002) - The calling thread timed out while waiting for a response to unblock it
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 44 条数据: Java web service request parameters returned as null
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 45 条数据: Printing Even and Odd using two Threads in Java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 46 条数据: Binding two JavaFX services&#39; running properties
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 47 条数据: Webclient Exception : PKIX path building
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 48 条数据: Not able to connect to SFTP using jcraft JSch
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 49 条数据: Creating word document from a template using java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 50 条数据: Java Swing Invisible Image
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 51 条数据: Turn off coverage for certain lines in Java
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 52 条数据: How to manage &quot;paging&quot; with Solr?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 53 条数据: JavaFX 8 HiDPI Support
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 54 条数据: Hibernate - MySQL - Connection to DB
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 55 条数据: Array Adapter is null after initialization
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 56 条数据: Spring : @Transactional @Scheduled method throws TransactionException
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 57 条数据: Something unusual has occurred to cause the driver to fail. Heroku postgresql database
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 58 条数据: JVM – Escape Analysis &amp; Stack Allocation
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 59 条数据: Swing tutorial: InputVerifier setup
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 60 条数据: Implementing PPTP/L2TP Protocols on Android +14
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 61 条数据: zoneddatetime toEpochSecond without converting to local time
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 62 条数据: Testcontainer: H2 is still used in test, Domain &quot;TEXT&quot; not found;
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 63 条数据: Risks of using Java 25 LTS versus Java 21 LTS in a new Spring Boot backend
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 64 条数据: I cannot connect to my HC-05 bluetooth module using my own Java app
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 65 条数据: Spring Boot Custom Authentication Provider with Java Configuration not working
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 66 条数据: Fields are not showing on screen after upgrading gwt from 2.8.0 to 2.10.0 and java 8 to 10
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 67 条数据: Type safety: The expression of type Map[] needs unchecked conversion to conform to Map&lt;String,Object&gt;[]
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 68 条数据: What is SuppressWarnings (&quot;unchecked&quot;) in Java?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 69 条数据: Setting CLASSPATH within Docker container using Dockerfile
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 70 条数据: how to run a war file in maven application?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 71 条数据: Hibernate Mapping Error: MappingException: An AnnotationConfiguration instance
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 72 条数据: @Value not working in Spring @Configuration
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 73 条数据: android.view.View.performClick(View.java:5610)
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 74 条数据: Cannot get Jedis connection, Could not get a resource from the pool
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 75 条数据: How to handle variable-length header values when parsing HTTP requests in Java?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 76 条数据: Failing to verify ECDSA signature using WebCrypto
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 77 条数据: End2End encryption IOException: algid parse error, not a sequence
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 78 条数据: How to run headless Chrome in Gitlab
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 79 条数据: How to set up a selenium test of download a file in Gitlab CI
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 80 条数据: org.springframework.ws.soap.client.SoapFaultClientException: 400200
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 81 条数据: How to implement JUnit 4 parameterized tests in JUnit 5?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 82 条数据: Hello I am creating a TicTacToe game for myself to understand Java better
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 83 条数据: GL_INVALID_OPERATION setting image2D in compute shader
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 84 条数据: How to define Run/Debug configuration templates per module?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 85 条数据: How to prevent pixels from overwriting each other in processing?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 86 条数据: spring boot with spring security : Error creating bean with name &#39;securityFilterChainRegistration&#39;
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 87 条数据: Android Studio - Fail to load plugin descriptor from file smalidea.zip
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 88 条数据: How programmatically (!) validate soap request/response with wsdl?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 89 条数据: Representing 4 types of Card Templates Adhering to DDD
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 90 条数据: Duplicate JSON Field with Jackson
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 91 条数据: MessageFormat.format() gives ClassCast exception
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 92 条数据: error while running maven project java.lang.ClassNotFoundException: org.apache.commons.io.IOUtils
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 93 条数据: How to install and setup Cucumber jar files in Eclipse for WebDriver Testing
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 94 条数据: Sending Spring domain events using a custom ApplicationEventPublisher
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 95 条数据: Disable Button as click is still processed
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 96 条数据: java mongodb driver how do you catch exceptions?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 97 条数据: How to connect to MCP server (Transport type: Streamable HTTP) in MCP Inspector (v0.17.2)
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 98 条数据: Java Swing - JComboBox getSelectedItem() not finding the object (cannot be resolved)
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 99 条数据: Why is FileReader as efficient as BufferedReader in reading 1KB chunks of data?
+2025-12-06 13:48:48 - DEBUG - c.x.c.service.QuestionService - 成功保存第 100 条数据: Read and write email using Microsoft Graph API Java
+2025-12-06 13:48:48 - INFO  - c.x.c.service.QuestionService - === 保存完成 ===
+2025-12-06 13:48:48 - INFO  - c.x.c.service.QuestionService - 处理结果 - 新增: 100 条, 跳过: 0 条
+2025-12-06 13:48:48 - INFO  - c.x.c.service.QuestionService - 数据库验证 - 保存前: 0 条, 保存后: 100 条, 实际增加: 100 条
+2025-12-06 13:48:48 - INFO  - c.x.c.service.StackOverflowService - 已保存第 1 页数据，当前总计: 100 条java问题
+2025-12-06 13:48:48 - INFO  - c.x.c.service.StackOverflowService - 已达到目标数量，停止采集
+2025-12-06 13:48:48 - INFO  - c.x.c.service.StackOverflowService - 批量采集完成，共采集 100 个java标签的问题
+2025-12-06 13:48:48 - INFO  - c.x.c.c.DataCollectionController - Java标签数据采集完成！目标: 100 条, 实际新增: 100 条 (Java: 100 条), 总Java问题: 100 条, 耗时: 1 秒
+2025-12-06 13:48:51 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 14:12:35 - INFO  - o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-06 14:12:35 - INFO  - o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-06 14:12:35 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 14:12:35 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-06 14:12:35 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-06 16:25:10 - INFO  - c.x.c.Cs209aProjectApplication - Starting Cs209aProjectApplication using Java 23.0.1 with PID 288684 (D:\cs209a_project\target\classes started by 浮生半昼 in D:\cs209a_project)
+2025-12-06 16:25:10 - DEBUG - c.x.c.Cs209aProjectApplication - Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-06 16:25:10 - INFO  - c.x.c.Cs209aProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2025-12-06 16:25:11 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-06 16:25:11 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 2 JPA repository interfaces.
+2025-12-06 16:25:11 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-06 16:25:11 - INFO  - o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-06 16:25:11 - INFO  - o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-06 16:25:11 - INFO  - o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 730 ms
+2025-12-06 16:25:11 - INFO  - o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-06 16:25:11 - INFO  - org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-06 16:25:11 - INFO  - o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-06 16:25:11 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-06 16:25:12 - INFO  - com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@31e3c34
+2025-12-06 16:25:12 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-06 16:25:12 - WARN  - org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-06 16:25:12 - INFO  - o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/cs209a_project]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.10
+	Default catalog/schema: cs209a_project/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-06 16:25:12 - WARN  - org.hibernate.orm.deprecation - HHH90000033: Encountered use of deprecated annotation [interface jakarta.persistence.Temporal] at com.xiao.cs209a_project.entity.Question.collectedDate.
+2025-12-06 16:25:12 - INFO  - o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-06 16:25:12 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 16:25:12 - INFO  - o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-06 16:25:13 - WARN  - o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-06 16:25:13 - WARN  - o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/webmvc/autoconfigure/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Ambiguous mapping. Cannot map 'dataCollectionController' method 
+com.xiao.cs209a_project.controller.DataCollectionController#listAnswers(Model)
+to {GET [/admin/answers]}: There is already 'answerController' bean method
+com.xiao.cs209a_project.controller.AnswerController#listAnswers(Model) mapped.
+2025-12-06 16:25:13 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 16:25:13 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-06 16:25:13 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-06 16:25:13 - INFO  - o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-12-06 16:25:13 - INFO  - o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-06 16:25:13 - ERROR - o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/webmvc/autoconfigure/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Ambiguous mapping. Cannot map 'dataCollectionController' method 
+com.xiao.cs209a_project.controller.DataCollectionController#listAnswers(Model)
+to {GET [/admin/answers]}: There is already 'answerController' bean method
+com.xiao.cs209a_project.controller.AnswerController#listAnswers(Model) mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:983)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:620)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:765)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:454)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1374)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at com.xiao.cs209a_project.Cs209aProjectApplication.main(Cs209aProjectApplication.java:14)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'dataCollectionController' method 
+com.xiao.cs209a_project.controller.DataCollectionController#listAnswers(Model)
+to {GET [/admin/answers]}: There is already 'answerController' bean method
+com.xiao.cs209a_project.controller.AnswerController#listAnswers(Model) mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.validateMethodMapping(AbstractHandlerMethodMapping.java:645)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:606)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:327)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.registerHandlerMethod(RequestMappingHandlerMapping.java:459)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.registerHandlerMethod(RequestMappingHandlerMapping.java:80)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$1(AbstractHandlerMethodMapping.java:294)
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:987)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:292)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.processCandidateBean(AbstractHandlerMethodMapping.java:261)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:220)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:208)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:158)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813)
+	... 18 common frames omitted
+2025-12-06 16:26:41 - INFO  - c.x.c.Cs209aProjectApplication - Starting Cs209aProjectApplication using Java 23.0.1 with PID 263328 (D:\cs209a_project\target\classes started by 浮生半昼 in D:\cs209a_project)
+2025-12-06 16:26:41 - DEBUG - c.x.c.Cs209aProjectApplication - Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-06 16:26:41 - INFO  - c.x.c.Cs209aProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2025-12-06 16:26:41 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-06 16:26:41 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 2 JPA repository interfaces.
+2025-12-06 16:26:41 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-06 16:26:41 - INFO  - o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-06 16:26:41 - INFO  - o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-06 16:26:41 - INFO  - o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 615 ms
+2025-12-06 16:26:41 - INFO  - o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-06 16:26:41 - INFO  - org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-06 16:26:42 - INFO  - o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-06 16:26:42 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-06 16:26:42 - INFO  - com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4780341
+2025-12-06 16:26:42 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-06 16:26:42 - WARN  - org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-06 16:26:42 - INFO  - o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/cs209a_project]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.10
+	Default catalog/schema: cs209a_project/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-06 16:26:42 - WARN  - org.hibernate.orm.deprecation - HHH90000033: Encountered use of deprecated annotation [interface jakarta.persistence.Temporal] at com.xiao.cs209a_project.entity.Question.collectedDate.
+2025-12-06 16:26:42 - INFO  - o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-06 16:26:42 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 16:26:43 - INFO  - o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-06 16:26:43 - WARN  - o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-06 16:26:43 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-06 16:26:43 - INFO  - c.x.c.Cs209aProjectApplication - Started Cs209aProjectApplication in 2.821 seconds (process running for 3.204)
+2025-12-06 16:26:43 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 16:26:43 - INFO  - c.x.c.Cs209aProjectApplication - 🚀 CS209A项目应用启动成功!
+2025-12-06 16:26:43 - INFO  - c.x.c.Cs209aProjectApplication - 📊 数据收集界面: http://localhost:8080/admin/collect
+2025-12-06 16:26:43 - INFO  - c.x.c.Cs209aProjectApplication - 🔧 API基础路径: http://localhost:8080/api
+2025-12-06 16:26:43 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 16:26:45 - INFO  - o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-06 16:26:45 - INFO  - o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-06 16:26:45 - INFO  - o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-06 16:26:45 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 16:27:24 - INFO  - c.x.c.c.DataCollectionController - 开始采集 100 个java标签的问题数据
+2025-12-06 16:27:24 - INFO  - c.x.c.c.DataCollectionController - 采集前 - 总问题数: 100, Java问题数: 100, 答案数: 0
+2025-12-06 16:27:24 - INFO  - c.x.c.service.StackOverflowService - 开始批量采集 100 个java标签的问题
+2025-12-06 16:27:24 - INFO  - c.x.c.service.StackOverflowService - 正在采集第 1 页数据，目标: 100 条
+2025-12-06 16:27:24 - INFO  - c.x.c.service.StackOverflowService - 开始采集第 1 页java标签问题，每页 100 条
+2025-12-06 16:27:24 - INFO  - c.x.c.service.StackOverflowService - API URL: https://api.stackexchange.com/2.3/questions?page=1&pagesize=100&order=desc&sort=activity&tagged=java&site=stackoverflow
+2025-12-06 16:27:26 - INFO  - c.x.c.service.StackOverflowService - API响应状态: 200 OK
+2025-12-06 16:27:26 - INFO  - c.x.c.service.StackOverflowService - 解析到 100 个问题
+2025-12-06 16:27:26 - INFO  - c.x.c.service.StackOverflowService - 成功转换 100 个问题
+2025-12-06 16:27:26 - INFO  - c.x.c.service.StackOverflowService - 成功获取第 1 页数据，共 100 条java问题
+2025-12-06 16:27:26 - INFO  - c.x.c.service.QuestionService - === 开始批量保存问题数据到数据库 ===
+2025-12-06 16:27:26 - INFO  - c.x.c.service.QuestionService - 准备保存 100 条问题数据
+2025-12-06 16:27:26 - INFO  - c.x.c.service.QuestionService - 保存前问题数据量: 100
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838375
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839444
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 56162518
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79305425
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838727
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 24803148
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79443500
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 32878888
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79822509
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 5367933
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 15638885
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839373
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 53517885
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79820806
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46619261
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838872
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79831984
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839168
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 70241755
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 20035669
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838704
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839094
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839208
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 1591186
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 42550019
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 41976049
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 54601467
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838766
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838110
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79674700
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79819132
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839079
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 4907622
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 45825955
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 19123013
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835732
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838989
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16492370
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 40462955
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838557
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 58432186
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79829457
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64341349
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 58140480
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16689449
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838626
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838871
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 40681593
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 9732832
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79834897
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838637
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 2348094
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 26182460
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 19639811
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 65014449
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18399006
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 61544077
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838729
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838436
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 33928707
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64108218
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838482
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838612
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838627
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 36721212
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838587
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 53973126
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 1129795
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 76075609
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 44181613
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16913225
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46564999
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 55072352
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46606265
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838312
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 68770259
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 69004788
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 50073168
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 69974278
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18294197
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46897134
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 23097418
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 49053967
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79836329
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838187
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 27690160
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838128
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 21461504
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835008
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18237222
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835931
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 38408191
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 20785607
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64049854
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79837783
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 34564466
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79837982
+2025-12-06 16:27:26 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79837547
+2025-12-06 16:27:26 - INFO  - c.x.c.service.QuestionService - === 问题数据保存完成 ===
+2025-12-06 16:27:26 - INFO  - c.x.c.service.QuestionService - 处理结果 - 成功: 2 条, 跳过: 98 条, 错误: 0 条
+2025-12-06 16:27:26 - INFO  - c.x.c.service.QuestionService - 数据库验证 - 保存前: 100 条, 保存后: 102 条, 实际增加: 2 条
+2025-12-06 16:27:26 - INFO  - c.x.c.service.StackOverflowService - 已保存第 1 页数据，当前总计: 100 条java问题
+2025-12-06 16:27:26 - INFO  - c.x.c.service.StackOverflowService - 已达到目标数量，停止采集
+2025-12-06 16:27:26 - INFO  - c.x.c.service.StackOverflowService - 批量采集完成，共采集 100 个java标签的问题
+2025-12-06 16:27:26 - INFO  - c.x.c.c.DataCollectionController - Java标签数据采集完成！目标: 100 条, 实际新增: 2 条 (Java: 2 条), 答案新增: 0 条, 总Java问题: 102 条, 耗时: 1 秒
+2025-12-06 16:27:29 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 16:27:32 - INFO  - c.x.c.c.DataCollectionController - 开始采集 100 个java标签的问题数据
+2025-12-06 16:27:32 - INFO  - c.x.c.c.DataCollectionController - 采集前 - 总问题数: 102, Java问题数: 102, 答案数: 0
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - 开始批量采集 100 个java标签的问题
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - 正在采集第 1 页数据，目标: 100 条
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - 开始采集第 1 页java标签问题，每页 100 条
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - API URL: https://api.stackexchange.com/2.3/questions?page=1&pagesize=100&order=desc&sort=activity&tagged=java&site=stackoverflow
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - API响应状态: 200 OK
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - 解析到 100 个问题
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - 成功转换 100 个问题
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - 成功获取第 1 页数据，共 100 条java问题
+2025-12-06 16:27:32 - INFO  - c.x.c.service.QuestionService - === 开始批量保存问题数据到数据库 ===
+2025-12-06 16:27:32 - INFO  - c.x.c.service.QuestionService - 准备保存 100 条问题数据
+2025-12-06 16:27:32 - INFO  - c.x.c.service.QuestionService - 保存前问题数据量: 102
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838375
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839444
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 41111224
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 72084625
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 56162518
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79305425
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838727
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 24803148
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79443500
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 32878888
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79822509
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 5367933
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 15638885
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839373
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 53517885
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79820806
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46619261
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838872
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79831984
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839168
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 70241755
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 20035669
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838704
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839094
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839208
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 1591186
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 42550019
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 41976049
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 54601467
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838766
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838110
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79674700
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79819132
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839079
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 4907622
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 45825955
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 19123013
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835732
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838989
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16492370
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 40462955
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838557
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 58432186
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79829457
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64341349
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 58140480
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16689449
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838626
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838871
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 40681593
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 9732832
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79834897
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838637
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 2348094
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 26182460
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 19639811
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 65014449
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18399006
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 61544077
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838729
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838436
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 33928707
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64108218
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838482
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838612
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838627
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 36721212
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838587
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 53973126
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 1129795
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 76075609
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 44181613
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16913225
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46564999
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 55072352
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46606265
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838312
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 68770259
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 69004788
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 50073168
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 69974278
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18294197
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46897134
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 23097418
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 49053967
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79836329
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838187
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 27690160
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838128
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 21461504
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835008
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18237222
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835931
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 38408191
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 20785607
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64049854
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79837783
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 34564466
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79837982
+2025-12-06 16:27:32 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79837547
+2025-12-06 16:27:32 - INFO  - c.x.c.service.QuestionService - === 问题数据保存完成 ===
+2025-12-06 16:27:32 - INFO  - c.x.c.service.QuestionService - 处理结果 - 成功: 0 条, 跳过: 100 条, 错误: 0 条
+2025-12-06 16:27:32 - INFO  - c.x.c.service.QuestionService - 数据库验证 - 保存前: 102 条, 保存后: 102 条, 实际增加: 0 条
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - 已保存第 1 页数据，当前总计: 100 条java问题
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - 已达到目标数量，停止采集
+2025-12-06 16:27:32 - INFO  - c.x.c.service.StackOverflowService - 批量采集完成，共采集 100 个java标签的问题
+2025-12-06 16:27:32 - INFO  - c.x.c.c.DataCollectionController - Java标签数据采集完成！目标: 100 条, 实际新增: 0 条 (Java: 0 条), 答案新增: 0 条, 总Java问题: 102 条, 耗时: 0 秒
+2025-12-06 16:27:35 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 16:28:37 - INFO  - o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-06 16:28:37 - INFO  - o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-06 16:28:37 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 16:28:37 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-06 16:28:37 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-06 18:56:20 - INFO  - c.x.c.Cs209aProjectApplication - Starting Cs209aProjectApplication using Java 23.0.1 with PID 296532 (D:\cs209a_project\target\classes started by 浮生半昼 in D:\cs209a_project)
+2025-12-06 18:56:20 - DEBUG - c.x.c.Cs209aProjectApplication - Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-06 18:56:20 - INFO  - c.x.c.Cs209aProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2025-12-06 18:56:21 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-06 18:56:21 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 78 ms. Found 2 JPA repository interfaces.
+2025-12-06 18:56:22 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-06 18:56:22 - INFO  - o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-06 18:56:22 - INFO  - o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-06 18:56:22 - INFO  - o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1867 ms
+2025-12-06 18:56:22 - INFO  - o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-06 18:56:22 - INFO  - org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-06 18:56:22 - INFO  - o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-06 18:56:22 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-06 18:56:23 - INFO  - com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4780341
+2025-12-06 18:56:23 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-06 18:56:23 - WARN  - org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-06 18:56:23 - INFO  - o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/cs209a_project]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.10
+	Default catalog/schema: cs209a_project/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-06 18:56:23 - WARN  - org.hibernate.orm.deprecation - HHH90000033: Encountered use of deprecated annotation [interface jakarta.persistence.Temporal] at com.xiao.cs209a_project.entity.Question.collectedDate.
+2025-12-06 18:56:24 - INFO  - o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-06 18:56:24 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 18:56:24 - INFO  - o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-06 18:56:25 - WARN  - o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-06 18:56:25 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-06 18:56:25 - INFO  - c.x.c.Cs209aProjectApplication - Started Cs209aProjectApplication in 6.659 seconds (process running for 8.054)
+2025-12-06 18:56:25 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 18:56:25 - INFO  - c.x.c.Cs209aProjectApplication - 🚀 CS209A项目应用启动成功!
+2025-12-06 18:56:25 - INFO  - c.x.c.Cs209aProjectApplication - 📊 数据收集界面: http://localhost:8080/admin/collect
+2025-12-06 18:56:25 - INFO  - c.x.c.Cs209aProjectApplication - 🔧 API基础路径: http://localhost:8080/api
+2025-12-06 18:56:25 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 18:56:28 - INFO  - o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-06 18:56:28 - INFO  - o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-06 18:56:28 - INFO  - o.s.web.servlet.DispatcherServlet - Completed initialization in 55 ms
+2025-12-06 18:56:28 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 18:56:34 - INFO  - c.x.c.c.DataCollectionController - 开始采集 100 个java标签的问题数据
+2025-12-06 18:56:34 - INFO  - c.x.c.c.DataCollectionController - 采集前 - 总问题数: 102, Java问题数: 102, 答案数: 0
+2025-12-06 18:56:34 - INFO  - c.x.c.service.StackOverflowService - 开始批量采集 100 个java标签的问题
+2025-12-06 18:56:34 - INFO  - c.x.c.service.StackOverflowService - 正在采集第 1 页数据，目标: 100 条
+2025-12-06 18:56:34 - INFO  - c.x.c.service.StackOverflowService - 开始采集第 1 页java标签问题，每页 100 条
+2025-12-06 18:56:34 - INFO  - c.x.c.service.StackOverflowService - API URL: https://api.stackexchange.com/2.3/questions?page=1&pagesize=100&order=desc&sort=activity&tagged=java&site=stackoverflow
+2025-12-06 18:56:36 - INFO  - c.x.c.service.StackOverflowService - API响应状态: 200 OK
+2025-12-06 18:56:36 - INFO  - c.x.c.service.StackOverflowService - 解析到 100 个问题
+2025-12-06 18:56:36 - INFO  - c.x.c.service.StackOverflowService - 成功转换 100 个问题
+2025-12-06 18:56:36 - INFO  - c.x.c.service.StackOverflowService - 成功获取第 1 页数据，共 100 条java问题
+2025-12-06 18:56:36 - INFO  - c.x.c.service.QuestionService - === 开始批量保存问题数据到数据库 ===
+2025-12-06 18:56:36 - INFO  - c.x.c.service.QuestionService - 准备保存 100 条问题数据
+2025-12-06 18:56:36 - INFO  - c.x.c.service.QuestionService - 保存前问题数据量: 102
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79305425
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 5367933
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838375
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839444
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 41111224
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 72084625
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 56162518
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838727
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 24803148
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79443500
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 32878888
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79822509
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 15638885
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839373
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 53517885
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79820806
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46619261
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838872
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79831984
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839168
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 70241755
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 20035669
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838704
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839094
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839208
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 1591186
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 42550019
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 41976049
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 54601467
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838766
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838110
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79674700
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79819132
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839079
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 4907622
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 45825955
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 19123013
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835732
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838989
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16492370
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 40462955
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838557
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 58432186
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79829457
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64341349
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 58140480
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16689449
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838626
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838871
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 40681593
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 9732832
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79834897
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838637
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 2348094
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 26182460
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 19639811
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 65014449
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18399006
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 61544077
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838729
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838436
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 33928707
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64108218
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838482
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838612
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838627
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 36721212
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838587
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 53973126
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 1129795
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 76075609
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 44181613
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16913225
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46564999
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 55072352
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46606265
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838312
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 68770259
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 69004788
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 50073168
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 69974278
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18294197
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46897134
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 23097418
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 49053967
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79836329
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838187
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 27690160
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838128
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 21461504
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835008
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18237222
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835931
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 38408191
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 20785607
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64049854
+2025-12-06 18:56:36 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79837783
+2025-12-06 18:56:36 - INFO  - c.x.c.service.QuestionService - === 问题数据保存完成 ===
+2025-12-06 18:56:36 - INFO  - c.x.c.service.QuestionService - 处理结果 - 成功: 3 条, 跳过: 97 条, 错误: 0 条
+2025-12-06 18:56:36 - INFO  - c.x.c.service.QuestionService - 数据库验证 - 保存前: 102 条, 保存后: 105 条, 实际增加: 3 条
+2025-12-06 18:56:36 - INFO  - c.x.c.service.StackOverflowService - 已保存第 1 页数据，当前总计: 100 条java问题
+2025-12-06 18:56:36 - INFO  - c.x.c.service.StackOverflowService - 已达到目标数量，停止采集
+2025-12-06 18:56:36 - INFO  - c.x.c.service.StackOverflowService - 批量采集完成，共采集 100 个java标签的问题
+2025-12-06 18:56:36 - INFO  - c.x.c.c.DataCollectionController - Java标签数据采集完成！目标: 100 条, 实际新增: 3 条 (Java: 3 条), 答案新增: 0 条, 总Java问题: 105 条, 耗时: 1 秒
+2025-12-06 18:56:39 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 18:56:42 - INFO  - c.x.c.c.DataCollectionController - 开始采集 100 个java标签的问题数据
+2025-12-06 18:56:42 - INFO  - c.x.c.c.DataCollectionController - 采集前 - 总问题数: 105, Java问题数: 105, 答案数: 0
+2025-12-06 18:56:42 - INFO  - c.x.c.service.StackOverflowService - 开始批量采集 100 个java标签的问题
+2025-12-06 18:56:42 - INFO  - c.x.c.service.StackOverflowService - 正在采集第 1 页数据，目标: 100 条
+2025-12-06 18:56:42 - INFO  - c.x.c.service.StackOverflowService - 开始采集第 1 页java标签问题，每页 100 条
+2025-12-06 18:56:42 - INFO  - c.x.c.service.StackOverflowService - API URL: https://api.stackexchange.com/2.3/questions?page=1&pagesize=100&order=desc&sort=activity&tagged=java&site=stackoverflow
+2025-12-06 18:56:43 - INFO  - c.x.c.service.StackOverflowService - API响应状态: 200 OK
+2025-12-06 18:56:43 - INFO  - c.x.c.service.StackOverflowService - 解析到 100 个问题
+2025-12-06 18:56:43 - INFO  - c.x.c.service.StackOverflowService - 成功转换 100 个问题
+2025-12-06 18:56:43 - INFO  - c.x.c.service.StackOverflowService - 成功获取第 1 页数据，共 100 条java问题
+2025-12-06 18:56:43 - INFO  - c.x.c.service.QuestionService - === 开始批量保存问题数据到数据库 ===
+2025-12-06 18:56:43 - INFO  - c.x.c.service.QuestionService - 准备保存 100 条问题数据
+2025-12-06 18:56:43 - INFO  - c.x.c.service.QuestionService - 保存前问题数据量: 105
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 15657569
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79305425
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839588
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 5367933
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 67525088
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838375
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839444
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 41111224
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 72084625
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 56162518
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838727
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 24803148
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79443500
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 32878888
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79822509
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 15638885
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839373
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 53517885
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79820806
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46619261
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838872
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79831984
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839168
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 70241755
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 20035669
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838704
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839094
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839208
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 1591186
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 42550019
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 41976049
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 54601467
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838766
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838110
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79674700
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79819132
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79839079
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 4907622
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 45825955
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 19123013
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835732
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838989
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16492370
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 40462955
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838557
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 58432186
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79829457
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64341349
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 58140480
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16689449
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838626
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838871
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 40681593
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 9732832
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79834897
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838637
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 2348094
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 26182460
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 19639811
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 65014449
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18399006
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 61544077
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838729
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838436
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 33928707
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64108218
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838482
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838612
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838627
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 36721212
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838587
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 53973126
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 1129795
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 76075609
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 44181613
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 16913225
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46564999
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 55072352
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46606265
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838312
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 68770259
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 69004788
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 50073168
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 69974278
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18294197
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 46897134
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 23097418
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 49053967
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79836329
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838187
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 27690160
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79838128
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 21461504
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835008
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 18237222
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79835931
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 38408191
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 20785607
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 64049854
+2025-12-06 18:56:43 - DEBUG - c.x.c.service.QuestionService - 跳过重复问题数据: 79837783
+2025-12-06 18:56:43 - INFO  - c.x.c.service.QuestionService - === 问题数据保存完成 ===
+2025-12-06 18:56:43 - INFO  - c.x.c.service.QuestionService - 处理结果 - 成功: 0 条, 跳过: 100 条, 错误: 0 条
+2025-12-06 18:56:43 - INFO  - c.x.c.service.QuestionService - 数据库验证 - 保存前: 105 条, 保存后: 105 条, 实际增加: 0 条
+2025-12-06 18:56:43 - INFO  - c.x.c.service.StackOverflowService - 已保存第 1 页数据，当前总计: 100 条java问题
+2025-12-06 18:56:43 - INFO  - c.x.c.service.StackOverflowService - 已达到目标数量，停止采集
+2025-12-06 18:56:43 - INFO  - c.x.c.service.StackOverflowService - 批量采集完成，共采集 100 个java标签的问题
+2025-12-06 18:56:43 - INFO  - c.x.c.c.DataCollectionController - Java标签数据采集完成！目标: 100 条, 实际新增: 0 条 (Java: 0 条), 答案新增: 0 条, 总Java问题: 105 条, 耗时: 0 秒
+2025-12-06 18:56:46 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 20:30:35 - INFO  - o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-06 20:30:35 - INFO  - o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-06 20:30:35 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 20:30:35 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-06 20:30:35 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-06 20:30:39 - INFO  - c.x.c.Cs209aProjectApplication - Starting Cs209aProjectApplication using Java 23.0.1 with PID 298868 (D:\cs209a_project\target\classes started by 浮生半昼 in D:\cs209a_project)
+2025-12-06 20:30:39 - DEBUG - c.x.c.Cs209aProjectApplication - Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-06 20:30:39 - INFO  - c.x.c.Cs209aProjectApplication - No active profile set, falling back to 1 default profile: "default"
+2025-12-06 20:30:40 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-06 20:30:40 - INFO  - o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 2 JPA repository interfaces.
+2025-12-06 20:30:40 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-06 20:30:40 - INFO  - o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-06 20:30:40 - INFO  - o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-06 20:30:40 - INFO  - o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 791 ms
+2025-12-06 20:30:40 - INFO  - o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-06 20:30:40 - INFO  - org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-06 20:30:41 - INFO  - o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-06 20:30:41 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-06 20:30:41 - INFO  - com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@45790cb
+2025-12-06 20:30:41 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-06 20:30:41 - WARN  - org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-06 20:30:41 - INFO  - o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/cs209a_project]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.10
+	Default catalog/schema: cs209a_project/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-06 20:30:41 - WARN  - org.hibernate.orm.deprecation - HHH90000033: Encountered use of deprecated annotation [interface jakarta.persistence.Temporal] at com.xiao.cs209a_project.entity.Question.collectedDate.
+2025-12-06 20:30:42 - INFO  - o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-06 20:30:42 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 20:30:42 - INFO  - o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-06 20:30:42 - WARN  - o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-06 20:30:43 - INFO  - o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-06 20:30:43 - INFO  - c.x.c.Cs209aProjectApplication - Started Cs209aProjectApplication in 3.587 seconds (process running for 4.204)
+2025-12-06 20:30:43 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 20:30:43 - INFO  - c.x.c.Cs209aProjectApplication - 🚀 CS209A项目应用启动成功!
+2025-12-06 20:30:43 - INFO  - c.x.c.Cs209aProjectApplication - 📊 数据收集界面: http://localhost:8080/admin/collect
+2025-12-06 20:30:43 - INFO  - c.x.c.Cs209aProjectApplication - 🔧 API基础路径: http://localhost:8080/api
+2025-12-06 20:30:43 - INFO  - c.x.c.Cs209aProjectApplication - ============================================
+2025-12-06 20:30:44 - INFO  - o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-06 20:30:44 - INFO  - o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-06 20:30:44 - INFO  - o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-06 20:30:44 - INFO  - c.x.c.c.DataCollectionController - 显示数据采集页面
+2025-12-06 20:31:58 - INFO  - o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-06 20:31:58 - INFO  - o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-06 20:31:58 - INFO  - o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06 20:31:58 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-06 20:31:58 - INFO  - com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
