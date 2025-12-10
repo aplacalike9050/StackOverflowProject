@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Data
+
 @Entity
 @Table(name = "tags")
 public class Tag {
@@ -24,4 +24,35 @@ public class Tag {
     @Column(name = "collected_at")
     private LocalDateTime collectedAt = LocalDateTime.now();
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
+
+    public Integer getUsageCount() {
+        return usageCount;
+    }
+
+    public void setUsageCount(Integer usageCount) {
+        this.usageCount = usageCount;
+    }
+
+    public LocalDateTime getCollectedAt() {
+        return collectedAt;
+    }
+
+    public void setCollectedAt(LocalDateTime collectedAt) {
+        this.collectedAt = collectedAt;
+    }
 }

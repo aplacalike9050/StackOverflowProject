@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Data
+
 @Entity
 @Table(name = "question_tags",
         uniqueConstraints = @UniqueConstraint(columnNames = {"question_id", "tag_id"}))
@@ -28,4 +28,35 @@ public class QuestionTag {
     @Column(name = "collected_at")
     private LocalDateTime collectedAt = LocalDateTime.now();
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+
+    public Long getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(Long tagId) {
+        this.tagId = tagId;
+    }
+
+    public LocalDateTime getCollectedAt() {
+        return collectedAt;
+    }
+
+    public void setCollectedAt(LocalDateTime collectedAt) {
+        this.collectedAt = collectedAt;
+    }
 }

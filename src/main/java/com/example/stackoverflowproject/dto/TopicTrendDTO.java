@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 //任务1：话题趋势
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class TopicTrendDTO {
 }

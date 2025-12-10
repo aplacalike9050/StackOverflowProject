@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 
-@Data
+
 @Entity
 @Table(name = "answers")
 public class Answer {
@@ -37,5 +37,83 @@ public class Answer {
     @Column(name = "collected_at")
     private LocalDateTime collectedAt = LocalDateTime.now();
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(Long answerId) {
+        this.answerId = answerId;
+    }
+
+    public Long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+
+    public Long getOwnerUserId() {
+        return ownerUserId;
+    }
+
+    public void setOwnerUserId(Long ownerUserId) {
+        this.ownerUserId = ownerUserId;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public Boolean getAccepted() {
+        return isAccepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        isAccepted = accepted;
+    }
+
+    public Long getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Long creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Long getLastActivityDate() {
+        return lastActivityDate;
+    }
+
+    public void setLastActivityDate(Long lastActivityDate) {
+        this.lastActivityDate = lastActivityDate;
+    }
+
+    public LocalDateTime getCollectedAt() {
+        return collectedAt;
+    }
+
+    public void setCollectedAt(LocalDateTime collectedAt) {
+        this.collectedAt = collectedAt;
+    }
 }

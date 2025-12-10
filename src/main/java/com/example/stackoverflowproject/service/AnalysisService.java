@@ -1,8 +1,10 @@
 package com.example.stackoverflowproject.service;
 
+import com.example.stackoverflowproject.dto.CoOccurrenceDTO;
 import com.example.stackoverflowproject.dto.PitfallDTO;
 import com.example.stackoverflowproject.dto.SolvabilityDTO;
 import com.example.stackoverflowproject.dto.TopicTrendDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -13,11 +15,13 @@ public interface AnalysisService {
     List<TopicTrendDTO> analyzeTopicTrends();
 
     // 任务2: 话题共现 (Top N)
-    Map<String, Integer> analyzeCoOccurrence(int topN);
+    List<CoOccurrenceDTO> analyzeCoOccurrence(int topN);
 
     // 任务3: 多线程常见陷阱
     List<PitfallDTO> analyzeMultithreadingPitfalls();
 
     // 任务4: 易解决 vs 难解决问题对比
     List<SolvabilityDTO> analyzeSolvabilityFactors();
+
+    String exportUniqueTags();
 }

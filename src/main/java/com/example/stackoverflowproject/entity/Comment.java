@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 
-@Data
+
 @Entity
 @Table(name = "comments")
 public class Comment {
@@ -40,4 +40,75 @@ public class Comment {
     // 删除了所有的 @ManyToOne 关联，保证数据纯净导入
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
+    }
+
+    public Long getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+
+    public String getPostType() {
+        return postType;
+    }
+
+    public void setPostType(String postType) {
+        this.postType = postType;
+    }
+
+    public Long getOwnerUserId() {
+        return ownerUserId;
+    }
+
+    public void setOwnerUserId(Long ownerUserId) {
+        this.ownerUserId = ownerUserId;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public Long getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Long creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDateTime getCollectedAt() {
+        return collectedAt;
+    }
+
+    public void setCollectedAt(LocalDateTime collectedAt) {
+        this.collectedAt = collectedAt;
+    }
 }
