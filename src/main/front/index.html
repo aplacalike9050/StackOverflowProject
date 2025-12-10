@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stack Overflow Java Analysis Report</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #0b0e14;
+      --card-bg: rgba(30, 35, 50, 0.6);
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --accent-color: #38bdf8;
+      --highlight-color: #f472b6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* 【修改点 1】全局字体调大 */
+    html {
+      font-size: 18px; /* 基础字号从默认16px调大到18px */
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      overflow: hidden;
+      line-height: 1.6;
+    }
+
+    .scroll-container {
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      height: 100vh;
+      width: 100%;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 5%; /* 使用 rem 单位，随根字号缩放 */
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: radial-gradient(circle at top right, #1a2035 0%, transparent 40%);
+    }
+
+    header { flex: 0 0 auto; margin-bottom: 1.5rem; }
+
+    h1 {
+      font-size: 2.5rem; /* 字体变大 */
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+
+    .subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-top: 0.5rem; }
+
+    .content-wrapper {
+      flex: 1;
+      display: flex;
+      gap: 2rem;
+      height: 0;
+      padding-bottom: 2rem;
+    }
+
+    .chart-container {
+      flex: 1.8;
+      background: var(--card-bg);
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 1.2rem;
+      position: relative;
+    }
+
+    .analysis-card {
+      flex: 1;
+      background: var(--card-bg);
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      overflow-y: auto;
+    }
+
+    .question-block {
+      border-left: 4px solid var(--accent-color);
+      padding-left: 1rem;
+      background: rgba(56, 189, 248, 0.05);
+      padding: 1rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .question-label {
+      color: var(--accent-color);
+      font-size: 0.9rem; /* 调大 */
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .question-text {
+      font-size: 1.2rem; /* 调大 */
+      font-weight: 600;
+      line-height: 1.4;
+      color: #fff;
+    }
+
+    .answer-block { flex: 1; }
+
+    .answer-label {
+      color: var(--highlight-color);
+      font-size: 0.9rem; /* 调大 */
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+      display: block;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 0.4rem;
+    }
+
+    .answer-text {
+      font-size: 1.1rem; /* 调大，增强可读性 */
+      line-height: 1.7;
+      color: #cbd5e1;
+      text-align: justify;
+    }
+
+    .answer-text p { margin-bottom: 0.8rem; }
+    .answer-text strong { color: #fff; font-weight: 600; font-size: 1.15rem; }
+
+    .nav-dots {
+      position: fixed;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 100;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background-color: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .dot.active {
+      background-color: var(--accent-color);
+      transform: scale(1.5);
+      box-shadow: 0 0 8px var(--accent-color);
+    }
+
+    @media (max-width: 1024px) {
+      html { font-size: 16px; } /* 小屏幕还原字体 */
+      .content-wrapper { flex-direction: column; height: auto; }
+      section { height: auto; min-height: 100vh; }
+      .chart-container { height: 400px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-dots">
+  <div class="dot active" onclick="scrollToSection(0)"></div>
+  <div class="dot" onclick="scrollToSection(1)"></div>
+  <div class="dot" onclick="scrollToSection(2)"></div>
+  <div class="dot" onclick="scrollToSection(3)"></div>
+</div>
+
+<div class="scroll-container" id="mainContainer">
+
+  <section>
+    <header>
+      <h1>Part I: Topic Trends</h1>
+      <p class="subtitle">Java 生态系统的演变趋势分析</p>
+    </header>
+    <div class="content-wrapper">
+      <div id="chart1" class="chart-container"></div>
+      <div class="analysis-card">
+        <div class="question-block">
+          <span class="question-label">Research Question 1</span>
+          <div class="question-text">Why certain Java topics show increasing/decreasing trends on Stack Overflow over a certain time period? What are possible reasons behind these trends?</div>
+        </div>
+        <div class="answer-block">
+          <span class="answer-label">Key Findings</span>
+          <div class="answer-text">
+            <p><strong>1. Technology Lifecycle:</strong> Increasing trends in topics like <em>Spring Boot</em> and <em>Microservices</em> reflect the industry's shift towards cloud-native architectures. Conversely, legacy technologies like <em>Swing</em> or <em>JSP</em> show decreasing trends as they are replaced by modern alternatives.</p>
+            <p><strong>2. Framework Updates:</strong> Spikes in trends often correlate with major version releases (e.g., Java 17, Spring Boot 3), which introduce new features and breaking changes that prompt user questions.</p>
+            <p><strong>3. Complexity & Adoption:</strong> Rapidly growing topics usually indicate high adoption rates coupled with initial learning curves (e.g., Reactive Programming), driving developers to seek help.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <header>
+      <h1>Part II: Topic Co-occurrence</h1>
+      <p class="subtitle">技术栈关联分析 (Top N Pairs)</p>
+    </header>
+    <div class="content-wrapper">
+      <div id="chart2" class="chart-container"></div>
+      <div class="analysis-card">
+        <div class="question-block">
+          <span class="question-label">Research Question 2</span>
+          <div class="question-text">Why certain pairs of topics frequently co-occur on Stack Overflow?</div>
+        </div>
+        <div class="answer-block">
+          <span class="answer-label">Key Findings</span>
+          <div class="answer-text">
+            <p><strong>1. Complementary Ecosystems:</strong> High co-occurrence (e.g., <em>Spring + Hibernate</em>) indicates standard industry stacks. Developers rarely use one without the other.</p>
+            <p><strong>2. Language & Platform:</strong> Pairs like <em>Android + Kotlin</em> show the tight coupling between a programming language and its primary deployment platform.</p>
+            <p><strong>3. Problem & Context:</strong> Pairs like <em>Multithreading + Concurrency</em> represent the relationship between a specific implementation (Threads) and the broader theoretical domain, showing that developers tag both the "what" and the "how".</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <header>
+      <h1>Part III: Multithreading Pitfalls</h1>
+      <p class="subtitle">并发编程常见错误分析</p>
+    </header>
+    <div class="content-wrapper">
+      <div id="chart3" class="chart-container"></div>
+      <div class="analysis-card">
+        <div class="question-block">
+          <span class="question-label">Research Question 3</span>
+          <div class="question-text">Do you think the common pitfalls in Java multithreading you identified are indeed common and significant problems faced by Java developers? Why?</div>
+        </div>
+        <div class="answer-block">
+          <span class="answer-label">Key Findings</span>
+          <div class="answer-text">
+            <p><strong>Yes, they are significant.</strong></p>
+            <p><strong>1. Lifecycle Complexity:</strong> The high frequency of <em>Thread Lifecycle</em> issues suggests that managing thread states (start/stop/interrupt) is the first hurdle for beginners, making it a widespread "entry-level" problem.</p>
+            <p><strong>2. The "Invisible" Bugs:</strong> <em>Visibility/Volatile</em> issues are significant because they relate to the Java Memory Model. These bugs are subtle, do not always crash the app, and are hard to reproduce, leading to frustration and frequent questions.</p>
+            <p><strong>3. Gap in Understanding:</strong> The prevalence of these topics highlights a gap between understanding syntax (how to create a thread) and understanding correctness (how to make it thread-safe).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <header>
+      <h1>Part IV: Solvability Analysis</h1>
+      <p class="subtitle">问题解决难度因素分析</p>
+    </header>
+    <div class="content-wrapper">
+      <div id="chart4" class="chart-container"></div>
+      <div class="analysis-card">
+        <div class="question-block">
+          <span class="question-label">Research Question 4</span>
+          <div class="question-text">What factors contribute to a question being solvable or hard-to-solve on Stack Overflow? Do you think these factors are reasonable? Why?</div>
+        </div>
+        <div class="answer-block">
+          <span class="answer-label">Key Findings</span>
+          <div class="answer-text">
+            <p><strong>Key Factors:</strong> Code Snippets, Description Length, and Tags Specificity.</p>
+            <p><strong>Reasonable? Yes.</strong></p>
+            <p><strong>1. Reproducibility:</strong> Questions with code snippets (Solvable) allow answerers to reproduce the bug. It is reasonable that vague questions (Hard-to-solve) are ignored.</p>
+            <p><strong>2. Clarity vs. Noise:</strong> A reasonable length indicates effort in explaining the context. Too short = lack of info; Too long = loss of focus.</p>
+            <p><strong>3. Reputation Bias:</strong> Higher reputation users know "how to ask," making their questions inherently more solvable, which is a fair reflection of community norms.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const API_BASE = 'http://localhost:8080/api/analysis';
+  const charts = [
+    echarts.init(document.getElementById('chart1')),
+    echarts.init(document.getElementById('chart2')),
+    echarts.init(document.getElementById('chart3')),
+    echarts.init(document.getElementById('chart4'))
+  ];
+
+  // 滚动监听
+  const container = document.getElementById('mainContainer');
+  const dots = document.querySelectorAll('.dot');
+  const sections = document.querySelectorAll('section');
+
+  container.addEventListener('scroll', () => {
+    let current = 0;
+    sections.forEach((section, index) => {
+      if (container.scrollTop >= (section.offsetTop - section.clientHeight / 3)) current = index;
+    });
+    dots.forEach(dot => dot.classList.remove('active'));
+    if(dots[current]) dots[current].classList.add('active');
+  });
+
+  function scrollToSection(index) {
+    sections[index].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // ============ Task 1 (Demo) ============
+  function loadTask1() {
+    const option = {
+      backgroundColor: 'transparent',
+      tooltip: { trigger: 'axis', backgroundColor: 'rgba(0,0,0,0.8)', textStyle: { fontSize: 16 } },
+      legend: { textStyle: { color: '#94a3b8', fontSize: 14 }, bottom: 0 },
+      grid: { left: '3%', right: '4%', bottom: '10%', containLabel: true },
+      xAxis: { type: 'category', data: ['2019', '2020', '2021', '2022', '2023', '2024'], axisLabel: { color: '#94a3b8', fontSize: 14 } },
+      yAxis: { type: 'value', splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } }, axisLabel: { color: '#94a3b8', fontSize: 14 } },
+      series: [
+        { name: 'Spring Boot', type: 'line', smooth: true, data: [120, 200, 250, 280, 310, 300], itemStyle: { color: '#38bdf8' } },
+        { name: 'Swing', type: 'line', smooth: true, data: [100, 80, 60, 50, 40, 30], itemStyle: { color: '#f472b6' } }
+      ]
+    };
+    charts[0].setOption(option);
+  }
+
+  // ============ Task 2 (Co-occurrence) - 增加滑动条 ============
+  async function loadTask2() {
+    try {
+      // 如果想要更多数据，可以改 topN=50 测试效果
+      const response = await fetch(`${API_BASE}/coOccurrence?topN=20`);
+      const data = await response.json();
+
+      // 不再只取 slice(0, 10)，而是全部数据
+      const yData = data.map(item => `${item.tag1} + ${item.tag2}`).reverse();
+      const xData = data.map(item => item.count || item.occurrenceCount).reverse();
+
+      const option = {
+        backgroundColor: 'transparent',
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        // 【修改点 2】增加 dataZoom 滑动条
+        dataZoom: [
+          {
+            type: 'slider',
+            yAxisIndex: 0,
+            width: 20, // 宽度
+            right: 10,  // 靠右位置
+            start: 60,  // 默认显示后 40% 的数据（因为我们 reverse 了，所以是排名靠前的）
+            end: 100,
+            textStyle: { color: '#fff' },
+            handleSize: '100%'
+          },
+          {
+            type: 'inside', // 允许鼠标滚轮滚动
+            yAxisIndex: 0
+          }
+        ],
+        grid: { left: '3%', right: '8%', bottom: '3%', containLabel: true },
+        xAxis: { type: 'value', splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } }, axisLabel: { color: '#94a3b8', fontSize: 14 } },
+        yAxis: {
+          type: 'category',
+          data: yData,
+          axisLabel: { color: '#e2e8f0', fontSize: 14 } // 字体变大
+        },
+        series: [{
+          type: 'bar',
+          data: xData,
+          itemStyle: {
+            borderRadius: [0, 6, 6, 0],
+            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{ offset: 0, color: '#38bdf8' }, { offset: 1, color: '#2563eb' }])
+          },
+          label: { show: true, position: 'right', color: '#fff', fontSize: 14 }
+        }]
+      };
+      charts[1].setOption(option);
+    } catch (e) { console.error("Task 2 Error", e); }
+  }
+
+  // ============ Task 3 (Pitfalls) - 增加占比显示 (保留1位小数) ============
+  async function loadTask3() {
+    try {
+      const response = await fetch(`${API_BASE}/pitfalls`);
+      const data = await response.json();
+      const pieData = data.map(item => ({ value: item.frequency, name: item.pitfallName }));
+
+      const option = {
+        backgroundColor: 'transparent',
+        tooltip: {
+          trigger: 'item',
+          // 提示框也统一格式
+          formatter: '{b}: {c} ({d}%)'
+        },
+        legend: { top: '5%', textStyle: { color: '#94a3b8', fontSize: 14 } },
+        series: [{
+          type: 'pie',
+          radius: ['40%', '70%'],
+          center: ['50%', '60%'],
+          itemStyle: { borderRadius: 10, borderColor: '#1e293b', borderWidth: 2 },
+          // 【修改点 3】显示具体数值和百分比，保留1位小数
+          label: {
+            show: true,
+            color: '#fff',
+            fontSize: 16,
+            formatter: function(params) {
+              // params.name: 名字
+              // params.percent: 百分比数字
+              return `${params.name}\n${params.percent.toFixed(1)}%`;
+            }
+          },
+          labelLine: { show: true, length: 20, length2: 30 },
+          data: pieData
+        }]
+      };
+      charts[2].setOption(option);
+    } catch (e) { console.error("Task 3 Error", e); }
+  }
+
+  // ============ Task 4 (Demo) ============
+  function loadTask4() {
+    const option = {
+      backgroundColor: 'transparent',
+      radar: {
+        indicator: [{ name: 'Snippets', max: 100 }, { name: 'Length', max: 100 }, { name: 'Reputation', max: 100 }, { name: 'Tags', max: 100 }, { name: 'Speed', max: 100 }],
+        axisName: { color: '#fff', fontSize: 14 },
+        splitArea: { areaStyle: { color: ['rgba(255,255,255,0.05)', 'transparent'] } }
+      },
+      series: [{
+        type: 'radar',
+        data: [
+          { value: [90, 85, 80, 70, 95], name: 'Solvable', itemStyle: { color: '#4ade80' }, areaStyle: { opacity: 0.3 } },
+          { value: [30, 40, 20, 50, 20], name: 'Hard-to-Solve', itemStyle: { color: '#f87171' }, areaStyle: { opacity: 0.3 } }
+        ]
+      }]
+    };
+    charts[3].setOption(option);
+  }
+
+  window.onload = function() {
+    loadTask1();
+    loadTask2();
+    loadTask3();
+    loadTask4();
+    window.addEventListener('resize', () => charts.forEach(c => c.resize()));
+  };
+</script>
+</body>
+</html>

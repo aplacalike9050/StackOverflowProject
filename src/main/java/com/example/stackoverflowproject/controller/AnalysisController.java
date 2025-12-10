@@ -6,16 +6,13 @@ import com.example.stackoverflowproject.dto.SolvabilityDTO;
 import com.example.stackoverflowproject.dto.TopicTrendDTO;
 import com.example.stackoverflowproject.service.AnalysisService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/analysis")
-
+@CrossOrigin(origins = "*")
 public class AnalysisController {
 
     private final AnalysisService analysisService;
