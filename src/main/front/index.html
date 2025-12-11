@@ -17,10 +17,7 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* 【修改点 1】全局字体调大 */
-    html {
-      font-size: 18px; /* 基础字号从默认16px调大到18px */
-    }
+    html { font-size: 18px; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -43,15 +40,15 @@
       scroll-snap-align: start;
       display: flex;
       flex-direction: column;
-      padding: 2rem 5%; /* 使用 rem 单位，随根字号缩放 */
+      padding: 2rem 5%;
       border-bottom: 1px solid rgba(255,255,255,0.05);
       background: radial-gradient(circle at top right, #1a2035 0%, transparent 40%);
     }
 
-    header { flex: 0 0 auto; margin-bottom: 1.5rem; }
+    header { flex: 0 0 auto; margin-bottom: 1rem; position: relative;}
 
     h1 {
-      font-size: 2.5rem; /* 字体变大 */
+      font-size: 2.5rem;
       background: linear-gradient(90deg, #38bdf8, #818cf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -59,6 +56,64 @@
     }
 
     .subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-top: 0.5rem; }
+
+    /* 控制栏样式 (新添加) */
+    .controls {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.1);
+      padding: 5px 15px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .input-group label {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-right: 10px;
+    }
+
+    .input-group input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      width: 60px;
+      text-align: center;
+      outline: none;
+      font-weight: bold;
+    }
+
+    /* 隐藏 input number 的箭头 */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .refresh-btn {
+      background: var(--accent-color);
+      border: none;
+      color: #000;
+      padding: 5px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .refresh-btn:hover {
+      transform: scale(1.05);
+      background: #fff;
+    }
 
     .content-wrapper {
       flex: 1;
@@ -99,7 +154,7 @@
 
     .question-label {
       color: var(--accent-color);
-      font-size: 0.9rem; /* 调大 */
+      font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -108,7 +163,7 @@
     }
 
     .question-text {
-      font-size: 1.2rem; /* 调大 */
+      font-size: 1.2rem;
       font-weight: 600;
       line-height: 1.4;
       color: #fff;
@@ -118,7 +173,7 @@
 
     .answer-label {
       color: var(--highlight-color);
-      font-size: 0.9rem; /* 调大 */
+      font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -129,7 +184,7 @@
     }
 
     .answer-text {
-      font-size: 1.1rem; /* 调大，增强可读性 */
+      font-size: 1.1rem;
       line-height: 1.7;
       color: #cbd5e1;
       text-align: justify;
@@ -165,7 +220,7 @@
     }
 
     @media (max-width: 1024px) {
-      html { font-size: 16px; } /* 小屏幕还原字体 */
+      html { font-size: 16px; }
       .content-wrapper { flex-direction: column; height: auto; }
       section { height: auto; min-height: 100vh; }
       .chart-container { height: 400px; }
@@ -211,6 +266,13 @@
     <header>
       <h1>Part II: Topic Co-occurrence</h1>
       <p class="subtitle">技术栈关联分析 (Top N Pairs)</p>
+      <div class="controls">
+        <div class="input-group">
+          <label for="topNInput">Display Top:</label>
+          <input type="number" id="topNInput" value="10" min="5" max="100">
+        </div>
+        <button class="refresh-btn" onclick="loadTask2()">Update Chart</button>
+      </div>
     </header>
     <div class="content-wrapper">
       <div id="chart2" class="chart-container"></div>
@@ -224,7 +286,7 @@
           <div class="answer-text">
             <p><strong>1. Complementary Ecosystems:</strong> High co-occurrence (e.g., <em>Spring + Hibernate</em>) indicates standard industry stacks. Developers rarely use one without the other.</p>
             <p><strong>2. Language & Platform:</strong> Pairs like <em>Android + Kotlin</em> show the tight coupling between a programming language and its primary deployment platform.</p>
-            <p><strong>3. Problem & Context:</strong> Pairs like <em>Multithreading + Concurrency</em> represent the relationship between a specific implementation (Threads) and the broader theoretical domain, showing that developers tag both the "what" and the "how".</p>
+            <p><strong>3. Problem & Context:</strong> Pairs like <em>Multithreading + Concurrency</em> represent the relationship between a specific implementation (Threads) and the broader theoretical domain.</p>
           </div>
         </div>
       </div>
@@ -247,8 +309,8 @@
           <span class="answer-label">Key Findings</span>
           <div class="answer-text">
             <p><strong>Yes, they are significant.</strong></p>
-            <p><strong>1. Lifecycle Complexity:</strong> The high frequency of <em>Thread Lifecycle</em> issues suggests that managing thread states (start/stop/interrupt) is the first hurdle for beginners, making it a widespread "entry-level" problem.</p>
-            <p><strong>2. The "Invisible" Bugs:</strong> <em>Visibility/Volatile</em> issues are significant because they relate to the Java Memory Model. These bugs are subtle, do not always crash the app, and are hard to reproduce, leading to frustration and frequent questions.</p>
+            <p><strong>1. Lifecycle Complexity:</strong> The high frequency of <em>Thread Lifecycle</em> issues suggests that managing thread states (start/stop/interrupt) is the first hurdle for beginners.</p>
+            <p><strong>2. The "Invisible" Bugs:</strong> <em>Visibility/Volatile</em> issues are significant because they relate to the Java Memory Model. These bugs are subtle and hard to reproduce.</p>
             <p><strong>3. Gap in Understanding:</strong> The prevalence of these topics highlights a gap between understanding syntax (how to create a thread) and understanding correctness (how to make it thread-safe).</p>
           </div>
         </div>
@@ -275,7 +337,7 @@
             <p><strong>Reasonable? Yes.</strong></p>
             <p><strong>1. Reproducibility:</strong> Questions with code snippets (Solvable) allow answerers to reproduce the bug. It is reasonable that vague questions (Hard-to-solve) are ignored.</p>
             <p><strong>2. Clarity vs. Noise:</strong> A reasonable length indicates effort in explaining the context. Too short = lack of info; Too long = loss of focus.</p>
-            <p><strong>3. Reputation Bias:</strong> Higher reputation users know "how to ask," making their questions inherently more solvable, which is a fair reflection of community norms.</p>
+            <p><strong>3. Reputation Bias:</strong> Higher reputation users know "how to ask," making their questions inherently more solvable.</p>
           </div>
         </div>
       </div>
@@ -311,7 +373,9 @@
     sections[index].scrollIntoView({ behavior: 'smooth' });
   }
 
-  // ============ Task 1 (Demo) ============
+  // ============ Data Loading ============
+
+  // Task 1: Demo Data (Trends)
   function loadTask1() {
     const option = {
       backgroundColor: 'transparent',
@@ -328,43 +392,33 @@
     charts[0].setOption(option);
   }
 
-  // ============ Task 2 (Co-occurrence) - 增加滑动条 ============
+  // Task 2: Real Data (Co-occurrence) with Input Control
   async function loadTask2() {
     try {
-      // 如果想要更多数据，可以改 topN=50 测试效果
-      const response = await fetch(`${API_BASE}/coOccurrence?topN=20`);
+      // 【修改点 1】从输入框获取 topN，默认 10
+      const topNInput = document.getElementById('topNInput');
+      const topN = topNInput ? topNInput.value : 10;
+
+      const response = await fetch(`${API_BASE}/coOccurrence?topN=${topN}`);
       const data = await response.json();
 
-      // 不再只取 slice(0, 10)，而是全部数据
       const yData = data.map(item => `${item.tag1} + ${item.tag2}`).reverse();
       const xData = data.map(item => item.count || item.occurrenceCount).reverse();
 
       const option = {
         backgroundColor: 'transparent',
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-        // 【修改点 2】增加 dataZoom 滑动条
+        // 保持滑动条，应对大量数据
         dataZoom: [
-          {
-            type: 'slider',
-            yAxisIndex: 0,
-            width: 20, // 宽度
-            right: 10,  // 靠右位置
-            start: 60,  // 默认显示后 40% 的数据（因为我们 reverse 了，所以是排名靠前的）
-            end: 100,
-            textStyle: { color: '#fff' },
-            handleSize: '100%'
-          },
-          {
-            type: 'inside', // 允许鼠标滚轮滚动
-            yAxisIndex: 0
-          }
+          { type: 'slider', yAxisIndex: 0, width: 20, right: 10, start: 60, end: 100, textStyle: { color: '#fff' }, handleSize: '100%' },
+          { type: 'inside', yAxisIndex: 0 }
         ],
         grid: { left: '3%', right: '8%', bottom: '3%', containLabel: true },
         xAxis: { type: 'value', splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } }, axisLabel: { color: '#94a3b8', fontSize: 14 } },
         yAxis: {
           type: 'category',
           data: yData,
-          axisLabel: { color: '#e2e8f0', fontSize: 14 } // 字体变大
+          axisLabel: { color: '#e2e8f0', fontSize: 14 }
         },
         series: [{
           type: 'bar',
@@ -380,7 +434,7 @@
     } catch (e) { console.error("Task 2 Error", e); }
   }
 
-  // ============ Task 3 (Pitfalls) - 增加占比显示 (保留1位小数) ============
+  // Task 3: Real Data (Pitfalls) with Count + Percentage
   async function loadTask3() {
     try {
       const response = await fetch(`${API_BASE}/pitfalls`);
@@ -391,7 +445,7 @@
         backgroundColor: 'transparent',
         tooltip: {
           trigger: 'item',
-          // 提示框也统一格式
+          // 提示框同时显示: 名字: 个数 (百分比)
           formatter: '{b}: {c} ({d}%)'
         },
         legend: { top: '5%', textStyle: { color: '#94a3b8', fontSize: 14 } },
@@ -400,15 +454,15 @@
           radius: ['40%', '70%'],
           center: ['50%', '60%'],
           itemStyle: { borderRadius: 10, borderColor: '#1e293b', borderWidth: 2 },
-          // 【修改点 3】显示具体数值和百分比，保留1位小数
+          // 【修改点 2】标签同时显示 名称、个数、百分比
           label: {
             show: true,
             color: '#fff',
             fontSize: 16,
             formatter: function(params) {
-              // params.name: 名字
-              // params.percent: 百分比数字
-              return `${params.name}\n${params.percent.toFixed(1)}%`;
+              // params.value 是个数
+              // params.percent 是百分比
+              return `${params.name}\n${params.value} (${params.percent.toFixed(1)}%)`;
             }
           },
           labelLine: { show: true, length: 20, length2: 30 },
@@ -419,7 +473,7 @@
     } catch (e) { console.error("Task 3 Error", e); }
   }
 
-  // ============ Task 4 (Demo) ============
+  // Task 4: Demo Data (Solvability)
   function loadTask4() {
     const option = {
       backgroundColor: 'transparent',
