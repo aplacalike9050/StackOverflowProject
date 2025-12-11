@@ -123,4 +123,9 @@ public class DataImportController {
         result.put("timestamp", System.currentTimeMillis());
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping("/analysis")
+    public String analysisPage() {
+        return "analysis";
+    }
 }
