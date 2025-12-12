@@ -1,30 +1,14 @@
 package com.xiao.cs209a_project.service;
 
-import com.xiao.cs209a_project.dto.QuestionItem;
-import com.xiao.cs209a_project.dto.AnswerItem;
-import com.xiao.cs209a_project.dto.CommentItem;
-import com.xiao.cs209a_project.dto.StackExchangeResponse;
-import com.xiao.cs209a_project.dto.UserItem;
-import com.xiao.cs209a_project.entity.Question;
-import com.xiao.cs209a_project.entity.Answer;
-import com.xiao.cs209a_project.entity.Comment;
-import com.xiao.cs209a_project.entity.User;
-import com.xiao.cs209a_project.entity.Tag;
-import com.xiao.cs209a_project.entity.QuestionTag;
-import com.xiao.cs209a_project.repository.QuestionRepository;
-import com.xiao.cs209a_project.repository.AnswerRepository;
-import com.xiao.cs209a_project.repository.CommentRepository;
-import com.xiao.cs209a_project.repository.UserRepository;
-import com.xiao.cs209a_project.repository.TagRepository;
-import com.xiao.cs209a_project.repository.QuestionTagRepository;
+import com.xiao.cs209a_project.dto.*;
+import com.xiao.cs209a_project.entity.*;
+import com.xiao.cs209a_project.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -80,13 +64,13 @@ public class QuestionImportService {
                     }
 
                     // 检查问题是否已存在
-                    if (questionRepository.existsByQuestionId(questionItem.getQuestionId())) {
+                    if (questionRepository.findByQuestionId(questionItem.getQuestionId()).isPresent()) {
                         log.debug("问题 {} 已存在，跳过", questionItem.getQuestionId());
                         continue;
                     }
 
                     // 1. 导入问题作者的用户数据
-                    User questionOwner = importUserIfNeeded(questionItem.getOwnerUserId());
+                    importUserIfNeeded(questionItem.getOwnerUserId());
 
                     // 2. 转换并保存问题
                     Question question = convertToQuestion(questionItem);
@@ -101,7 +85,7 @@ public class QuestionImportService {
                     log.info("成功导入问题: ID={}, 标题={}",
                             savedQuestion.getQuestionId(),
                             savedQuestion.getTitle() != null ?
-                                    savedQuestion.getTitle().substring(0, Math.min(50, savedQuestion.getTitle().length())) : "无标题");
+                                    (savedQuestion.getTitle().length() > 50 ? savedQuestion.getTitle().substring(0, 50) : savedQuestion.getTitle()) : "无标题");
 
                     // 3. 导入问题的标签数据
                     if (questionItem.getTags() != null && !questionItem.getTags().isEmpty()) {
@@ -111,46 +95,38 @@ public class QuestionImportService {
                                 questionItem.getTags());
 
                         try {
+                            // 传入 Stack Overflow 的 questionId (业务ID)
                             processQuestionTags(savedQuestion.getQuestionId(), questionItem.getTags());
                             log.info("问题 {} 的标签导入完成", savedQuestion.getQuestionId());
                         } catch (Exception e) {
                             log.error("导入问题 {} 的标签失败，但问题已保存，继续处理",
                                     savedQuestion.getQuestionId(), e);
                         }
-                    } else {
-                        log.info("问题 {} 没有标签，跳过标签导入", savedQuestion.getQuestionId());
                     }
 
                     // 4. 导入问题的评论
                     log.info("开始导入问题 {} 的评论数据", savedQuestion.getQuestionId());
                     try {
                         importCommentsForQuestion(savedQuestion.getQuestionId());
-                        log.info("问题 {} 的评论导入完成", savedQuestion.getQuestionId());
                     } catch (Exception e) {
-                        log.error("导入问题 {} 的评论失败，但问题已保存，继续处理",
-                                savedQuestion.getQuestionId(), e);
+                        log.error("导入问题 {} 的评论失败", savedQuestion.getQuestionId(), e);
                     }
 
-                    // 5. 如果问题有答案，导入所有答案和答案评论
+                    // 5. 导入答案
                     if (savedQuestion.getAnswerCount() != null && savedQuestion.getAnswerCount() > 0) {
                         log.info("问题 {} 有 {} 个答案，开始导入答案",
                                 savedQuestion.getQuestionId(), savedQuestion.getAnswerCount());
-
                         importAnswersForQuestion(savedQuestion.getQuestionId());
-                    } else {
-                        log.info("问题 {} 没有答案，跳过答案导入", savedQuestion.getQuestionId());
                     }
 
                     // 问题间的延迟
                     Thread.sleep(1000);
                 }
 
-                // 检查是否还有更多数据
                 if (!response.isHasMore()) {
                     log.info("API返回没有更多数据，停止导入");
                     break;
                 }
-
                 page++;
             }
 
@@ -163,348 +139,286 @@ public class QuestionImportService {
         }
     }
 
-    /**
-     * 导入指定问题的所有答案和答案评论
-     */
     private void importAnswersForQuestion(Long questionId) {
-        log.info("开始导入问题 {} 的所有答案数据", questionId);
-
         int page = 1;
         int pageSize = 100;
-        int importedAnswerCount = 0;
 
         try {
             while (true) {
-                // API调用延迟
                 Thread.sleep(2000);
-
                 StackExchangeResponse<AnswerItem> response = apiService.getAnswersForQuestion(questionId, page, pageSize);
 
                 if (response == null || response.getItems() == null || response.getItems().isEmpty()) {
-                    log.info("问题 {} 没有更多答案数据", questionId);
                     break;
                 }
 
                 List<Answer> answersToSave = new ArrayList<>();
                 for (AnswerItem answerItem : response.getItems()) {
-                    // 检查答案是否已存在
-                    if (answerRepository.existsByAnswerId(answerItem.getAnswerId())) {
-                        log.debug("答案 {} 已存在，跳过", answerItem.getAnswerId());
+                    if (answerRepository.findByAnswerId(answerItem.getAnswerId()).isPresent()) {
                         continue;
                     }
+                    importUserIfNeeded(answerItem.getOwnerUserId());
 
-                    // 导入答案作者的用户数据
-                    User answerOwner = importUserIfNeeded(answerItem.getOwnerUserId());
-
-                    // 转换并保存答案
                     Answer answer = convertToAnswer(answerItem);
                     if (answer != null) {
                         answersToSave.add(answer);
-                        importedAnswerCount++;
                     }
                 }
 
-                // 批量保存答案
                 if (!answersToSave.isEmpty()) {
                     List<Answer> savedAnswers = answerRepository.saveAll(answersToSave);
-                    log.info("成功保存 {} 个答案到数据库，问题ID: {}", savedAnswers.size(), questionId);
 
-                    // 为每个答案导入评论
+                    // 导入答案评论
                     for (Answer savedAnswer : savedAnswers) {
-                        log.info("开始导入答案 {} 的评论数据", savedAnswer.getAnswerId());
                         try {
                             importCommentsForAnswer(savedAnswer.getAnswerId());
-                            log.info("答案 {} 的评论导入完成", savedAnswer.getAnswerId());
                         } catch (Exception e) {
-                            log.error("导入答案 {} 的评论失败，但答案已保存，继续处理",
-                                    savedAnswer.getAnswerId(), e);
+                            log.error("导入答案 {} 的评论失败", savedAnswer.getAnswerId(), e);
                         }
                     }
                 }
 
-                // 检查是否还有更多页数据
-                if (!response.isHasMore()) {
-                    break;
-                }
-
+                if (!response.isHasMore()) break;
                 page++;
             }
-
-            log.info("问题 {} 的答案导入完成，总共导入 {} 个答案", questionId, importedAnswerCount);
-
         } catch (Exception e) {
-            log.error("导入问题 {} 的答案数据时发生错误，但问题已保存", questionId, e);
+            log.error("导入问题 {} 的答案数据时发生错误", questionId, e);
         }
     }
 
-    /**
-     * 导入问题的所有评论
-     */
     private void importCommentsForQuestion(Long questionId) {
-        log.info("开始导入问题 {} 的所有评论数据", questionId);
-
-        int page = 1;
-        int pageSize = 100;
-        int importedCommentCount = 0;
-
-        try {
-            while (true) {
-                // API调用延迟
-                Thread.sleep(1000);
-
-                StackExchangeResponse<CommentItem> response = apiService.getCommentsForQuestion(questionId, page, pageSize);
-
-                if (response == null || response.getItems() == null || response.getItems().isEmpty()) {
-                    log.info("问题 {} 没有更多评论数据", questionId);
-                    break;
-                }
-
-                List<Comment> commentsToSave = new ArrayList<>();
-                for (CommentItem commentItem : response.getItems()) {
-                    // 检查评论是否已存在
-                    if (commentRepository.existsByCommentId(commentItem.getCommentId())) {
-                        log.debug("评论 {} 已存在，跳过", commentItem.getCommentId());
-                        continue;
-                    }
-
-                    // 导入评论作者的用户数据
-                    User commentOwner = importUserIfNeeded(commentItem.getOwnerUserId());
-
-                    // 转换并保存评论
-                    Comment comment = convertToComment(commentItem, "question");
-                    if (comment != null) {
-                        commentsToSave.add(comment);
-                        importedCommentCount++;
-                    }
-                }
-
-                // 批量保存评论
-                if (!commentsToSave.isEmpty()) {
-                    List<Comment> savedComments = commentRepository.saveAll(commentsToSave);
-                    log.info("成功保存 {} 个评论到数据库，问题ID: {}", savedComments.size(), questionId);
-                }
-
-                // 检查是否还有更多页数据
-                if (!response.isHasMore()) {
-                    break;
-                }
-
-                page++;
-            }
-
-            log.info("问题 {} 的评论导入完成，总共导入 {} 个评论", questionId, importedCommentCount);
-
-        } catch (Exception e) {
-            log.error("导入问题 {} 的评论数据时发生错误，但问题已保存", questionId, e);
-        }
+        importComments(questionId, "question");
     }
 
-    /**
-     * 导入答案的所有评论
-     */
     private void importCommentsForAnswer(Long answerId) {
-        log.info("开始导入答案 {} 的所有评论数据", answerId);
+        importComments(answerId, "answer");
+    }
 
+    private void importComments(Long postId, String type) {
         int page = 1;
         int pageSize = 100;
-        int importedCommentCount = 0;
 
         try {
             while (true) {
-                // API调用延迟
                 Thread.sleep(1000);
+                StackExchangeResponse<CommentItem> response;
 
-                StackExchangeResponse<CommentItem> response = apiService.getCommentsForAnswer(answerId, page, pageSize);
+                if ("question".equals(type)) {
+                    response = apiService.getCommentsForQuestion(postId, page, pageSize);
+                } else {
+                    response = apiService.getCommentsForAnswer(postId, page, pageSize);
+                }
 
                 if (response == null || response.getItems() == null || response.getItems().isEmpty()) {
-                    log.info("答案 {} 没有更多评论数据", answerId);
                     break;
                 }
 
                 List<Comment> commentsToSave = new ArrayList<>();
-                for (CommentItem commentItem : response.getItems()) {
-                    // 检查评论是否已存在
-                    if (commentRepository.existsByCommentId(commentItem.getCommentId())) {
-                        log.debug("评论 {} 已存在，跳过", commentItem.getCommentId());
+                for (CommentItem item : response.getItems()) {
+                    if (commentRepository.existsByCommentId(item.getCommentId())) {
                         continue;
                     }
+                    importUserIfNeeded(item.getOwnerUserId());
 
-                    // 导入评论作者的用户数据
-                    User commentOwner = importUserIfNeeded(commentItem.getOwnerUserId());
-
-                    // 转换并保存评论
-                    Comment comment = convertToComment(commentItem, "answer");
+                    Comment comment = convertToComment(item, type);
                     if (comment != null) {
                         commentsToSave.add(comment);
-                        importedCommentCount++;
                     }
                 }
 
-                // 批量保存评论
                 if (!commentsToSave.isEmpty()) {
-                    List<Comment> savedComments = commentRepository.saveAll(commentsToSave);
-                    log.info("成功保存 {} 个评论到数据库，答案ID: {}", savedComments.size(), answerId);
+                    commentRepository.saveAll(commentsToSave);
                 }
 
-                // 检查是否还有更多页数据
-                if (!response.isHasMore()) {
-                    break;
-                }
-
+                if (!response.isHasMore()) break;
                 page++;
             }
-
-            log.info("答案 {} 的评论导入完成，总共导入 {} 个评论", answerId, importedCommentCount);
-
         } catch (Exception e) {
-            log.error("导入答案 {} 的评论数据时发生错误", answerId, e);
+            log.error("导入评论失败: postId={}, type={}", postId, type, e);
         }
     }
 
-    /**
-     * 导入用户数据（如果不存在）
-     */
-    private User importUserIfNeeded(Long userId) {
-        if (userId == null) {
-            return null;
-        }
+    private void importUserIfNeeded(Long userId) {
+        if (userId == null) return;
 
         try {
-            // 检查用户是否已存在
-            if (userRepository.existsByUserId(userId)) {
-                return userRepository.findById(userId).orElse(null);
+            if (userRepository.findByUserId(userId).isPresent()) {
+                return;
             }
 
-            // API调用延迟
             Thread.sleep(1000);
+            UserItem item = apiService.getUserInfo(userId);
+            if (item == null) return;
 
-            // 调用API获取用户数据
-            UserItem userItem = apiService.getUserInfo(userId);
-            if (userItem == null) {
-                log.warn("无法获取用户 {} 的数据", userId);
-                return null;
-            }
-
-            User user = convertToUser(userItem);
+            User user = convertToUser(item);
             if (user != null) {
-                User savedUser = userRepository.save(user);
-                log.debug("成功导入用户: ID={}, 名称={}", savedUser.getUserId(), savedUser.getDisplayName());
-                return savedUser;
+                userRepository.save(user);
             }
-
-            return null;
-
         } catch (Exception e) {
-            log.error("导入用户数据失败: userId={}, error={}", userId, e.getMessage());
-            return null;
+            log.error("导入用户数据失败: userId={}", userId, e);
         }
     }
 
-    /**
-     * 处理问题的标签数据
-     */
     @Transactional
     public void processQuestionTags(Long questionId, List<String> tagNames) {
         if (questionId == null || tagNames == null || tagNames.isEmpty()) {
-            log.warn("问题ID或标签列表为空，跳过标签处理");
             return;
         }
 
         try {
-            // 1. 确保所有标签都存在
+            // 1. 确保 Tag 表中有这些标签
             List<Tag> tags = ensureTagsExist(tagNames);
 
-            // 2. 创建问题与标签的关联
-            createQuestionTagAssociations(questionId, tags);
+            // 2. 创建关联
+            List<QuestionTag> questionTags = new ArrayList<>();
+            for (Tag tag : tags) {
+                // 使用 Tag 的 id (主键)
+                // 使用 Question 的 questionId (业务ID) - 对应 QuestionTag 实体中的定义
+                // 假设 QuestionTag 实体里的 tagId 对应 Tag 表的主键 id
+                if (!questionTagRepository.existsByQuestionIdAndTagId(questionId, tag.getId())) {
+                    QuestionTag qt = new QuestionTag();
+                    qt.setQuestionId(questionId);
+                    qt.setTagId(tag.getId()); // 注意：这里用 Tag 的主键 ID
+                    questionTags.add(qt);
+                }
+            }
+            if (!questionTags.isEmpty()) {
+                questionTagRepository.saveAll(questionTags);
+            }
 
-            // 3. 更新标签使用计数
-            updateTagUsageCounts(tags);
-
-            log.debug("成功处理问题 {} 的 {} 个标签: {}", questionId, tags.size(), tagNames);
+            // 3. 更新引用计数
+            for (Tag tag : tags) {
+                tagRepository.incrementUsageCount(tag.getId());
+            }
 
         } catch (Exception e) {
-            log.error("处理问题 {} 的标签数据失败", questionId, e);
+            log.error("处理标签失败: questionId={}", questionId, e);
         }
     }
 
-    /**
-     * 确保标签存在，不存在则创建
-     */
     private List<Tag> ensureTagsExist(List<String> tagNames) {
         List<Tag> existingTags = tagRepository.findByTagNameIn(tagNames);
-        Set<String> existingTagNames = existingTags.stream()
-                .map(Tag::getTagName)
-                .collect(Collectors.toSet());
+        Set<String> existingNames = existingTags.stream().map(Tag::getTagName).collect(Collectors.toSet());
 
         List<Tag> newTags = new ArrayList<>();
-        for (String tagName : tagNames) {
-            if (!existingTagNames.contains(tagName)) {
-                Tag newTag = new Tag();
-                newTag.setTagName(tagName);
-                newTag.setUsageCount(0);
-                newTags.add(newTag);
+        for (String name : tagNames) {
+            if (!existingNames.contains(name)) {
+                Tag t = new Tag();
+                t.setTagName(name);
+                t.setUsageCount(0);
+                newTags.add(t);
             }
         }
 
         if (!newTags.isEmpty()) {
-            List<Tag> savedTags = tagRepository.saveAll(newTags);
-            existingTags.addAll(savedTags);
-            log.info("创建了 {} 个新标签: {}", savedTags.size(),
-                    savedTags.stream().map(Tag::getTagName).collect(Collectors.toList()));
+            existingTags.addAll(tagRepository.saveAll(newTags));
         }
-
         return existingTags;
     }
 
-    /**
-     * 创建问题与标签的关联
-     */
-    private void createQuestionTagAssociations(Long questionId, List<Tag> tags) {
-        List<QuestionTag> questionTags = new ArrayList<>();
+    // --- 转换方法 (核心修改：时间类型直接赋值 Long) ---
 
-        for (Tag tag : tags) {
-            // 检查关联是否已存在
-            if (questionTagRepository.existsByQuestionIdAndTagId(questionId, tag.getTagId())) {
-                continue;
-            }
+    private Question convertToQuestion(QuestionItem item) {
+        Question q = new Question();
+        q.setQuestionId(item.getQuestionId());
+        q.setTitle(item.getTitle());
+        q.setBody(item.getBody());
+        q.setOwnerUserId(item.getOwnerUserId());
+        q.setScore(item.getScore() != null ? item.getScore() : 0);
+        q.setViewCount(item.getViewCount() != null ? item.getViewCount() : 0);
+        q.setAnswerCount(item.getAnswerCount() != null ? item.getAnswerCount() : 0);
+        q.setCommentCount(item.getCommentCount() != null ? item.getCommentCount() : 0);
+        q.setIsAnswered(item.getIsAnswered() != null ? item.getIsAnswered() : false);
+        q.setAcceptedAnswerId(item.getAcceptedAnswerId());
 
-            QuestionTag questionTag = new QuestionTag();
-            questionTag.setQuestionId(questionId);
-            questionTag.setTagId(tag.getTagId());
-            questionTags.add(questionTag);
+        // 直接存 Long
+        q.setCreationDate(item.getCreationDate());
+        q.setLastActivityDate(item.getLastActivityDate());
+
+        // 标签缓存字符串
+        if (item.getTags() != null) {
+            q.setTagsCache(String.join(",", item.getTags()));
         }
 
-        if (!questionTags.isEmpty()) {
-            questionTagRepository.saveAll(questionTags);
-            log.debug("为问题 {} 创建了 {} 个标签关联", questionId, questionTags.size());
-        }
+        return q;
     }
 
-    /**
-     * 更新标签使用计数
-     */
-    private void updateTagUsageCounts(List<Tag> tags) {
-        for (Tag tag : tags) {
-            tagRepository.incrementUsageCount(tag.getTagId());
-        }
+    private Answer convertToAnswer(AnswerItem item) {
+        Answer a = new Answer();
+        a.setAnswerId(item.getAnswerId());
+        a.setQuestionId(item.getQuestionId());
+        a.setOwnerUserId(item.getOwnerUserId());
+        a.setBody(item.getBody());
+        a.setScore(item.getScore() != null ? item.getScore() : 0);
+        a.setIsAccepted(item.getIsAccepted() != null ? item.getIsAccepted() : false);
+
+        // 直接存 Long
+        a.setCreationDate(item.getCreationDate());
+        a.setLastActivityDate(item.getLastActivityDate());
+
+        return a;
     }
 
-    /**
-     * 批量处理所有问题的标签
-     */
+    private Comment convertToComment(CommentItem item, String postType) {
+        Comment c = new Comment();
+        c.setCommentId(item.getCommentId());
+        c.setPostId(item.getPostId());
+        c.setPostType(postType);
+        c.setOwnerUserId(item.getOwnerUserId());
+        c.setBody(item.getBody());
+        c.setScore(item.getScore() != null ? item.getScore() : 0);
+
+        // 直接存 Long
+        c.setCreationDate(item.getCreationDate());
+
+        return c;
+    }
+
+    private User convertToUser(UserItem item) {
+        User u = new User();
+        u.setUserId(item.getUserId());
+        u.setDisplayName(item.getDisplayName());
+        u.setReputation(item.getReputation() != null ? item.getReputation() : 0);
+
+        // 直接存 Long
+        u.setCreationDate(item.getCreationDate());
+
+        return u;
+    }
+
+    public long getImportedCount() {
+        return questionRepository.count();
+    }
+
     @Transactional
     public void processAllQuestionsTags() {
+        log.info("开始批量处理所有问题的标签...");
         List<Question> questions = questionRepository.findAll();
         int processedCount = 0;
 
         for (Question question : questions) {
-            if (question.getTagsCache() != null && !question.getTagsCache().isEmpty()) {
-                List<String> tagNames = Arrays.asList(question.getTagsCache().split(","));
+            String tagsCache = question.getTagsCache();
+            if (tagsCache != null && !tagsCache.isEmpty()) {
+
+
+                List<String> tagNames;
+                if (tagsCache.startsWith("<")) {
+                    // 解析 <java><spring> 格式
+                    tagNames = new ArrayList<>();
+                    java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("<([^>]+)>").matcher(tagsCache);
+                    while (matcher.find()) {
+                        tagNames.add(matcher.group(1));
+                    }
+                } else {
+                    // 解析 java,spring 格式
+                    tagNames = Arrays.asList(tagsCache.split(","));
+                }
+
+                // 调用现有的处理逻辑
                 processQuestionTags(question.getQuestionId(), tagNames);
                 processedCount++;
             }
         }
-
         log.info("批量处理完成，共处理 {} 个问题的标签数据", processedCount);
     }
 
@@ -512,155 +426,9 @@ public class QuestionImportService {
      * 获取最常用的标签
      */
     public List<Tag> getTopTags(int limit) {
+        // 调用 Repository 中已有的方法
         return tagRepository.findTopTagsByUsageCount().stream()
                 .limit(limit)
                 .collect(Collectors.toList());
-    }
-
-    private Question convertToQuestion(QuestionItem item) {
-        try {
-            Question question = new Question();
-            question.setQuestionId(item.getQuestionId());
-            question.setTitle(item.getTitle());
-            question.setBody(item.getBody());
-            question.setOwnerUserId(item.getOwnerUserId());
-            question.setScore(item.getScore() != null ? item.getScore() : 0);
-            question.setViewCount(item.getViewCount() != null ? item.getViewCount() : 0);
-            question.setAnswerCount(item.getAnswerCount() != null ? item.getAnswerCount() : 0);
-            question.setCommentCount(item.getCommentCount() != null ? item.getCommentCount() : 0);
-            question.setFavoriteCount(item.getFavoriteCount() != null ? item.getFavoriteCount() : 0);
-            question.setIsAnswered(item.getIsAnswered() != null ? item.getIsAnswered() : false);
-            question.setAcceptedAnswerId(item.getAcceptedAnswerId());
-
-            // 日期转换
-            if (item.getCreationDate() != null) {
-                question.setCreationDate(LocalDateTime.ofInstant(
-                        Instant.ofEpochSecond(item.getCreationDate()), ZoneOffset.UTC));
-            } else {
-                question.setCreationDate(LocalDateTime.now());
-            }
-
-            if (item.getLastActivityDate() != null) {
-                question.setLastActivityDate(LocalDateTime.ofInstant(
-                        Instant.ofEpochSecond(item.getLastActivityDate()), ZoneOffset.UTC));
-            } else {
-                question.setLastActivityDate(question.getCreationDate());
-            }
-
-            if (item.getLastEditDate() != null) {
-                question.setLastEditDate(LocalDateTime.ofInstant(
-                        Instant.ofEpochSecond(item.getLastEditDate()), ZoneOffset.UTC));
-            }
-
-            // 设置标签缓存
-            if (item.getTags() != null && !item.getTags().isEmpty()) {
-                question.setTagsCache(String.join(",", item.getTags()));
-            } else {
-                question.setTagsCache("");
-            }
-
-            return question;
-
-        } catch (Exception e) {
-            log.error("转换问题数据失败: questionId={}", item.getQuestionId(), e);
-            return null;
-        }
-    }
-
-    private Answer convertToAnswer(AnswerItem item) {
-        try {
-            Answer answer = new Answer();
-            answer.setAnswerId(item.getAnswerId());
-            answer.setQuestionId(item.getQuestionId());
-            answer.setOwnerUserId(item.getOwnerUserId());
-            answer.setBody(item.getBody());
-            answer.setScore(item.getScore() != null ? item.getScore() : 0);
-            answer.setIsAccepted(item.getIsAccepted() != null ? item.getIsAccepted() : false);
-            answer.setCommentCount(item.getCommentCount() != null ? item.getCommentCount() : 0);
-
-            // 日期转换
-            if (item.getCreationDate() != null) {
-                answer.setCreationDate(LocalDateTime.ofInstant(
-                        Instant.ofEpochSecond(item.getCreationDate()), ZoneOffset.UTC));
-            } else {
-                answer.setCreationDate(LocalDateTime.now());
-            }
-
-            if (item.getLastActivityDate() != null) {
-                answer.setLastActivityDate(LocalDateTime.ofInstant(
-                        Instant.ofEpochSecond(item.getLastActivityDate()), ZoneOffset.UTC));
-            } else {
-                answer.setLastActivityDate(answer.getCreationDate());
-            }
-
-            if (item.getLastEditDate() != null) {
-                answer.setLastEditDate(LocalDateTime.ofInstant(
-                        Instant.ofEpochSecond(item.getLastEditDate()), ZoneOffset.UTC));
-            }
-
-            return answer;
-
-        } catch (Exception e) {
-            log.error("转换答案数据失败: answerId={}", item.getAnswerId(), e);
-            return null;
-        }
-    }
-
-    private Comment convertToComment(CommentItem item, String postType) {
-        try {
-            Comment comment = new Comment();
-            comment.setCommentId(item.getCommentId());
-            comment.setPostId(item.getPostId());
-            comment.setPostType(postType);
-            comment.setOwnerUserId(item.getOwnerUserId());
-            comment.setBody(item.getBody());
-            comment.setScore(item.getScore() != null ? item.getScore() : 0);
-
-            // 日期转换
-            if (item.getCreationDate() != null) {
-                comment.setCreationDate(LocalDateTime.ofInstant(
-                        Instant.ofEpochSecond(item.getCreationDate()), ZoneOffset.UTC));
-            } else {
-                comment.setCreationDate(LocalDateTime.now());
-            }
-
-            return comment;
-
-        } catch (Exception e) {
-            log.error("转换评论数据失败: commentId={}", item.getCommentId(), e);
-            return null;
-        }
-    }
-
-    private User convertToUser(UserItem item) {
-        try {
-            User user = new User();
-            user.setUserId(item.getUserId());
-            user.setDisplayName(item.getDisplayName());
-            user.setReputation(item.getReputation() != null ? item.getReputation() : 0);
-
-            // 日期转换
-            if (item.getCreationDate() != null) {
-                user.setCreatedAt(LocalDateTime.ofInstant(
-                        Instant.ofEpochSecond(item.getCreationDate()), ZoneOffset.UTC));
-            } else {
-                user.setCreatedAt(LocalDateTime.now());
-            }
-
-            if (item.getLastAccessDate() != null) {
-                user.setLastAccessDate(LocalDateTime.ofInstant(
-                        Instant.ofEpochSecond(item.getLastAccessDate()), ZoneOffset.UTC));
-            }
-
-            return user;
-
-        } catch (Exception e) {
-            log.error("转换用户数据失败: userId={}", item.getUserId(), e);
-            return null;
-        }
-    }
-
-    public long getImportedCount() {
-        return questionRepository.count();
     }
 }

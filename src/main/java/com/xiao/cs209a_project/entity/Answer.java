@@ -8,11 +8,15 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "answers")
 public class Answer {
+
     @Id
-    @Column(name = "answer_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "answer_id", unique = true, nullable = false)
     private Long answerId;
 
-    @Column(name = "question_id")
+    @Column(name = "question_id") // 逻辑外键，关联 Question 的 questionId
     private Long questionId;
 
     @Column(name = "owner_user_id")
@@ -26,18 +30,12 @@ public class Answer {
     @Column(name = "is_accepted")
     private Boolean isAccepted;
 
-    @Column(name = "comment_count")
-    private Integer commentCount;
-
     @Column(name = "creation_date")
-    private LocalDateTime creationDate;
-
+    private Long creationDate;
     @Column(name = "last_activity_date")
-    private LocalDateTime lastActivityDate;
-
-    @Column(name = "last_edit_date")
-    private LocalDateTime lastEditDate;
-
+    private Long lastActivityDate;
     @Column(name = "collected_at")
     private LocalDateTime collectedAt = LocalDateTime.now();
+
+
 }

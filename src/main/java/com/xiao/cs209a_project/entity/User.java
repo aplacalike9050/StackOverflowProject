@@ -8,8 +8,12 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "user_id", unique = true)
     private Long userId;
 
     @Column(name = "display_name")
@@ -17,12 +21,10 @@ public class User {
 
     private Integer reputation;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "last_access_date")
-    private LocalDateTime lastAccessDate;
-
     @Column(name = "collected_at")
     private LocalDateTime collectedAt = LocalDateTime.now();
+
+    @Column(name = "creation_date")
+    private Long creationDate; // 存 Unix 时间戳
+
 }

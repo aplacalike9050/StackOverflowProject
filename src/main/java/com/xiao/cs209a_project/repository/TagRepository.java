@@ -23,7 +23,8 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
     List<Tag> findByTagNameContaining(@Param("keyword") String keyword);
 
     @Modifying
-    @Query("UPDATE Tag t SET t.usageCount = t.usageCount + 1 WHERE t.tagId = :tagId")
+    // 修复：t.tagId 改为 t.id (因为 Tag 实体的主键是 id)
+    @Query("UPDATE Tag t SET t.usageCount = t.usageCount + 1 WHERE t.id = :tagId")
     void incrementUsageCount(@Param("tagId") Long tagId);
 
     @Query("SELECT t FROM Tag t ORDER BY t.usageCount DESC")
