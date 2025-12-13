@@ -1,6 +1,7 @@
 package com.xiao.cs209a_project.service;
 
 import com.xiao.cs209a_project.entity.Question;
+import com.xiao.cs209a_project.repository.CommentRepository;
 import com.xiao.cs209a_project.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class TopicAnalysisService {
 
     private final QuestionRepository questionRepository;
+    private final CommentRepository commentRepository;
 
     // 定义我们要分析的Java主题关键词
     private static final Map<String, List<String>> TOPIC_KEYWORDS = Map.of(
@@ -46,13 +48,9 @@ public class TopicAnalysisService {
             // 根据活动类型进行分析
             Map<String, Long> topicActivity = analyzeTopicActivity(questions, activityType);
 
-            // 按时间分组分析趋势
-            Map<String, Map<Long, Long>> monthlyTrends = analyzeMonthlyTrends(questions, activityType);
-
             result.put("success", true);
             result.put("totalQuestions", questions.size());
             result.put("topicActivity", topicActivity);
-            result.put("monthlyTrends", monthlyTrends);
             result.put("timeRange", Map.of(
                     "start", startTime,
                     "end", endTime
@@ -113,46 +111,11 @@ public class TopicAnalysisService {
         return switch (activityType) {
             case "questions" -> 1; // 单纯计数问题数量
             case "answers" -> question.getAnswerCount() != null ? question.getAnswerCount() : 0;
-            case "comments" -> question.getCommentCount() != null ? question.getCommentCount() : 0;
+            case "comments"  -> commentRepository.countByPostId(question.getQuestionId());
             case "score" -> question.getScore() != null ? Math.max(question.getScore(), 0) : 0;
             case "views" -> question.getViewCount() != null ? question.getViewCount() : 0;
             default -> 1;
         };
-    }
-
-    private Map<String, Map<Long, Long>> analyzeMonthlyTrends(List<Question> questions, String activityType) {
-        Map<String, Map<Long, Long>> monthlyTrends = new HashMap<>();
-
-        // 按月份分组问题
-        Map<Long, List<Question>> questionsByMonth = questions.stream()
-                .collect(Collectors.groupingBy(q -> {
-                    Instant instant = Instant.ofEpochSecond(q.getCreationDate());
-                    LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-                    // 转换为月份的时间戳（每月第一天）
-                    return LocalDateTime.of(dateTime.getYear(), dateTime.getMonth(), 1, 0, 0)
-                            .atZone(ZoneId.systemDefault()).toEpochSecond();
-                }));
-
-        // 为每个主题分析月度趋势
-        for (String topic : TOPIC_KEYWORDS.keySet()) {
-            Map<Long, Long> monthlyData = new TreeMap<>();
-
-            for (Map.Entry<Long, List<Question>> monthEntry : questionsByMonth.entrySet()) {
-                Long monthTimestamp = monthEntry.getKey();
-                List<Question> monthlyQuestions = monthEntry.getValue();
-
-                long monthlyActivity = monthlyQuestions.stream()
-                        .filter(q -> containsTopicKeywords(q, TOPIC_KEYWORDS.get(topic)))
-                        .mapToLong(q -> calculateActivityValue(q, activityType))
-                        .sum();
-
-                monthlyData.put(monthTimestamp, monthlyActivity);
-            }
-
-            monthlyTrends.put(topic, monthlyData);
-        }
-
-        return monthlyTrends;
     }
 
     /**

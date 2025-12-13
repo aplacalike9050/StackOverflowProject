@@ -120,7 +120,7 @@ public class QuestionImportService {
                     }
 
                     // 问题间的延迟
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                 }
 
                 if (!response.isHasMore()) {

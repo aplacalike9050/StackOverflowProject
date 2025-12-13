@@ -53,4 +53,14 @@ public class TopicAnalysisController {
         );
         return ResponseEntity.ok(result);
     }
+
+    /**
+     * 获取当前数据中问题的时间范围
+     * GET /api/analysis/time-range
+     */
+    @GetMapping("/time-range")
+    public ResponseEntity<Map<String, Object>> getAvailableTimeRange() {
+        Map<String, Object> result = topicAnalysisService.getAvailableTimeRange();
+        return ResponseEntity.ok(result);
+    }
 }

@@ -7,11 +7,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.lang.Math.round;
 
 @Slf4j
 @Service
@@ -29,28 +29,34 @@ public class QuestionSolvabilityAnalysisService {
             "memory-management", "optimization", "distributed", "transaction"
     );
 
-    // 定义疑难标签（解答率<30%的标签）
-    private static final Set<String> DIFFICULT_TAGS = Set.of(
-            "memory-leak", "performance", "optimization", "concurrency", "security",
-            "jvm", "garbage-collection", "deadlock", "race-condition", "serialization",
-            "reflection", "bytecode", "native", "jni", "low-level"
-    );
-
-    // 时间配置
-    private static final int DAYTIME_START_HOUR = 6;    // 早上6点
-    private static final int DAYTIME_END_HOUR = 22;     // 晚上10点
-    private static final int MORNING_START = 6;         // 早上开始
-    private static final int AFTERNOON_START = 12;      // 下午开始
-    private static final int EVENING_START = 18;        // 晚上开始
-    private static final int NIGHT_START = 22;          // 夜间开始
+    // 北美工作时间：周一-周五 09:00-17:00 （EST/EDT）
+    private static final int NA_WORK_START = 9;
+    private static final int NA_WORK_END   = 17;
 
     // 显著性阈值配置
     private static final double SCORE_DIFFERENCE_THRESHOLD = 2.0;
     private static final double COMMENT_DIFFERENCE_THRESHOLD = 1.5;
     private static final double ENGAGEMENT_SCORE_SIGNIFICANCE_THRESHOLD = 8.0;
 
+    private boolean isAnsweredInNorthAmericaWorkTime(Question question) {
+        if (question.getLastActivityDate() == null) return false;
+
+        // 1. 用纽约时区
+        ZoneId naZone = ZoneId.of("America/New_York");
+        ZonedDateTime naTime = Instant.ofEpochSecond(question.getLastActivityDate())
+                .atZone(naZone);
+
+        // 2. 只算周一-周五
+        DayOfWeek dow = naTime.getDayOfWeek();
+        if (dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY) return false;
+
+        // 3. 09:00-17:00
+        int hour = naTime.getHour();
+        return hour >= NA_WORK_START && hour < NA_WORK_END;
+    }
+
     /**
-     * 分析可解问题与难解问题的六个核心因素差异
+     * 分析可解问题与难解问题的五个核心因素差异
      */
     public Map<String, Object> analyzeSolvabilityFactors() {
         Map<String, Object> result = new HashMap<>();
@@ -81,7 +87,7 @@ public class QuestionSolvabilityAnalysisService {
             log.info("可解问题: {} 个, 难解问题: {} 个",
                     solvableQuestions.size(), hardToSolveQuestions.size());
 
-            // 分析六个核心因素
+            // 分析五个核心因素
             Map<String, Object> factors = analyzeSixCoreFactors(solvableQuestions, hardToSolveQuestions);
 
             // 生成分析结果
@@ -94,7 +100,7 @@ public class QuestionSolvabilityAnalysisService {
             result.put("factors", factors);
             result.put("insights", generateInsights(solvableQuestions, hardToSolveQuestions, factors));
 
-            log.info("可解性分析完成，识别出 6 个核心因素");
+            log.info("可解性分析完成，识别出 5 个核心因素");
 
         } catch (Exception e) {
             log.error("分析问题可解性时发生错误", e);
@@ -137,7 +143,7 @@ public class QuestionSolvabilityAnalysisService {
     }
 
     /**
-     * 分析六个核心因素
+     * 分析五个核心因素
      */
     private Map<String, Object> analyzeSixCoreFactors(List<Question> solvable, List<Question> hardToSolve) {
         Map<String, Object> factors = new HashMap<>();
@@ -146,8 +152,7 @@ public class QuestionSolvabilityAnalysisService {
             // 1. 问题复杂度分析
             factors.put("questionComplexity", analyzeQuestionComplexity(solvable, hardToSolve));
 
-            // 2. 疑难标签分析
-            factors.put("difficultTags", analyzeDifficultTags(solvable, hardToSolve));
+
 
             // 3. 用户参与度分析
             factors.put("userEngagement", analyzeUserEngagement(solvable, hardToSolve));
@@ -186,29 +191,29 @@ public class QuestionSolvabilityAnalysisService {
                     .mapToInt(this::countTags)
                     .average().orElse(0);
 
-            analysis.put("solvableAvgTags", Math.round(solvableAvgTags * 100.0) / 100.0);
-            analysis.put("hardToSolveAvgTags", Math.round(hardToSolveAvgTags * 100.0) / 100.0);
+            analysis.put("solvableAvgTags", round(solvableAvgTags * 100.0) / 100.0);
+            analysis.put("hardToSolveAvgTags", round(hardToSolveAvgTags * 100.0) / 100.0);
 
             double tagCountDifference = solvableAvgTags - hardToSolveAvgTags;
-            analysis.put("tagCountDifference", Math.round(tagCountDifference * 100.0) / 100.0);
+            analysis.put("tagCountDifference", round(tagCountDifference * 100.0) / 100.0);
 
             // 分析高级主题比例
             double solvableAdvancedRate = calculateAdvancedTopicRate(solvable);
             double hardToSolveAdvancedRate = calculateAdvancedTopicRate(hardToSolve);
 
-            analysis.put("solvableAdvancedRate", Math.round(solvableAdvancedRate * 100.0) / 100.0);
-            analysis.put("hardToSolveAdvancedRate", Math.round(hardToSolveAdvancedRate * 100.0) / 100.0);
+            analysis.put("solvableAdvancedRate", round(solvableAdvancedRate * 100.0) / 100.0);
+            analysis.put("hardToSolveAdvancedRate", round(hardToSolveAdvancedRate * 100.0) / 100.0);
 
             double advancedTopicDifference = solvableAdvancedRate - hardToSolveAdvancedRate;
-            analysis.put("advancedTopicDifference", Math.round(advancedTopicDifference * 100.0) / 100.0);
+            analysis.put("advancedTopicDifference", round(advancedTopicDifference * 100.0) / 100.0);
 
             // 复杂度综合评分
             double solvableComplexityScore = calculateComplexityScore(solvable);
             double hardToSolveComplexityScore = calculateComplexityScore(hardToSolve);
 
-            analysis.put("solvableValue", Math.round(solvableComplexityScore * 100.0) / 100.0);
-            analysis.put("hardToSolveValue", Math.round(hardToSolveComplexityScore * 100.0) / 100.0);
-            analysis.put("difference", Math.round((solvableComplexityScore - hardToSolveComplexityScore) * 100.0) / 100.0);
+            analysis.put("solvableValue", round(solvableComplexityScore * 100.0) / 100.0);
+            analysis.put("hardToSolveValue", round(hardToSolveComplexityScore * 100.0) / 100.0);
+            analysis.put("difference", round((solvableComplexityScore - hardToSolveComplexityScore) * 100.0) / 100.0);
 
             // 显著性判断
             boolean isSignificant = Math.abs(tagCountDifference) > 0.5 || Math.abs(advancedTopicDifference) > 10;
@@ -223,53 +228,6 @@ public class QuestionSolvabilityAnalysisService {
         return analysis;
     }
 
-    /**
-     * 2. 疑难标签分析
-     */
-    private Map<String, Object> analyzeDifficultTags(List<Question> solvable, List<Question> hardToSolve) {
-        Map<String, Object> analysis = new HashMap<>();
-
-        try {
-            // 分析疑难标签比例
-            long solvableWithDifficultTags = solvable.stream()
-                    .filter(this::containsDifficultTags)
-                    .count();
-
-            long hardToSolveWithDifficultTags = hardToSolve.stream()
-                    .filter(this::containsDifficultTags)
-                    .count();
-
-            double solvableDifficultTagRate = solvable.size() > 0 ?
-                    (double) solvableWithDifficultTags / solvable.size() * 100 : 0;
-            double hardToSolveDifficultTagRate = hardToSolve.size() > 0 ?
-                    (double) hardToSolveWithDifficultTags / hardToSolve.size() * 100 : 0;
-
-            analysis.put("solvableDifficultTagRate", Math.round(solvableDifficultTagRate * 100.0) / 100.0);
-            analysis.put("hardToSolveDifficultTagRate", Math.round(hardToSolveDifficultTagRate * 100.0) / 100.0);
-
-            double difficultTagDifference = solvableDifficultTagRate - hardToSolveDifficultTagRate;
-            analysis.put("difficultTagDifference", Math.round(difficultTagDifference * 100.0) / 100.0);
-
-            // 疑难标签综合评分
-            double solvableDifficultTagScore = 100 - solvableDifficultTagRate; // 疑难标签越少，评分越高
-            double hardToSolveDifficultTagScore = 100 - hardToSolveDifficultTagRate;
-
-            analysis.put("solvableValue", Math.round(solvableDifficultTagScore * 100.0) / 100.0);
-            analysis.put("hardToSolveValue", Math.round(hardToSolveDifficultTagScore * 100.0) / 100.0);
-            analysis.put("difference", Math.round((solvableDifficultTagScore - hardToSolveDifficultTagScore) * 100.0) / 100.0);
-
-            // 显著性判断
-            boolean isSignificant = Math.abs(difficultTagDifference) > 5;
-            analysis.put("significance", isSignificant ? "显著" : "不显著");
-            analysis.put("significanceLevel", isSignificant ? "high" : "low");
-
-        } catch (Exception e) {
-            log.error("分析疑难标签时发生错误", e);
-            analysis = createDefaultDifficultTagsData();
-        }
-
-        return analysis;
-    }
 
     /**
      * 3. 用户参与度分析 - 使用CommentRepository获取评论数量
@@ -282,11 +240,11 @@ public class QuestionSolvabilityAnalysisService {
             double solvableCommentCount = calculateAverageCommentCount(solvable);
             double hardToSolveCommentCount = calculateAverageCommentCount(hardToSolve);
 
-            analysis.put("solvableCommentCount", Math.round(solvableCommentCount * 100.0) / 100.0);
-            analysis.put("hardToSolveCommentCount", Math.round(hardToSolveCommentCount * 100.0) / 100.0);
+            analysis.put("solvableCommentCount", round(solvableCommentCount * 100.0) / 100.0);
+            analysis.put("hardToSolveCommentCount", round(hardToSolveCommentCount * 100.0) / 100.0);
 
             double commentDifference = solvableCommentCount - hardToSolveCommentCount;
-            analysis.put("commentDifference", Math.round(commentDifference * 100.0) / 100.0);
+            analysis.put("commentDifference", round(commentDifference * 100.0) / 100.0);
 
             // 分析问题分数
             double solvableScore = solvable.stream()
@@ -297,11 +255,11 @@ public class QuestionSolvabilityAnalysisService {
                     .mapToInt(q -> q.getScore() != null ? Math.max(q.getScore(), 0) : 0)
                     .average().orElse(0);
 
-            analysis.put("solvableScore", Math.round(solvableScore * 100.0) / 100.0);
-            analysis.put("hardToSolveScore", Math.round(hardToSolveScore * 100.0) / 100.0);
+            analysis.put("solvableScore", round(solvableScore * 100.0) / 100.0);
+            analysis.put("hardToSolveScore", round(hardToSolveScore * 100.0) / 100.0);
 
             double scoreDifference = solvableScore - hardToSolveScore;
-            analysis.put("scoreDifference", Math.round(scoreDifference * 100.0) / 100.0);
+            analysis.put("scoreDifference", round(scoreDifference * 100.0) / 100.0);
 
             // 分析回答数量
             double solvableAnswerCount = solvable.stream()
@@ -312,11 +270,11 @@ public class QuestionSolvabilityAnalysisService {
                     .mapToInt(q -> q.getAnswerCount() != null ? q.getAnswerCount() : 0)
                     .average().orElse(0);
 
-            analysis.put("solvableAnswerCount", Math.round(solvableAnswerCount * 100.0) / 100.0);
-            analysis.put("hardToSolveAnswerCount", Math.round(hardToSolveAnswerCount * 100.0) / 100.0);
+            analysis.put("solvableAnswerCount", round(solvableAnswerCount * 100.0) / 100.0);
+            analysis.put("hardToSolveAnswerCount", round(hardToSolveAnswerCount * 100.0) / 100.0);
 
             double answerDifference = solvableAnswerCount - hardToSolveAnswerCount;
-            analysis.put("answerDifference", Math.round(answerDifference * 100.0) / 100.0);
+            analysis.put("answerDifference", round(answerDifference * 100.0) / 100.0);
 
             // 分析浏览量
             double solvableViewCount = solvable.stream()
@@ -327,19 +285,19 @@ public class QuestionSolvabilityAnalysisService {
                     .mapToInt(q -> q.getViewCount() != null ? Math.min(q.getViewCount() / 100, 100) : 0)
                     .average().orElse(0);
 
-            analysis.put("solvableViewCount", Math.round(solvableViewCount * 100.0) / 100.0);
-            analysis.put("hardToSolveViewCount", Math.round(hardToSolveViewCount * 100.0) / 100.0);
+            analysis.put("solvableViewCount", round(solvableViewCount * 100.0) / 100.0);
+            analysis.put("hardToSolveViewCount", round(hardToSolveViewCount * 100.0) / 100.0);
 
             double viewDifference = solvableViewCount - hardToSolveViewCount;
-            analysis.put("viewDifference", Math.round(viewDifference * 100.0) / 100.0);
+            analysis.put("viewDifference", round(viewDifference * 100.0) / 100.0);
 
             // 参与度综合评分
             double solvableEngagementScore = calculateEngagementScore(solvable);
             double hardToSolveEngagementScore = calculateEngagementScore(hardToSolve);
 
-            analysis.put("solvableValue", Math.round(solvableEngagementScore * 100.0) / 100.0);
-            analysis.put("hardToSolveValue", Math.round(hardToSolveEngagementScore * 100.0) / 100.0);
-            analysis.put("difference", Math.round((solvableEngagementScore - hardToSolveEngagementScore) * 100.0) / 100.0);
+            analysis.put("solvableValue", round(solvableEngagementScore * 100.0) / 100.0);
+            analysis.put("hardToSolveValue", round(hardToSolveEngagementScore * 100.0) / 100.0);
+            analysis.put("difference", round((solvableEngagementScore - hardToSolveEngagementScore) * 100.0) / 100.0);
 
             // 显著性判断
             boolean isSignificant = isEngagementSignificant(analysis);
@@ -370,19 +328,19 @@ public class QuestionSolvabilityAnalysisService {
                     .mapToInt(this::calculateReputationProxy)
                     .average().orElse(0);
 
-            analysis.put("solvableReputation", Math.round(solvableReputation * 100.0) / 100.0);
-            analysis.put("hardToSolveReputation", Math.round(hardToSolveReputation * 100.0) / 100.0);
+            analysis.put("solvableReputation", round(solvableReputation * 100.0) / 100.0);
+            analysis.put("hardToSolveReputation", round(hardToSolveReputation * 100.0) / 100.0);
 
             double reputationDifference = solvableReputation - hardToSolveReputation;
-            analysis.put("reputationDifference", Math.round(reputationDifference * 100.0) / 100.0);
+            analysis.put("reputationDifference", round(reputationDifference * 100.0) / 100.0);
 
             // 声誉评分标准化
             double solvableReputationScore = Math.min(solvableReputation / 10.0, 100.0);
             double hardToSolveReputationScore = Math.min(hardToSolveReputation / 10.0, 100.0);
 
-            analysis.put("solvableValue", Math.round(solvableReputationScore * 100.0) / 100.0);
-            analysis.put("hardToSolveValue", Math.round(hardToSolveReputationScore * 100.0) / 100.0);
-            analysis.put("difference", Math.round((solvableReputationScore - hardToSolveReputationScore) * 100.0) / 100.0);
+            analysis.put("solvableValue", round(solvableReputationScore * 100.0) / 100.0);
+            analysis.put("hardToSolveValue", round(hardToSolveReputationScore * 100.0) / 100.0);
+            analysis.put("difference", round((solvableReputationScore - hardToSolveReputationScore) * 100.0) / 100.0);
 
             // 显著性判断
             boolean isSignificant = Math.abs(reputationDifference) > 2;
@@ -398,59 +356,61 @@ public class QuestionSolvabilityAnalysisService {
     }
 
     /**
-     * 5. 时间因素分析
+     * 5. 时间因素（极简版）
+     * 仅比较：北美工作日工作时间 vs 非工作时间 回答数量差异
+     * 已剔除 白天比例/回答速度/时间段分布 等全部无关项
      */
     private Map<String, Object> analyzeTimeFactors(List<Question> solvable, List<Question> hardToSolve) {
         Map<String, Object> analysis = new HashMap<>();
+        ZoneId naZone = ZoneId.of("America/New_York");
+        int WORK_START = 9;
+        int WORK_END   = 17;
 
         try {
-            // 分析白天回答比例
-            double solvableDaytimeRate = calculateDaytimeAnswerRate(solvable);
-            double hardToSolveDaytimeRate = calculateDaytimeAnswerRate(hardToSolve);
+            // 1. 统计：可解问题 工作 vs 非工作 回答数
+            long solvableWork = 0, solvableNonWork = 0;
+            for (Question q : solvable) {
+                if (isNorthAmericaWorkAnswer(q, naZone, WORK_START, WORK_END)) {
+                    solvableWork++;
+                } else {
+                    solvableNonWork++;
+                }
+            }
 
-            analysis.put("solvableDaytimeRate", Math.round(solvableDaytimeRate * 100.0) / 100.0);
-            analysis.put("hardToSolveDaytimeRate", Math.round(hardToSolveDaytimeRate * 100.0) / 100.0);
+            // 2. 统计：难解问题 工作 vs 非工作 回答数
+            long hardWork = 0, hardNonWork = 0;
+            for (Question q : hardToSolve) {
+                if (isNorthAmericaWorkAnswer(q, naZone, WORK_START, WORK_END)) {
+                    hardWork++;
+                } else {
+                    hardNonWork++;
+                }
+            }
 
-            double daytimeRateDifference = solvableDaytimeRate - hardToSolveDaytimeRate;
-            analysis.put("daytimeRateDifference", Math.round(daytimeRateDifference * 100.0) / 100.0);
+            // 3. 计算差异（百分比）
+            double workRateDiff = (solvableWork * 100.0 / Math.max(solvable.size(), 1))
+                    - (hardWork * 100.0 / Math.max(hardToSolve.size(), 1));
 
-            // 分析回答速度（小时）
-            double solvableAnswerTime = solvable.stream()
-                    .mapToDouble(this::calculateAnswerTime)
-                    .average().orElse(0);
+            // 4. 封装结果
+            analysis.put("solvableWorkCount",     solvableWork);
+            analysis.put("solvableNonWorkCount",  solvableNonWork);
+            analysis.put("hardWorkCount",         hardWork);
+            analysis.put("hardNonWorkCount",      hardNonWork);
+            analysis.put("workRateDifference",    round(workRateDiff));
+            analysis.put("significance",          Math.abs(workRateDiff) > 5 ? "显著" : "不显著");
+            analysis.put("significanceLevel",     Math.abs(workRateDiff) > 5 ? "high" : "low");
 
-            double hardToSolveAnswerTime = hardToSolve.stream()
-                    .mapToDouble(this::calculateAnswerTime)
-                    .average().orElse(0);
-
-            analysis.put("solvableAnswerTime", Math.round(solvableAnswerTime * 100.0) / 100.0);
-            analysis.put("hardToSolveAnswerTime", Math.round(hardToSolveAnswerTime * 100.0) / 100.0);
-
-            // 分析时间段分布
-            Map<String, Double> solvableTimeDistribution = analyzeTimeDistribution(solvable);
-            Map<String, Double> hardToSolveTimeDistribution = analyzeTimeDistribution(hardToSolve);
-
-            analysis.put("solvableTimeDistribution", solvableTimeDistribution);
-            analysis.put("hardToSolveTimeDistribution", hardToSolveTimeDistribution);
-
-            // 时间因素综合评分
-            double solvableTimeScore = calculateTimeFactorScore(solvable);
-            double hardToSolveTimeScore = calculateTimeFactorScore(hardToSolve);
-
-            analysis.put("solvableValue", Math.round(solvableTimeScore * 100.0) / 100.0);
-            analysis.put("hardToSolveValue", Math.round(hardToSolveTimeScore * 100.0) / 100.0);
-            analysis.put("difference", Math.round((solvableTimeScore - hardToSolveTimeScore) * 100.0) / 100.0);
-
-            // 显著性判断
-            boolean isSignificant = Math.abs(daytimeRateDifference) > 5 || Math.abs(solvableAnswerTime - hardToSolveAnswerTime) > 6;
-            analysis.put("significance", isSignificant ? "显著" : "不显著");
-            analysis.put("significanceLevel", isSignificant ? "high" : "low");
+            // 5. 综合评分（工作回答越多分越高）
+            double solvableScore = solvableWork * 50.0 / Math.max(solvable.size(), 1);
+            double hardScore     = hardWork * 50.0 / Math.max(hardToSolve.size(), 1);
+            analysis.put("solvableValue", round(Math.min(solvableScore, 100)));
+            analysis.put("hardToSolveValue", round(Math.min(hardScore, 100)));
+            analysis.put("difference", round(solvableScore - hardScore));
 
         } catch (Exception e) {
             log.error("分析时间因素时发生错误", e);
             analysis = createDefaultTimeFactorsData();
         }
-
         return analysis;
     }
 
@@ -470,26 +430,26 @@ public class QuestionSolvabilityAnalysisService {
                     .mapToInt(q -> q.getTitle() != null ? q.getTitle().length() : 0)
                     .average().orElse(0);
 
-            analysis.put("solvableTitleLength", Math.round(solvableTitleLength * 100.0) / 100.0);
-            analysis.put("hardToSolveTitleLength", Math.round(hardToSolveTitleLength * 100.0) / 100.0);
+            analysis.put("solvableTitleLength", round(solvableTitleLength * 100.0) / 100.0);
+            analysis.put("hardToSolveTitleLength", round(hardToSolveTitleLength * 100.0) / 100.0);
 
             // 分析代码片段比例
             double solvableCodeRate = calculateCodeSnippetRate(solvable);
             double hardToSolveCodeRate = calculateCodeSnippetRate(hardToSolve);
 
-            analysis.put("solvableCodeRate", Math.round(solvableCodeRate * 100.0) / 100.0);
-            analysis.put("hardToSolveCodeRate", Math.round(hardToSolveCodeRate * 100.0) / 100.0);
+            analysis.put("solvableCodeRate", round(solvableCodeRate * 100.0) / 100.0);
+            analysis.put("hardToSolveCodeRate", round(hardToSolveCodeRate * 100.0) / 100.0);
 
             // 内容质量综合评分
             double solvableContentScore = calculateContentQualityScore(solvable);
             double hardToSolveContentScore = calculateContentQualityScore(hardToSolve);
 
-            analysis.put("solvableValue", Math.round(solvableContentScore * 100.0) / 100.0);
-            analysis.put("hardToSolveValue", Math.round(hardToSolveContentScore * 100.0) / 100.0);
-            analysis.put("difference", Math.round((solvableContentScore - hardToSolveContentScore) * 100.0) / 100.0);
+            analysis.put("solvableValue", round(solvableContentScore * 100.0) / 100.0);
+            analysis.put("hardToSolveValue", round(hardToSolveContentScore * 100.0) / 100.0);
+            analysis.put("difference", round((solvableContentScore - hardToSolveContentScore) * 100.0) / 100.0);
 
             // 显著性判断
-            boolean isSignificant = Math.abs(solvableContentScore - hardToSolveContentScore) > 5;
+            boolean isSignificant = Math.abs(solvableContentScore - hardToSolveContentScore) > 3;
             analysis.put("significance", isSignificant ? "显著" : "不显著");
             analysis.put("significanceLevel", isSignificant ? "high" : "low");
 
@@ -515,7 +475,7 @@ public class QuestionSolvabilityAnalysisService {
         for (Question question : questions) {
             try {
                 // 使用CommentRepository查询评论数量
-                Long commentCount = commentRepository.countByPostId(question.getId());
+                Long commentCount = commentRepository.countByPostId(question.getQuestionId());
                 if (commentCount != null) {
                     totalComments += commentCount;
                     count++;
@@ -528,7 +488,7 @@ public class QuestionSolvabilityAnalysisService {
                     }
                 }
             } catch (Exception e) {
-                log.warn("获取问题 {} 的评论数量失败: {}", question.getId(), e.getMessage());
+                log.warn("获取问题 {} 的评论数量失败: {}", question.getQuestionId(), e.getMessage());
                 // 备选方案
                 if (question.getCommentCount() != null) {
                     totalComments += question.getCommentCount();
@@ -540,6 +500,17 @@ public class QuestionSolvabilityAnalysisService {
         double avgComments = count > 0 ? (double) totalComments / count : 0;
         log.debug("计算了 {} 个问题的平均评论数: {}", count, avgComments);
         return avgComments;
+    }
+
+
+    /* 判断问题回答是否落在北美工作日 09-17 点 */
+    private boolean isNorthAmericaWorkAnswer(Question q, ZoneId zone, int start, int end) {
+        if (q.getLastActivityDate() == null) return false;
+        ZonedDateTime na = Instant.ofEpochSecond(q.getLastActivityDate()).atZone(zone);
+        DayOfWeek dow = na.getDayOfWeek();
+        if (dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY) return false;
+        int hour = na.getHour();
+        return hour >= start && hour < end;
     }
 
     /**
@@ -641,29 +612,43 @@ public class QuestionSolvabilityAnalysisService {
     }
 
     /**
-     * 判断是否包含疑难标签
-     */
-    private boolean containsDifficultTags(Question question) {
-        if (question.getTagsCache() == null) return false;
-        String tags = question.getTagsCache().toLowerCase();
-        return DIFFICULT_TAGS.stream().anyMatch(tags::contains);
-    }
-
-    /**
      * 计算问题复杂度评分
      */
     private double calculateComplexityScore(List<Question> questions) {
         if (questions.isEmpty()) return 0;
+        return questions.stream()
+                .mapToDouble(q -> {
+                    int score = 0;
 
-        double avgTags = questions.stream()
-                .mapToInt(this::countTags)
-                .average().orElse(0);
+                    // 1. 标签数量：每标签 8 分，上限 24
+                    int tagCnt = countTags(q);
+                    score += Math.min(24, tagCnt * 8);
 
-        double advancedRate = calculateAdvancedTopicRate(questions);
+                    // 2. 高级主题命中数：每命中 15 分，上限 45
+                    long hit = ADVANCED_TOPICS.stream()
+                            .filter(kw -> q.getTagsCache() != null &&
+                                    q.getTagsCache().toLowerCase().contains(kw))
+                            .count();
+                    score += Math.min(45, hit * 15);
 
-        // 复杂度评分公式：标签数量 + 高级主题比例
-        double score = (avgTags * 5) + (advancedRate / 2);
-        return Math.min(score, 100);
+                    // 3. 标题技术词密度 ≥40% → 31 分
+                    double density = calcTechDensity(q.getTitle());
+                    score += Math.min(31, density * 31 / 0.4);
+
+                    return Math.min(100, score);
+                })
+                .average()
+                .orElse(0);
+    }
+
+    /* 计算标题中技术词占比（简单按空格分词后匹配关键词） */
+    private double calcTechDensity(String title) {
+        if (title == null || title.isBlank()) return 0;
+        String[] words = title.toLowerCase().split("\\W+");
+        long tech = Arrays.stream(words)
+                .filter(w -> ADVANCED_TOPICS.stream().anyMatch(w::contains))
+                .count();
+        return words.length == 0 ? 0 : (double) tech / words.length;
     }
 
     /**
@@ -733,137 +718,38 @@ public class QuestionSolvabilityAnalysisService {
      */
     private double calculateContentQualityScore(List<Question> questions) {
         if (questions.isEmpty()) return 0;
-
-        double avgTitleLength = questions.stream()
-                .mapToInt(q -> q.getTitle() != null ? q.getTitle().length() : 0)
-                .average().orElse(0);
-
-        double codeRate = calculateCodeSnippetRate(questions);
-
-        // 内容质量评分公式：标题长度/10 + 代码片段比例
-        double score = (avgTitleLength / 5) + (codeRate / 2);
-        return Math.min(score, 100);
-    }
-
-    /**
-     * 计算白天回答比例
-     */
-    private double calculateDaytimeAnswerRate(List<Question> questions) {
-        if (questions.isEmpty()) return 0;
-
-        long daytimeAnswers = questions.stream()
-                .filter(this::isAnsweredInDaytime)
-                .count();
-
-        return (double) daytimeAnswers / questions.size() * 100;
-    }
-
-    /**
-     * 判断问题是否在白天被回答
-     */
-    private boolean isAnsweredInDaytime(Question question) {
-        if (question.getCreationDate() == null || question.getLastActivityDate() == null) {
-            return false;
-        }
-
-        // 获取最后活动时间的小时（作为回答时间的代理）
-        Instant activityInstant = Instant.ofEpochSecond(question.getLastActivityDate());
-        LocalDateTime activityTime = LocalDateTime.ofInstant(activityInstant, ZoneId.systemDefault());
-        int activityHour = activityTime.getHour();
-
-        // 定义白天时间：早上6点到晚上10点
-        boolean isDaytime = activityHour >= DAYTIME_START_HOUR && activityHour < DAYTIME_END_HOUR;
-
-        return isDaytime;
-    }
-
-    /**
-     * 分析时间分布
-     */
-    private Map<String, Double> analyzeTimeDistribution(List<Question> questions) {
-        Map<String, Double> distribution = new HashMap<>();
-
-        if (questions.isEmpty()) {
-            distribution.put("morning", 0.0);
-            distribution.put("afternoon", 0.0);
-            distribution.put("evening", 0.0);
-            distribution.put("night", 0.0);
-            return distribution;
-        }
-
-        long morningCount = questions.stream()
-                .filter(q -> getTimePeriod(q) == TimePeriod.MORNING)
-                .count();
-
-        long afternoonCount = questions.stream()
-                .filter(q -> getTimePeriod(q) == TimePeriod.AFTERNOON)
-                .count();
-
-        long eveningCount = questions.stream()
-                .filter(q -> getTimePeriod(q) == TimePeriod.EVENING)
-                .count();
-
-        long nightCount = questions.stream()
-                .filter(q -> getTimePeriod(q) == TimePeriod.NIGHT)
-                .count();
-
-        distribution.put("morning", Math.round((double) morningCount / questions.size() * 10000) / 100.0);
-        distribution.put("afternoon", Math.round((double) afternoonCount / questions.size() * 10000) / 100.0);
-        distribution.put("evening", Math.round((double) eveningCount / questions.size() * 10000) / 100.0);
-        distribution.put("night", Math.round((double) nightCount / questions.size() * 10000) / 100.0);
-
-        return distribution;
-    }
-
-    /**
-     * 获取问题的时间段
-     */
-    private TimePeriod getTimePeriod(Question question) {
-        if (question.getCreationDate() == null) {
-            return TimePeriod.UNKNOWN;
-        }
-
-        Instant instant = Instant.ofEpochSecond(question.getCreationDate());
-        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-        int hour = dateTime.getHour();
-
-        if (hour >= MORNING_START && hour < AFTERNOON_START) {
-            return TimePeriod.MORNING;      // 早上 6:00-11:59
-        } else if (hour >= AFTERNOON_START && hour < EVENING_START) {
-            return TimePeriod.AFTERNOON;   // 下午 12:00-17:59
-        } else if (hour >= EVENING_START && hour < NIGHT_START) {
-            return TimePeriod.EVENING;      // 晚上 18:00-21:59
-        } else {
-            return TimePeriod.NIGHT;        // 夜间 22:00-5:59
-        }
-    }
-
-    /**
-     * 计算时间因素综合评分
-     */
-    private double calculateTimeFactorScore(List<Question> questions) {
-        if (questions.isEmpty()) return 0;
-
-        double daytimeRate = calculateDaytimeAnswerRate(questions);
-        double answerSpeed = calculateAverageAnswerSpeed(questions);
-
-        // 评分公式：白天回答比例 + 快速回答加分
-        double speedBonus = Math.max(0, 24 - answerSpeed) / 24 * 40; // 24小时内回答得满分
-        double score = (daytimeRate * 0.6) + speedBonus;
-
-        return Math.min(score, 100);
-    }
-
-    /**
-     * 计算平均回答速度
-     */
-    private double calculateAverageAnswerSpeed(List<Question> questions) {
-        if (questions.isEmpty()) return 0;
-
         return questions.stream()
-                .mapToDouble(this::calculateAnswerTime)
+                .mapToDouble(q -> {
+                    int score = 0;
+                    // 1. 标题长度 30-120 字符 → 20 分
+                    int titleLen = q.getTitle() == null ? 0 : q.getTitle().length();
+                    score += Math.min(20, titleLen * 20 / 120.0);
+                    score = Math.max(0, Math.min(20, score));
+
+                    // 2. 代码块数量 → 每段 15 分，上限 45
+                    int codeBlocks = countCodeBlocks(q.getBody());
+                    score += Math.min(45, codeBlocks * 15);
+
+                    // 3. 关键标签 → 10 分
+                    if (containsAdvancedTopics(q)) score += 10;
+
+                    // 4. 正文长度 200-2000 字符 → 25 分
+                    int bodyLen = q.getBody() == null ? 0 : q.getBody().length();
+                    score += Math.min(25, Math.max(0, (bodyLen - 200) * 25 / 1800.0));
+
+                    return Math.min(100, score);
+                })
                 .average()
                 .orElse(0);
+    }
+
+    /* 统计 <code> 或 ``` 出现次数 */
+    private int countCodeBlocks(String body) {
+        if (body == null) return 0;
+        int cnt = 0;
+        cnt += body.split("<code>", -1).length - 1;
+        cnt += body.split("```", -1).length - 1;
+        return cnt;
     }
 
     /**
@@ -879,7 +765,6 @@ public class QuestionSolvabilityAnalysisService {
         int significantFactors = 0;
 
         Map<String, Object> complexityFactors = (Map<String, Object>) factors.get("questionComplexity");
-        Map<String, Object> difficultTagsFactors = (Map<String, Object>) factors.get("difficultTags");
         Map<String, Object> engagementFactors = (Map<String, Object>) factors.get("userEngagement");
         Map<String, Object> reputationFactors = (Map<String, Object>) factors.get("userReputation");
         Map<String, Object> timeFactors = (Map<String, Object>) factors.get("timeFactors");
@@ -888,11 +773,6 @@ public class QuestionSolvabilityAnalysisService {
         // 检查每个因素的显著性
         if ("显著".equals(complexityFactors.get("significance"))) {
             insights.add("🎯 问题复杂度: 复杂问题（多标签、高级主题）更难获得解答");
-            significantFactors++;
-        }
-
-        if ("显著".equals(difficultTagsFactors.get("significance"))) {
-            insights.add("⚠️ 疑难标签: 含解答率<30%标签的问题更难获得解答");
             significantFactors++;
         }
 
@@ -952,7 +832,6 @@ public class QuestionSolvabilityAnalysisService {
     private Map<String, Object> createDefaultFactors() {
         Map<String, Object> factors = new HashMap<>();
         factors.put("questionComplexity", createDefaultComplexityData());
-        factors.put("difficultTags", createDefaultDifficultTagsData());
         factors.put("userEngagement", createDefaultEngagementData());
         factors.put("userReputation", createDefaultReputationData());
         factors.put("timeFactors", createDefaultTimeFactorsData());
@@ -961,15 +840,6 @@ public class QuestionSolvabilityAnalysisService {
     }
 
     private Map<String, Object> createDefaultComplexityData() {
-        Map<String, Object> data = new HashMap<>();
-        data.put("solvableValue", 0.0);
-        data.put("hardToSolveValue", 0.0);
-        data.put("difference", 0.0);
-        data.put("significance", "不显著");
-        return data;
-    }
-
-    private Map<String, Object> createDefaultDifficultTagsData() {
         Map<String, Object> data = new HashMap<>();
         data.put("solvableValue", 0.0);
         data.put("hardToSolveValue", 0.0);
@@ -1132,13 +1002,13 @@ public class QuestionSolvabilityAnalysisService {
             result.put("totalQuestions", totalQuestions);
             result.put("answeredQuestions", answeredQuestions);
             result.put("answerRate", totalQuestions > 0 ?
-                    Math.round((double) answeredQuestions / totalQuestions * 10000) / 100.0 : 0);
+                    round((double) answeredQuestions / totalQuestions * 10000) / 100.0 : 0);
             result.put("highScoreQuestions", highScoreQuestions);
             result.put("highViewQuestions", highViewQuestions);
-            result.put("averageTags", Math.round(avgTags * 100.0) / 100.0);
-            result.put("averageScore", Math.round(avgScore * 100.0) / 100.0);
-            result.put("averageViews", Math.round(avgViews * 100.0) / 100.0);
-            result.put("averageAnswers", Math.round(avgAnswers * 100.0) / 100.0);
+            result.put("averageTags", round(avgTags * 100.0) / 100.0);
+            result.put("averageScore", round(avgScore * 100.0) / 100.0);
+            result.put("averageViews", round(avgViews * 100.0) / 100.0);
+            result.put("averageAnswers", round(avgAnswers * 100.0) / 100.0);
 
         } catch (Exception e) {
             log.error("获取统计信息失败", e);
@@ -1212,41 +1082,5 @@ public class QuestionSolvabilityAnalysisService {
         }
 
         return result;
-    }
-
-    // 其他方法（占位符实现）
-    public Map<String, Object> analyzeMultipleFactors(java.util.List<String> factors) {
-        // 实现批量分析逻辑
-        return Map.of("success", true, "message", "批量分析功能待实现");
-    }
-
-    public Map<String, Object> getAnalysisHistory() {
-        // 实现分析历史查询
-        return Map.of("success", true, "history", java.util.List.of());
-    }
-
-    public Map<String, Object> clearAnalysisCache() {
-        // 实现缓存清除
-        return Map.of("success", true, "message", "缓存清除成功");
-    }
-
-    public Map<String, Object> getAnalysisConfig() {
-        // 实现配置获取
-        return Map.of("success", true, "config", Map.of());
-    }
-
-    public Map<String, Object> updateAnalysisConfig(Map<String, Object> config) {
-        // 实现配置更新
-        return Map.of("success", true, "message", "配置更新成功");
-    }
-
-    public Map<String, Object> getAnalysisProgress() {
-        // 实现进度查询
-        return Map.of("success", true, "progress", 100, "status", "COMPLETED");
-    }
-
-    public Map<String, Object> stopAnalysis() {
-        // 实现分析停止
-        return Map.of("success", true, "message", "分析已停止");
     }
 }

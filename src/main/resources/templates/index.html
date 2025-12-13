@@ -462,6 +462,18 @@
             color: #7f8c8d;
         }
 
+        .time-range-custom {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .time-range-custom input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
         @media (max-width: 768px) {
             .container {
                 border-radius: 0;
@@ -505,7 +517,7 @@
 <div class="container">
     <header>
         <h1>🔍🔍 Stack Overflow 问题可解性分析</h1>
-        <p class="subtitle">识别影响Java问题解答率的六个核心因素：问题复杂度、疑难标签、用户参与度、用户声誉、时间因素、内容质量</p>
+        <p class="subtitle">识别影响Java问题解答率的五个核心因素：问题复杂度、用户参与度、用户声誉、时间因素、内容质量</p>
     </header>
 
     <div class="tab-navigation">
@@ -519,7 +531,6 @@
     <div id="status-tab" class="tab-content active">
         <div class="panel">
             <h2><i>📊📊</i> 系统概览</h2>
-
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-label">已导入问题</div>
@@ -544,15 +555,6 @@
                     <div class="stat-value" id="readyStatus">❌❌</div>
                     <div class="stat-label">数据准备状态</div>
                 </div>
-            </div>
-
-            <div class="controls">
-                <button onclick="refreshStatus()">
-                    <i>🔄🔄</i> 刷新状态
-                </button>
-                <button onclick="checkHealth()">
-                    <i>🏥🏥</i> 健康检查
-                </button>
             </div>
 
             <div id="statusResult"></div>
@@ -580,12 +582,6 @@
             <div id="importResult"></div>
         </div>
 
-        <div class="panel">
-            <h2><i>📋📋</i> 导入历史</h2>
-            <div id="importHistory">
-                <div class="loading">暂无导入记录</div>
-            </div>
-        </div>
     </div>
 
     <!-- 主题趋势标签页 -->
@@ -605,12 +601,11 @@
                     <option value="score">问题分数</option>
                     <option value="views">浏览数量</option>
                 </select>
-                <select id="timeRangeSelect">
-                    <option value="all">全部时间</option>
-                    <option value="month">最近一个月</option>
-                    <option value="quarter">最近三个月</option>
-                    <option value="year">最近一年</option>
-                </select>
+            </div>
+
+            <div class="time-range-custom">
+                <label>开始时间: <input type="datetime-local" id="startTime"></label>
+                <label>结束时间: <input type="datetime-local" id="endTime"></label>
             </div>
 
             <div id="trendsResult"></div>
@@ -623,9 +618,6 @@
                 <canvas id="trendsChart"></canvas>
             </div>
 
-            <div class="chart-container">
-                <canvas id="monthlyTrendsChart"></canvas>
-            </div>
         </div>
     </div>
 
@@ -633,17 +625,12 @@
     <div id="analysis-tab" class="tab-content">
         <div class="panel">
             <h2><i>🔍🔍</i> 问题可解性分析</h2>
-            <p>分析Java问题的可解性特征，识别影响问题解答率的六个核心因素。</p>
-
+            <p>分析Java问题的可解性特征，识别影响问题解答率的五个核心因素。</p>
             <div class="controls">
                 <button onclick="analyzeSolvability()" id="analyzeButton">
                     <i>📈📈</i> 开始分析
                 </button>
-                <button onclick="clearAnalysis()">
-                    <i>🗑🗑️</i> 清除结果
-                </button>
             </div>
-
             <div id="analysisResult"></div>
         </div>
 
@@ -683,15 +670,11 @@
         chartsDiv.innerHTML = `
             <div class="panel">
                 <h3>📊📊 分析准备就绪</h3>
-                <p>点击"开始分析"按钮来运行可解性分析。系统将基于实际数据对比以下六个核心因素：</p>
+                <p>点击"开始分析"按钮来运行可解性分析。系统将基于实际数据对比以下五个核心因素：</p>
                 <div class="factors-grid">
                     <div class="factor-card">
                         <div class="factor-header"><div class="factor-title">🎯🎯 问题复杂度</div></div>
                         <p>分析标签数量、高级主题比例等指标</p>
-                    </div>
-                    <div class="factor-card">
-                        <div class="factor-header"><div class="factor-title">⚠️ 疑难标签</div></div>
-                        <p>分析解答率低的标签分布</p>
                     </div>
                     <div class="factor-card">
                         <div class="factor-header"><div class="factor-title">👥👥 用户参与度</div></div>
@@ -767,19 +750,6 @@
         }
     }
 
-    async function checkHealth() {
-        const resultDiv = document.getElementById('statusResult');
-        resultDiv.innerHTML = '<div class="loading">正在进行健康检查...</div>';
-
-        try {
-            const response = await fetch(`${API_BASE}/api/health`);
-            const data = await response.json();
-            resultDiv.innerHTML = `<div class="success">✅ 健康检查通过！服务: ${data.service}，状态: ${data.status}</div>`;
-        } catch (error) {
-            resultDiv.innerHTML = `<div class="error">健康检查失败: ${error.message}</div>`;
-        }
-    }
-
     // 数据导入功能
     async function importQuestions() {
         const button = document.getElementById('importButton');
@@ -805,7 +775,6 @@
                         导入后总数: ${data.afterCount}
                     </div>`;
                 refreshStatus();
-                loadImportHistory();
             } else {
                 resultDiv.innerHTML = `<div class="error">导入失败: ${data.message}</div>`;
             }
@@ -817,28 +786,18 @@
         }
     }
 
-    async function loadImportHistory() {
-        const historyDiv = document.getElementById('importHistory');
-        historyDiv.innerHTML = '<div class="loading">加载导入历史...</div>';
-
-        setTimeout(() => {
-            historyDiv.innerHTML = `
-                <div class="result-summary">
-                    <h4>最近导入记录</h4>
-                    <p>📅📅 最近导入: 刚刚</p>
-                    <p>📊📊 导入数量: 50 个问题</p>
-                    <p>✅ 状态: 导入成功
-                    </div>
-            `;
-        }, 500);
-    }
-
     // 主题趋势分析功能
     async function analyzeTrends() {
         const button = document.getElementById('trendsButton');
         const resultDiv = document.getElementById('trendsResult');
         const activityType = document.getElementById('activityType').value;
-        const timeRange = document.getElementById('timeRangeSelect').value;
+        // 获取自定义时间范围而不是预设值
+        const startTime = document.getElementById('startTime').value;
+        const endTime = document.getElementById('endTime').value;
+
+        // 转换为时间戳（秒）
+        const startTimestamp = Math.floor(new Date(startTime).getTime() / 1000);
+        const endTimestamp = Math.floor(new Date(endTime).getTime() / 1000);
 
         button.disabled = true;
         button.innerHTML = '<i>⏳⏳⏳</i> 分析中...';
@@ -848,8 +807,9 @@
         clearTrendsStats();
 
         try {
+            // 调用后端API（后端已支持这些参数）
             const response = await fetch(
-                `${API_BASE}/api/analysis/topic-trends?activityType=${activityType}&timeRange=${timeRange}`
+                `${API_BASE}/api/analysis/topic-trends?activityType=${activityType}&startTime=${startTimestamp}&endTime=${endTimestamp}`
             );
             const data = await response.json();
 
@@ -868,6 +828,34 @@
         }
     }
 
+    // 新增：日期格式化函数
+    function formatDate(dateString) {
+        if (!dateString) return '-';
+
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return '-';
+
+        return date.toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+
+    // 新增：时间戳格式化函数（如果需要）
+    function formatTimestamp(timestamp) {
+        if (!timestamp) return '-';
+
+        const date = new Date(timestamp * 1000);
+        return date.toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+    }
+
     function clearTrendsCharts() {
         trendsCharts.forEach(chart => chart.destroy());
         trendsCharts = [];
@@ -879,20 +867,27 @@
     }
 
     function displayTrendsResults(data, activityType) {
+        // 添加时间范围信息显示
+        const trendsStats = document.getElementById('trendsStats');
+        trendsStats.innerHTML = `
+        <div class="trend-stat">
+            <div class="trend-stat-label">分析时间范围</div>
+            <div class="trend-stat-value" style="font-size: 1.2rem;">${formatDate(startTime)}</div>
+            <div class="trend-stat-label">至 ${formatDate(endTime)}</div>
+        </div>
+    ` + trendsStats.innerHTML;
+
         const topicActivity = data.topicActivity || {};
-        const monthlyTrends = data.monthlyTrends || {};
 
         // 显示趋势统计信息
-        displayTrendsStats(topicActivity, monthlyTrends);
+        displayTrendsStats(topicActivity);
 
         // 显示主题活跃度图表
         createTopicActivityChart(topicActivity, activityType);
 
-        // 显示月度趋势图表
-        createMonthlyTrendsChart(monthlyTrends, activityType);
     }
 
-    function displayTrendsStats(topicActivity, monthlyTrends) {
+    function displayTrendsStats(topicActivity) {
         const statsDiv = document.getElementById('trendsStats');
 
         // 计算统计信息
@@ -911,19 +906,6 @@
             }
         });
 
-        // 计算趋势增长率（如果有月度数据）
-        let growthRate = 0;
-        if (Object.keys(monthlyTrends).length > 1) {
-            const months = Object.keys(monthlyTrends).sort();
-            if (months.length >= 2) {
-                const firstMonth = months[0];
-                const lastMonth = months[months.length - 1];
-                const firstActivity = monthlyTrends[firstMonth] || 0;
-                const lastActivity = monthlyTrends[lastMonth] || 0;
-                growthRate = firstActivity > 0 ? ((lastActivity - firstActivity) / firstActivity * 100) : 0;
-            }
-        }
-
         statsDiv.innerHTML = `
             <div class="trend-stat">
                 <div class="trend-stat-label">热门主题数量</div>
@@ -939,13 +921,6 @@
                 <div class="trend-stat-label">平均活跃度</div>
                 <div class="trend-stat-value">${avgActivity.toFixed(1)}</div>
                 <div class="trend-stat-label">每主题平均</div>
-            </div>
-            <div class="trend-stat">
-                <div class="trend-stat-label">趋势增长率</div>
-                <div class="trend-stat-value" style="color: ${growthRate >= 0 ? '#27ae60' : '#e74c3c'}">
-                    ${growthRate >= 0 ? '+' : ''}${growthRate.toFixed(1)}%
-                </div>
-                <div class="trend-stat-label">月度变化</div>
             </div>
         `;
     }
@@ -1003,66 +978,6 @@
         trendsCharts.push(chart);
     }
 
-    function createMonthlyTrendsChart(monthlyTrends, activityType) {
-        const ctx = document.getElementById('monthlyTrendsChart').getContext('2d');
-
-        const months = Object.keys(monthlyTrends).sort();
-        const activities = months.map(month => monthlyTrends[month] || 0);
-
-        // 格式化月份显示
-        const formattedMonths = months.map(month => {
-            const date = new Date(parseInt(month) * 1000);
-            return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
-        });
-
-        const activityLabels = {
-            'questions': '问题数量',
-            'answers': '答案数量',
-            'comments': '评论数量',
-            'score': '问题分数',
-            'views': '浏览数量'
-        };
-        const activityLabel = activityLabels[activityType] || activityType;
-
-        const chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: formattedMonths,
-                datasets: [{
-                    label: activityLabel,
-                    data: activities,
-                    backgroundColor: 'rgba(52, 152, 219, 0.2)',
-                    borderColor: '#3498db',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: `月度趋势分析 - ${activityLabel}`,
-                        font: { size: 16 }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: activityLabel
-                        }
-                    }
-                }
-            }
-        });
-
-        trendsCharts.push(chart);
-    }
-
     // 可解性分析功能
     async function analyzeSolvability() {
         const button = document.getElementById('analyzeButton');
@@ -1073,7 +988,6 @@
         button.innerHTML = '<i>⏳⏳⏳</i> 分析中...';
         resultDiv.innerHTML = '<div class="loading">正在分析问题可解性因素，请稍候...</div>';
         chartsDiv.innerHTML = '';
-        clearAnalysisCharts();
 
         try {
             const response = await fetch(`${API_BASE}/api/analysis/solvability-factors`);
@@ -1092,19 +1006,6 @@
             button.disabled = false;
             button.innerHTML = '<i>📈📈</i> 开始分析';
         }
-    }
-
-    function clearAnalysis() {
-        const resultDiv = document.getElementById('analysisResult');
-        const chartsDiv = document.getElementById('analysisCharts');
-        resultDiv.innerHTML = '';
-        chartsDiv.innerHTML = '';
-        clearAnalysisCharts();
-    }
-
-    function clearAnalysisCharts() {
-        analysisCharts.forEach(chart => chart.destroy());
-        analysisCharts = [];
     }
 
     function displayAnalysisResults(data) {
@@ -1164,15 +1065,14 @@
 
     function createFactorsAnalysis(factors, container) {
         const factorsContainer = document.createElement('div');
-        factorsContainer.innerHTML = '<h3>🎯🎯 六个核心因素分析</h3><div class="chart-container"><canvas id="factorsChart"></canvas></div>';
+        factorsContainer.innerHTML = '<h3>🎯🎯 五个核心因素分析</h3><div class="chart-container"><canvas id="factorsChart"></canvas></div>';
         container.appendChild(factorsContainer);
 
         const ctx = factorsContainer.querySelector('canvas').getContext('2d');
-        const factorNames = ['问题复杂度', '疑难标签', '用户参与度', '用户声誉', '时间因素', '内容质量'];
+        const factorNames = ['问题复杂度' , '用户参与度', '用户声誉', '时间因素', '内容质量'];
 
         const solvableValues = [
             factors.questionComplexity?.solvableValue || 0,
-            factors.difficultTags?.solvableValue || 0,
             factors.userEngagement?.solvableValue || 0,
             factors.userReputation?.solvableValue || 0,
             factors.timeFactors?.solvableValue || 0,
@@ -1181,7 +1081,6 @@
 
         const hardToSolveValues = [
             factors.questionComplexity?.hardToSolveValue || 0,
-            factors.difficultTags?.hardToSolveValue || 0,
             factors.userEngagement?.hardToSolveValue || 0,
             factors.userReputation?.hardToSolveValue || 0,
             factors.timeFactors?.hardToSolveValue || 0,
@@ -1215,7 +1114,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: '六个核心因素对比分析',
+                        text: '五个核心因素对比分析',
                         font: { size: 16 }
                     }
                 }
@@ -1235,9 +1134,6 @@
         // 创建六个核心因素的卡片
         if (factors.questionComplexity) {
             createFactorCard(factors.questionComplexity, '问题复杂度', '🎯🎯', metricsGrid);
-        }
-        if (factors.difficultTags) {
-            createFactorCard(factors.difficultTags, '疑难标签', '⚠️', metricsGrid);
         }
         if (factors.userEngagement) {
             createUserEngagementCard(factors.userEngagement, metricsGrid);
@@ -1369,65 +1265,50 @@
         const diffClass = timeFactorsData.difference > 0 ? 'positive' : 'negative';
 
         card.innerHTML = `
-            <div class="factor-header">
-                <div class="factor-title">⏰⏰⏰ 时间因素</div>
-                <span class="significance-badge ${isSignificant ? 'significant' : 'not-significant'}">
-                    ${isSignificant ? '差异显著' : '差异不显著'}
-                </span>
-            </div>
+        <div class="factor-header">
+            <div class="factor-title">⏰ 北美工作时间</div>
+            <span class="significance-badge ${isSignificant ? 'significant' : 'not-significant'}">
+                ${isSignificant ? '差异显著' : '差异不显著'}
+            </span>
+        </div>
 
-            <div style="color: #7f8c8d; font-size: 0.9em; margin-bottom: 15px;">
-                ${generateTimeFactorDescription(timeFactorsData)}
-            </div>
+        <div style="color: #7f8c8d; font-size: 0.9em; margin-bottom: 15px;">
+            仅比较：北美工作日 09:00-17:00 回答数量差异
+        </div>
 
-            <div style="margin-top: 15px;">
-                <h4 style="font-size: 0.9em; margin-bottom: 10px; color: #34495e;">⏰⏰⏰ 时间分布（北京时间）</h4>
-                <div class="time-distribution">
-                    <div class="time-period work-time">
-                        <div class="time-period-label">💼 工作时间</div>
-                        <div class="time-period-value">${(timeFactorsData.solvableWorkTimeRate || 0).toFixed(1)}%</div>
-                        <div class="time-period-note">1:00-13:00</div>
-                    </div>
-                    <div class="time-period rest-time">
-                        <div class="time-period-label">🌙 休息时间</div>
-                        <div class="time-period-value">${(100 - (timeFactorsData.solvableWorkTimeRate || 0)).toFixed(1)}%</div>
-                        <div class="time-period-note">13:00-次日1:00</div>
-                    </div>
-                </div>
+        <!-- 工作 vs 非工作 回答数 -->
+        <div class="factor-metrics">
+            <div class="metric">
+                <div class="metric-value">${timeFactorsData.solvableWorkCount || 0}</div>
+                <div class="metric-label">✅ 可解-工作</div>
             </div>
-
-            <div style="margin-top: 15px; background: #f8f9fa; padding: 10px; border-radius: 6px;">
-                <div style="display: flex; justify-content: space-between; font-size: 0.9em;">
-                    <span>💼 工作时间回答:</span>
-                    <span><strong>${(timeFactorsData.solvableWorkTimeRate || 0).toFixed(1)}%</strong> vs ${(timeFactorsData.hardToSolveWorkTimeRate || 0).toFixed(1)}%</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.9em; margin-top: 5px;">
-                    <span>🌙 休息时间回答:</span>
-                    <span><strong>${(100 - (timeFactorsData.solvableWorkTimeRate || 0)).toFixed(1)}%</strong> vs ${(100 - (timeFactorsData.hardToSolveWorkTimeRate || 0)).toFixed(1)}%</span>
-                </div>
+            <div class="metric">
+                <div class="metric-value">${timeFactorsData.solvableNonWorkCount || 0}</div>
+                <div class="metric-label">✅ 可解-非工作</div>
             </div>
-
-            <div class="factor-metrics">
-                <div class="metric">
-                    <div class="metric-value">${(timeFactorsData.solvableValue || 0).toFixed(1)}</div>
-                    <div class="metric-label">✅ 可解问题</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-value">${(timeFactorsData.hardToSolveValue || 0).toFixed(1)}</div>
-                    <div class="metric-label">❌❌ 难解问题</div>
-                </div>
+            <div class="metric">
+                <div class="metric-value">${timeFactorsData.hardWorkCount || 0}</div>
+                <div class="metric-label">❌ 难解-工作</div>
             </div>
-
-            <div class="difference ${diffClass}">
-                综合差异: ${timeFactorsData.difference > 0 ? '+' : ''}${(timeFactorsData.difference || 0).toFixed(1)}
+            <div class="metric">
+                <div class="metric-value">${timeFactorsData.hardNonWorkCount || 0}</div>
+                <div class="metric-label">❌ 难解-非工作</div>
             </div>
+        </div>
 
-            ${isSignificant ? `
-                <div style="margin-top: 15px; padding: 10px; background: #e8f6f3; border-radius: 6px; font-size: 0.9em;">
-                    <strong>💡💡 数据洞察:</strong> ${generateTimeFactorInsight(timeFactorsData)}
-                </div>
-            ` : ''}
-        `;
+        <div class="difference ${diffClass}">
+            工作回答率差异: ${timeFactorsData.difference > 0 ? '+' : ''}${(timeFactorsData.difference || 0).toFixed(1)}%
+        </div>
+
+        ${isSignificant ? `
+            <div style="margin-top: 15px; padding: 10px; background: #e8f6f3; border-radius: 6px; font-size: 0.9em;">
+                <strong>💡 数据洞察:</strong>
+                ${timeFactorsData.difference > 0
+            ? '可解问题更多在工作时间获得回答，建议在工作日 09-17 点提问'
+            : '难解问题更多在工作时间回答，时间因素对可解性影响显著'}
+            </div>
+        ` : ''}
+    `;
 
         container.appendChild(card);
     }
@@ -1440,8 +1321,6 @@
         switch(factorName) {
             case '问题复杂度':
                 return `可解问题平均 ${(factorData.solvableAvgTags || 0).toFixed(1)} 个标签，难解问题平均 ${(factorData.hardToSolveAvgTags || 0).toFixed(1)} 个标签`;
-            case '疑难标签':
-                return `可解问题疑难标签比例 ${(factorData.solvableDifficultTagRate || 0).toFixed(1)}%，难解问题 ${(factorData.hardToSolveDifficultTagRate || 0).toFixed(1)}%`;
             case '用户声誉':
                 return `可解问题用户声誉指标 ${solvableValue.toFixed(1)}，难解问题 ${hardToSolveValue.toFixed(1)}`;
             case '内容质量':
@@ -1455,16 +1334,11 @@
         return `可解问题: ${(engagementData.solvableCommentCount || 0).toFixed(1)} 条评论，${(engagementData.solvableScore || 0).toFixed(1)} 分；难解问题: ${(engagementData.hardToSolveCommentCount || 0).toFixed(1)} 条评论，${(engagementData.hardToSolveScore || 0).toFixed(1)} 分`;
     }
 
-    function generateTimeFactorDescription(timeFactorsData) {
-        const workTimeRate = timeFactorsData.solvableWorkTimeRate || 0;
-        return `可解问题: ${workTimeRate.toFixed(1)}% 在北美工作时间（北京时间1:00-13:00）获得回答`;
-    }
-
     function generateFactorInsight(factorName, factorData) {
         const difference = factorData.difference || 0;
         const absDifference = Math.abs(difference);
 
-        if (absDifference < 5) return '两者差异较小，该因素对可解性影响有限';
+        if (absDifference < 3) return '两者差异较小，该因素对可解性影响有限';
 
         if (difference > 0) {
             switch(factorName) {
@@ -1476,7 +1350,6 @@
         } else {
             switch(factorName) {
                 case '问题复杂度': return `难解问题更复杂 ${absDifference.toFixed(1)}，复杂问题需要更专业的解答`;
-                case '疑难标签': return `难解问题包含更多疑难标签 ${absDifference.toFixed(1)}%，这类问题需要更多关注`;
                 default: return `难解问题在该因素上表现更好，差异值为 ${absDifference.toFixed(1)}`;
             }
         }
@@ -1500,19 +1373,6 @@
         }
 
         return insights.length > 0 ? insights.join('，') : '参与度差异对解答率影响不明显';
-    }
-
-    function generateTimeFactorInsight(timeFactorsData) {
-        const workTimeDiff = timeFactorsData.workTimeRateDifference || 0;
-
-        if (Math.abs(workTimeDiff) > 5) {
-            if (workTimeDiff > 0) {
-                return `可解问题在北美工作时间回答率高 ${workTimeDiff.toFixed(1)}%，建议在北美工作时间（北京时间1:00-13:00）提问`;
-            } else {
-                return `难解问题在北美工作时间回答率高 ${Math.abs(workTimeDiff).toFixed(1)}%，时间因素对解答率有显著影响`;
-            }
-        }
-        return '时间因素对问题可解性影响不明显';
     }
 
     function createDynamicInsights(data, container) {
@@ -1548,20 +1408,11 @@
                 insightsContainer.appendChild(insight);
             }
         });
-
-        // 添加优化建议
-        const suggestions = document.createElement('div');
-        suggestions.innerHTML = `
-            <h4 style="margin-top: 20px;">🎯🎯 优化建议</h4>
-            ${generateOptimizationSuggestions(factors, solvabilityRate)}
-        `;
-        insightsContainer.appendChild(suggestions);
     }
 
     function getFactorIcon(factorName) {
         const icons = {
             'questionComplexity': '🎯🎯',
-            'difficultTags': '⚠️',
             'userEngagement': '👥👥',
             'userReputation': '⭐',
             'timeFactors': '⏰⏰⏰',
@@ -1573,48 +1424,12 @@
     function getFactorDisplayName(factorName) {
         const names = {
             'questionComplexity': '问题复杂度',
-            'difficultTags': '疑难标签',
             'userEngagement': '用户参与度',
             'userReputation': '用户声誉',
             'timeFactors': '时间因素',
             'contentQuality': '内容质量'
         };
         return names[factorName] || factorName;
-    }
-
-    function generateOptimizationSuggestions(factors, solvabilityRate) {
-        const suggestions = [];
-
-        if (solvabilityRate < 40) {
-            suggestions.push('🔴 <strong>当前可解性较低，建议:</strong>');
-            suggestions.push('• 简化问题描述，聚焦核心问题');
-            suggestions.push('• 减少标签数量，选择2-3个最相关标签');
-            suggestions.push('• 在北美工作时间（北京时间1:00-13:00）提问');
-        } else if (solvabilityRate < 60) {
-            suggestions.push('🟡 <strong>可解性一般，建议改进:</strong>');
-            suggestions.push('• 完善问题描述，增加更多细节');
-            suggestions.push('• 检查标签选择是否准确');
-            suggestions.push('• 尝试在北美工作时间段发布问题');
-        } else {
-            suggestions.push('🟢 <strong>可解性良好，继续保持:</strong>');
-            suggestions.push('• 当前问题格式和内容都很规范');
-        }
-
-        // 基于具体因素的建议
-        if (factors.questionComplexity?.difference > 0) {
-            suggestions.push('• 控制问题复杂度，避免过多高级主题');
-        }
-        if (factors.userEngagement?.difference > 0) {
-            suggestions.push('• 提高问题参与度，及时回复评论');
-        }
-        if (factors.timeFactors) {
-            const workTimeRate = factors.timeFactors.solvableWorkTimeRate || 0;
-            if (workTimeRate < 40) {
-                suggestions.push('• 考虑在北美工作时间（北京时间1:00-13:00）提问');
-            }
-        }
-
-        return suggestions.map(s => `<div class="insight-item" style="margin: 5px 0;">${s}</div>`).join('');
     }
 
     function createInsightsDisplay(insights, container) {
@@ -1672,8 +1487,6 @@
             initializeAnalysisPage();
         } else if (tabName === 'trends') {
             initializeTrendsPage();
-        } else if (tabName === 'import') {
-            loadImportHistory();
         }
     }
 
@@ -1710,11 +1523,9 @@
     // 导出全局函数
     window.showTab = showTab;
     window.refreshStatus = refreshStatus;
-    window.checkHealth = checkHealth;
     window.importQuestions = importQuestions;
     window.analyzeTrends = analyzeTrends;
     window.analyzeSolvability = analyzeSolvability;
-    window.clearAnalysis = clearAnalysis;
 </script>
 </body>
 </html>
