@@ -33,6 +33,7 @@ public class AnalysisController {
         return ResponseEntity.ok(analysisService.analyzeCoOccurrence(topN));
     }
     //任务3接口
+    //http://localhost:8080/api/analysis/pitfalls
     @GetMapping("/pitfalls")
     public ResponseEntity<List<PitfallDTO>> getMultithreadingPitfalls(){
         return ResponseEntity.ok(analysisService.analyzeMultithreadingPitfalls());

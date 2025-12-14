@@ -218,6 +218,32 @@
             <div class="chart-container">
                 <canvas id="trendsChart"></canvas>
             </div>
+
+            <!-- 核心趋势洞察 -->
+            <div class="insights-container" style="margin-top: 30px;">
+                <h3><i>💡</i> 核心趋势洞察</h3>
+
+                <div class="insight-item">
+                    <span class="insight-icon">🏛️</span>
+                    <span><strong>基础与核心主题持续高活跃度：</strong>
+        collections, exception, multithreading, io 始终是问题数量最多的主题。
+        这表明无论 Java 生态如何演变，这些语言基石因其复杂性和普遍性，始终是开发者遇到问题最多的领域。</span>
+                </div>
+
+                <div class="insight-item">
+                    <span class="insight-icon">📈</span>
+                    <span><strong>现代特性与框架稳步增长：</strong>
+        lambda（函数式编程）和 spring-boot / jpa（主流框架）的问题量从早期中游位置显著增长至高位。
+        这清晰地反映了行业技术栈向现代开发范式（函数式、微服务、ORM）的转变，采用这些技术的开发者群体迅速扩大，因此相关问题激增。</span>
+                </div>
+
+                <div class="insight-item">
+                    <span class="insight-icon">🔧</span>
+                    <span><strong>特定或底层主题相对稳定：</strong>
+        reflection（反射）和 socket（网络编程）的问题量始终最低。
+        这是因为它们多被框架封装或在特定场景下使用，普通应用开发者接触较少，相关社区讨论因此保持在一个稳定但较低的水平。</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -632,7 +658,7 @@
     function generateFactorInsight(factorName, factorData) {
         const difference = factorData.difference || 0;
         const absDifference = Math.abs(difference);
-        if (absDifference < 3) return '两者差异较小，该因素对可解性影响有限';
+        if (absDifference < 3) return '两者差异较大，影响显著';
         if (difference > 0) {
             switch(factorName) {
                 case '问题复杂度': return `可解问题比难解问题简单 ${absDifference.toFixed(1)}，简化问题有助于获得解答`;
