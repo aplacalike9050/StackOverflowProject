@@ -32,4 +32,6 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
     @Query("SELECT a FROM Answer a WHERE a.score > :minScore ORDER BY a.score DESC")
     List<Answer> findHighScoreAnswers(@Param("minScore") int minScore);
+
+
 }

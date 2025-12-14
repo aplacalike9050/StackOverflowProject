@@ -37,4 +37,8 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     // 修复：参数改为 Long 类型
     @Query("SELECT c FROM Comment c WHERE c.creationDate > :sinceDate")
     List<Comment> findCommentsCreatedAfter(@Param("sinceDate") Long sinceDate);
+
+
+    // 查一组回答下的所有评论
+    List<Comment> findByPostIdInAndPostType(List<Long> postIds, String postType);
 }
